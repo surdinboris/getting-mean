@@ -12,3 +12,5 @@ db.locations.update({name: 'Cafe Cafe'}, {$push: {reviews: {author: 'Simon Holme
 db.locations.update({name: 'Suzanna'}, {$push: {reviews: {author: 'Simon Holmes',_id: ObjectId(),rating: 5,timestamp: new Date("Jul 16, 2013"),reviewText: "What a great place. I can't say enough goodthings about it."}}})
 
 mongorestore --uri "mongodb+srv://userAdmin:QazsedcS1@cluster0-kjmgd.mongodb.net/Loc8r" -d Loc8r  ~/tmp/mongodump/Loc8r/
+
+mongodump --uri "mongodb+srv://userAdmin:QazsedcS1@cluster0-kjmgd.mongodb.net/Loc8r" -d Loc8r  ~/tmp/mongodump/Loc8r/

@@ -16,6 +16,7 @@ var sendJsonResponse = function(res, status, content) {
 
 
 module.exports.locationsCreate=function (req,res) {
+    console.log(req.body);
     Loc.create({
         name: req.body.name,
         address:req.body.address,
@@ -25,6 +26,7 @@ module.exports.locationsCreate=function (req,res) {
         coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
         // feedingSchedule: [feedingScheduleSchema],
         volunteers: req.body.volunteers.split(","),
+
         // catsList:[catsListSchema]
 
     }, function (err,location) {
