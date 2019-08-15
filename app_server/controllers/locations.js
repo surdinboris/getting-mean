@@ -9,13 +9,14 @@ var renderHomePage=function (err, res, body) {
         var message;
         if (err) {
             message = (err);}
+        if (!body.length) {
+            message = "No places found nearby";
+        }
         if (!(body instanceof Array)) {
             message = "API lookup error";
             body = [];
         }
-       if (!body.length) {
-                message = "No places found nearby";
-        }
+
         console.log(JSON.stringify(body));
         res.render('locations-list',  {        title: 'Cats feeding network',
             pageHeader: {
@@ -27,8 +28,6 @@ var renderHomePage=function (err, res, body) {
             locations:body,
         message: message})
     };
-
-
 
 /* GET 'home' page */
 module.exports.homelist = function(req, res) {
