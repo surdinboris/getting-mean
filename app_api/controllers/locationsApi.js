@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var Loc = mongoose.model('locations');
 
-
-
 var ErrCodesActions={
     400:function (res, err){sendJsonResponse(res, 400,{"message":"error", "error":err})},
     401:function (res,err){sendJsonResponse(res, 401,{"message":"no ID parameter(s) given","err":"missing parameters"})},
@@ -13,7 +11,6 @@ var sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
-
 
 module.exports.locationsCreate=function (req,res) {
     console.log(req.body);
@@ -26,9 +23,7 @@ module.exports.locationsCreate=function (req,res) {
         coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
         // feedingSchedule: [feedingScheduleSchema],
         volunteers: req.body.volunteers.split(","),
-
         // catsList:[catsListSchema]
-
     }, function (err,location) {
         if (err){
             ErrCodesActions[400](res,err)
@@ -65,10 +60,8 @@ module.exports.locationsReadOne=function (req,res) {
 };
 
 module.exports.locationsUpdateOne=function (req,res) {
-
     if (req.params && req.params.locationid) {
         var locId = req.params.locationid;
-
         Loc.findOne({_id: locId}).select("-rating -volunteers").exec(function (err, location) {
             if (!location) {
                 sendJsonResponse(res, 404, {
@@ -91,8 +84,6 @@ module.exports.locationsUpdateOne=function (req,res) {
                 // location.opening= req.body.opening;
                 // location.closing= req.body.closing;
                 // location.closed= req.body.closed;
-
-
             location.save( function (err, location) {
                 if (err) {
 
@@ -127,7 +118,6 @@ module.exports.locationsDeleteOne=function (req,res) {
     else {
         ErrCodesActions[401](res)
     }
-
 };
 
 
@@ -156,8 +146,7 @@ module.exports.locationsListByDistance = function (req, res) {
             distanceField: "distance"
         }
 
-        //db based convertation - disabled since transformation
-        // was implemented at controller lrevel
+        //db-level convertation - disabled - was implemented at controller level
     // }, {
     //     "$addFields": {
     //         distance: {$toInt: "$distance"},

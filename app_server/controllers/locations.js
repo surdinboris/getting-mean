@@ -5,6 +5,11 @@ var ApiOptions = {server:"http://localhost:3000"};
 if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
+
+var renderLocation = function (err,res,body){
+       res.render("location-info", body)
+};
+
 var renderHomePage=function (err, res, body) {
         var message;
         if (err) {
@@ -49,54 +54,75 @@ module.exports.homelist = function(req, res) {
         });
 };
 
-/* GET 'Location info' page */
+
 module.exports.locationInfo = function(req, res) {
-    res.render('location-info', {
-        title: 'Habima back yard Cats',
-        pageHeader: {
-            title: "Let's feed our cats together!"
-        },
-        sidebar: {
-            context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
-            callToAction: 'If you\'ve been and you like it - or if you don\'t - please leave a review to help other people just like you.'
-        },
-        location: {
-            name: 'Habima back yard Cats',
-            address: 'Tel Aviv, Habima st, 1',
-            rating: 3,
-            facilities: ['Water source', 'Trees', 'Junk containers'],
-            coords: {
-                lat: 51.455041,
-                lng: -0.9690884
-            },
-            openingTimes: [{
-                days: 'Monday - Friday',
-                opening: '7:00am',
-                closing: '7:00pm',
-                closed: false
-            }, {
-                days: 'Saturday',
-                opening: '8:00am',
-                closing: '5:00pm',
-                closed: false
-            }, {
-                days: 'Sunday',
-                closed: true
-            }],
-            reviews: [{
-                author: 'Simon Holmes',
-                rating: 5,
-                timestamp: '16 July 2013',
-                reviewText: 'What a great place. I can\'t say enough good things about it.'
-            }, {
-                author: 'Charlie Chaplin',
-                rating: 3,
-                timestamp: '16 June 2013',
-                reviewText: 'It was okay. Coffee wasn\'t great, but the wifi was fast.'
-            }]
+    request(url.resolve(ApiOptions.server, 'api/locations/'+req.params.locationid), {
+        method: 'get',
+            json: {},
+
+        }, function (err,apiResp,body) {
+        var message;
+        if (err) {
+            message = (err);}
+        if (!body.length) {
+            message = "No places found nearby";
         }
-    });
+        renderLocation(err,res,body)
+
+        })
+
+
 };
+
+
+// /* GET 'Location info' page */
+// module.exports.locationInfo = function(req, res) {
+//     res.render('location-info', {
+//         title: 'Habima back yard Cats',
+//         pageHeader: {
+//             title: "Let's feed our cats together!"
+//         },
+//         sidebar: {
+//             context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
+//             callToAction: 'If you\'ve been and you like it - or if you don\'t - please leave a review to help other people just like you.'
+//         },
+//         location: {
+//             name: 'Habima back yard Cats',
+//             address: 'Tel Aviv, Habima st, 1',
+//             rating: 3,
+//             facilities: ['Water source', 'Trees', 'Junk containers'],
+//             coords: {
+//                 lat: 51.455041,
+//                 lng: -0.9690884
+//             },
+//             openingTimes: [{
+//                 days: 'Monday - Friday',
+//                 opening: '7:00am',
+//                 closing: '7:00pm',
+//                 closed: false
+//             }, {
+//                 days: 'Saturday',
+//                 opening: '8:00am',
+//                 closing: '5:00pm',
+//                 closed: false
+//             }, {
+//                 days: 'Sunday',
+//                 closed: true
+//             }],
+//             reviews: [{
+//                 author: 'Simon Holmes',
+//                 rating: 5,
+//                 timestamp: '16 July 2013',
+//                 reviewText: 'What a great place. I can\'t say enough good things about it.'
+//             }, {
+//                 author: 'Charlie Chaplin',
+//                 rating: 3,
+//                 timestamp: '16 June 2013',
+//                 reviewText: 'It was okay. Coffee wasn\'t great, but the wifi was fast.'
+//             }]
+//         }
+//     });
+// };
 
 /* GET 'Add review' page */
 module.exports.addReview = function(req, res) {
