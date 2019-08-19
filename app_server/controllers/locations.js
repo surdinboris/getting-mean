@@ -7,7 +7,8 @@ if (process.env.NODE_ENV == 'production') {
 }
 
 var renderLocation = function (err,res,body){
-       res.render("location-info", {pageHeader:{title:'Location info'}, location:body})
+       res.render("location-info",
+           {pageHeader:{title:'Location info'}, sidebar:{calltoaction:'test', context:"tesr"},location:body})
 };
 
 var renderHomePage=function (err, res, body) {
