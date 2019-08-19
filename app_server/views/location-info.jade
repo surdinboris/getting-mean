@@ -16,13 +16,7 @@ block content
             .panel-heading
               h2.panel-title Opening hours
             .panel-body
-              each time in location.openingTimes
-                p
-                  | #{time.days} : 
-                  if time.closed
-                    | closed
-                  else
-                    | #{time.opening} - #{time.closing}
+
           .panel.panel-primary
             .panel-heading
               h2.panel-title Facilities
@@ -46,16 +40,13 @@ block content
               a.btn.btn-default.pull-right(href="/location/review/new") Add review
               h2.panel-title Customer reviews
             .panel-body.review-container
-              each review in location.reviews
+              each volunteer in location.volunteers
                 .row
                   .review
                     .well.well-sm.review-header
                       span.rating
-                        +outputRating(review.rating)
-                      span.reviewAuthor #{review.author}
-                      small.reviewTimestamp #{review.timestamp}
+                      span.reviewAuthor #{volunteer}
                     .col-xs-12
-                      p !{(review.reviewText).replace(/\n/g, '<br/>')}
     .col-xs-12.col-md-3
       p.lead #{location.name} #{sidebar.context}
       p= sidebar.callToAction
