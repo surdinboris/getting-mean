@@ -43,4 +43,4 @@ if(process.env.NODE_ENV == 'production'){
 }
 
 mongoose.connect(dbURI,{ useNewUrlParser: true,  useCreateIndex: true});
-require('./locations'); //db schema
+require('./dbschema'); //db schema

@@ -14,9 +14,9 @@ block content
           p= location.address
           .panel.panel-primary
             .panel-heading
-              h2.panel-title Opening hours
+              h2.panel-title Water Source
             .panel-body
-
+                p= location.waterSource
           .panel.panel-primary
             .panel-heading
               h2.panel-title Facilities
@@ -24,7 +24,7 @@ block content
               each facility in location.facilities
                 span.label.label-warning
                   span.glyphicon.glyphicon-ok
-                  | &nbsp;#{facility}
+                    | &nbsp;#{facility}
                 | &nbsp;
         .col-xs-12.col-sm-6.location-map
           .panel.panel-primary
@@ -37,13 +37,13 @@ block content
         .col-xs-12
           .panel.panel-primary.review-panel
             .panel-heading
-              a.btn.btn-default.pull-right(href="/location/review/new") Add review
-              h2.panel-title Customer reviews
-            .panel-body.review-container
+              a.btn.btn-default.pull-right(href="/location/volunteer/new") Add volunteer
+              h2.panel-title Volunteers list
+            .panel-body.volunteer-container
               each volunteer in location.volunteers
                 .row
-                  .review
-                    .well.well-sm.review-header
+                  .volunteer
+                    .well.well-sm.volunteer-header
                       span.rating
                       span.reviewAuthor #{volunteer}
                     .col-xs-12
