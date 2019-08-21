@@ -68,6 +68,7 @@ module.exports.locationInfo = function(req, res) {
         if (!body.length) {
             message = "No places found nearby";
         }
+        console.log(body);
         renderLocation(err,res,body)
 
         })

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Loc = mongoose.model('locations');
-
+var Vol = mongoose.model('volunteers')
 var ErrCodesActions={
     400:function (res, err){sendJsonResponse(res, 400,{"message":"error", "error":err})},
     401:function (res,err){sendJsonResponse(res, 401,{"message":"no ID parameter(s) given","err":"missing parameters"})},
@@ -49,6 +49,19 @@ module.exports.locationsReadOne=function (req,res) {
                 ErrCodesActions[404](res)
             }
             else {
+                var volsList =  Promise.all(location.volunteers.map(function (volunteer) {
+                      Vol.findOne({_id: volunteer}, function(err, volunteer){
+
+
+                })}));
+                volsList.then(function(res){
+                    location.volunts=res;
+                    sendJsonResponse(res, 220, location)});
+
+
+                //console.log(volsList);
+
+
                 sendJsonResponse(res, 220, location)
             }
         });
