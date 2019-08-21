@@ -66,8 +66,8 @@
       <file leaf-file-name="locationsApi.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app_api/controllers/locationsApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state relative-caret-position="251">
+              <caret line="60" column="20" lean-forward="false" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -191,8 +191,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="336" />
-    <option name="y" value="64" />
+    <option name="x" value="238" />
+    <option name="y" value="222" />
     <option name="width" value="1392" />
     <option name="height" value="876" />
   </component>
@@ -436,15 +436,15 @@
       <workItem from="1565593430639" duration="8832000" />
       <workItem from="1565672958844" duration="5972000" />
       <workItem from="1566194669436" duration="9499000" />
-      <workItem from="1566279552843" duration="12695000" />
+      <workItem from="1566279552843" duration="13879000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214507000" />
+    <option name="totallyTimeSpent" value="215691000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="336" y="64" width="1392" height="876" extended-state="0" />
+    <frame x="238" y="222" width="1392" height="876" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -777,8 +777,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_api/controllers/locationsApi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state relative-caret-position="251">
+          <caret line="60" column="20" lean-forward="false" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
           <folding />
         </state>
       </provider>

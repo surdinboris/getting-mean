@@ -51,15 +51,17 @@ module.exports.locationsReadOne=function (req,res) {
             else {
                 var volsList =  Promise.all(location.volunteers.map(function (volunteer) {
                       Vol.findOne({_id: volunteer}, function(err, volunteer){
-                          console.log("vols"+volunteer);
+                          //console.log("vols"+volunteer);
                           return volunteer
 
 
                 })}));
                 volsList.then(function(res){
 
-                    location.volunts=res;
-                    sendJsonResponse(res, 220, location)});
+                    location = {};
+
+                    console.log('----',location);
+                    sendJsonResponse(res, 220,location )});
 
 
                 //console.log(volsList);
