@@ -50,24 +50,26 @@ module.exports.locationsReadOne=function (req,res) {
             }
             else {
                 var volsList =  Promise.all(location.volunteers.map(function (volunteer) {
-                      Vol.findOne({_id: volunteer}, function(err, volunteer){
+                      return Vol.findOne({_id: volunteer}, function(err, volunteer){
                           //console.log("vols"+volunteer);
                           return volunteer
 
 
                 })}));
-                volsList.then(function(res){
+                volsList.then(function(volsobj){
+                    console.log('found',volsobj);
+                    console.log('found',volsobj);
+                    location.volunteers=JSON.stringify(volsobj);
+                    //location=Object.assign({},location,volsobj);
 
-                    location = {};
-
-                    console.log('----',location);
+                   // console.log('type',typeof(json(location)));
                     sendJsonResponse(res, 220,location )});
 
 
                 //console.log(volsList);
 
 
-                sendJsonResponse(res, 220, location)
+                //sendJsonResponse(res, 220, location)
             }
         });
     }
