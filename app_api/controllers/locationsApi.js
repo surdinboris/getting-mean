@@ -62,7 +62,7 @@ module.exports.locationsReadOne=function (req,res) {
                     //cloning object via JSON to make possible property additions
                     // from another db request (volunteers)
                     location = JSON.parse(JSON.stringify(location));
-                    location.voluntee = volsobj;
+                    location.volunteersList = volsobj;
                     sendJsonResponse(res, 220,location)
                 });
             }
