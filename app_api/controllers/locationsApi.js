@@ -37,6 +37,8 @@ module.exports.locationsCreate=function (req,res) {
 };
 
 module.exports.locationsReadOne=function (req,res) {
+
+
     if(req.params && req.params.locationid){
         var locId=req.params.locationid;
 
@@ -57,19 +59,12 @@ module.exports.locationsReadOne=function (req,res) {
 
                 })}));
                 volsList.then(function(volsobj){
-                    console.log('found',volsobj);
-                    console.log('found',volsobj);
-                    location.volunteers=JSON.stringify(volsobj);
-                    //location=Object.assign({},location,volsobj);
-
-                   // console.log('type',typeof(json(location)));
-                    sendJsonResponse(res, 220,location )});
-
-
-                //console.log(volsList);
-
-
-                //sendJsonResponse(res, 220, location)
+                    //cloning object via JSON to make possible property additions
+                    // from another db request (volunteers)
+                    location = JSON.parse(JSON.stringify(location));
+                    location.voluntee = volsobj;
+                    sendJsonResponse(res, 220,location)
+                });
             }
         });
     }
