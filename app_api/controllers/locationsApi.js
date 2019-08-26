@@ -61,7 +61,8 @@ module.exports.locationsReadOne=function (req,res) {
                 volsList.then(function(volsobj){
                     //cloning object via JSON to make possible property additions
                     // from another db request (volunteers)
-                    location = JSON.parse(JSON.stringify(location));
+                    //location = JSON.parse(JSON.stringify(location));
+                    location =location.toObject();
                     location.volunteersList = volsobj;
                     sendJsonResponse(res, 220,location)
                 });
@@ -88,12 +89,15 @@ module.exports.locationsUpdateOne=function (req,res) {
                 ErrCodesActions[400](res,err);
                 return;
             }
-
-                location.name= req.body.name;
-                location.address= req.body.address;
+            req.body.name? location.name=req.body.name : null ;
+            req.body.address? location.address= req.body.address: null;
                 //location.rating: req.body.rating;
-                location.facilities= req.body.facilities;
-                location.coords= [parseFloat(req.body.lng), parseFloat(req.body.lat)];
+            req.body.facilities? location.facilities= req.body.facilities: null;
+            req.body.lng && req.body.lat? location.coords=
+                [parseFloat(req.body.lng), parseFloat(req.body.lat)] : null;
+            console.log('----', req.body.volunteers.split(","));
+            console.log(req.body.volunteers)
+            req.body.volunteers? location.volunteers =  req.body.volunteers.split(",") : null;
                 //put to child doc
                 // location.days= req.body.days;
                 // location.opening= req.body.opening;

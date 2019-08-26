@@ -39,7 +39,7 @@ var locationSchema = new mongoose.Schema({
     waterSource:{type:Boolean, default: false},
     facilities: [String],
     coords: {type: [Number], index: '2dsphere'},
-    volunteers:[{ type: mongoose.Schema.Types.ObjectId, ref: 'volunteerSchema' }],
+    volunteers:{ type: [mongoose.Schema.Types.ObjectId], ref: 'volunteerSchema'},
     cats:[catsListSchema],
     icon: {type:'Buffer'}
 });

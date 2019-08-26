@@ -38,7 +38,13 @@ module.exports.volunteersCreate=function (req,res) {
 
     };
 
+module.exports.volunteersReadAll=function (req,res) {
 
+
+        Vol.find({}, function (err, volunteers) {
+            sendJsonResponse(res, 220, volunteers)
+        })
+}
 
 module.exports.volunteersReadOne=function (req,res) {
     if(req.params && req.params.volunteerid){
