@@ -47,6 +47,7 @@ block content
                       span.rating
                       p.reviewAuthor Name: #{volunteer.volunteerName}
                       p.reviewAuthor Address: #{volunteer.volunteerAddress}
+                      a.btn.btn-default.pull-right(href="/volunteers/#{volunteer._id}") Edit volunteer
                     .col-xs-12
     .col-xs-12.col-md-3
       p.lead #{location.name} #{sidebar.context}
