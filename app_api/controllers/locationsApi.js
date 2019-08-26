@@ -63,7 +63,15 @@ module.exports.locationsReadOne=function (req,res) {
                     // from another db request (volunteers)
                     //location = JSON.parse(JSON.stringify(location));
                     location =location.toObject();
-                    location.volunteersList = volsobj;
+                    volsobj=volsobj.map(function (vo) {
+
+                        if (vo!=null)
+                            return vo;
+                        else
+                            return{_id:'n/a',volunteerName:'volunteers n/a',volunteerAddress:"n/a"}
+
+                    });
+                    location.volunteersList=volsobj;
                     sendJsonResponse(res, 220,location)
                 });
             }
