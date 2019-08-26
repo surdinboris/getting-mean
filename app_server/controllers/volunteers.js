@@ -10,5 +10,12 @@ module.exports.volunteerinfo = function (req,res) {
 
     var volid=req.params.volunteerid;
     //api request by id ...
-    res.render("volunteer-info.jade", {pageHeader:{title: 'volunteer info'}, volunteer:volid})
+
+
+    request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
+        json: {}} ,function (err, apiResp, body) {
+
+        res.render("volunteer-info.jade", {pageHeader:{title: 'volunteer info'}, volunteer:JSON.stringify(body)})
+    })
+
 };
