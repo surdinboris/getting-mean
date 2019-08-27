@@ -11,3 +11,20 @@ iframe {
     padding-top: 20px;
 
 }
+
+div.volUpdContainer{
+    width:350px;
+    padding-left: 50px;
+}
+
+
+label,input {
+    width: 150px;
+    display: inline-block;
+
+}
+.savebutton{
+    width: 70px;
+    border-radius: 10px;
+    border-width: 5px;
+}
