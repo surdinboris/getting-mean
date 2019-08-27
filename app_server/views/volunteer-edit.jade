@@ -8,8 +8,8 @@ block content
       .row
         .col-xs-12.col-sm-6
         div.volUpdContainer
-            form(name="update-volunteer", method="put")
+            form(action="#{volunteer._id}", method="post",  role="form",  name="update-volunteer")
                 each value,label in volunteer
                         label #{label}:&nbsp &nbsp
-                        input(type="text", name="title", value="#{value}")
+                        input(type="text", name="#{label}", value="#{value}")
                 input.savebutton(type="submit", value="Save")

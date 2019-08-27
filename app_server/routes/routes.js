@@ -8,10 +8,9 @@ router.get('/', ctrlLocations.homelist);
 //router.get('/location', ctrlLocations.locationInfo);
 router.get('/locations/:locationid', ctrlLocations.locationInfo);
 router.get('/location/review/new', ctrlLocations.addReview);
-
-
 /* Other pages */
 router.get('/about', ctrlOthers.about);
 router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerinfo);
-
+//data manipulation
+router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerCreateChange);
 module.exports = router;

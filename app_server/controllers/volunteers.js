@@ -14,6 +14,26 @@ module.exports.volunteerinfo = function (req,res) {
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
         json: {}} ,function (err, apiResp, body) {
 
-        res.render("volunteer-info.jade", {pageHeader:{title: 'volunteer info'}, volunteer:body})
+        res.render("volunteer-edit.jade", {pageHeader:{title: 'volunteer info'}, volunteer:body})
     })
+};
+
+module.exports.volunteerCreateChange=function (req,res) {
+    //in case of id presented - initiation change of existing volunteer
+    if(req.body && req.body._id){
+       request(url.resolve(ApiOptions.server,"api/volunteers/"+ req.body._id),{method: 'put', json:req.body},
+           function (err, apiResp, body) {
+           res.render("volunteer-edit.jade", {pageHeader:{title: 'volunteer info'}, volunteer:body})
+       } )
+    }
+    // data without id - creating new
+    else{
+        request(url.resolve(ApiOptions.server,"api/volunteers"),{method: 'post', json: req.body},
+            function (err, apiResp, body) {
+            res.render("volunteer-edit.jade", {pageHeader:{title: 'volunteer info'}, volunteer:body})
+        } )
+    }
+
+
+
 };

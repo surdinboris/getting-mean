@@ -89,6 +89,7 @@ module.exports.volunteersUpdateOne=function (req,res) {
                  else {
                         volunteer.volunteerName = req.body.volunteerName;
                         volunteer.volunteerAddress= req.body.volunteerAddress;
+                        volunteer.active= req.body.active;
                         volunteer.comment = req.body.comment;
                         volunteer.save(function(err, savedvolunteer) {
                             if (err) {
