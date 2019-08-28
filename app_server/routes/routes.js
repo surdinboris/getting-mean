@@ -7,7 +7,7 @@ var ctrlvolunteers = require('../controllers/volunteers');
 router.get('/', ctrlLocations.homelist);
 //router.get('/location', ctrlLocations.locationInfo);
 router.get('/locations/:locationid', ctrlLocations.locationInfo);
-router.get('/location/review/new', ctrlLocations.addReview);
+//router.get('/location/new/review', ctrlLocations.addReview);
 /* Other pages */
 router.get('/about', ctrlOthers.about);
 
