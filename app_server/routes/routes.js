@@ -10,7 +10,14 @@ router.get('/locations/:locationid', ctrlLocations.locationInfo);
 router.get('/location/review/new', ctrlLocations.addReview);
 /* Other pages */
 router.get('/about', ctrlOthers.about);
-router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerinfo);
+
+router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditPage);
+router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditCommit);
+
+router.get('/new/volunteer',ctrlvolunteers.volunteerCreatePage);
+router.post('/new/volunteer', ctrlvolunteers.volunteerCreateCommit);
 //data manipulation
-router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerCreateChange);
+
+
+
 module.exports = router;

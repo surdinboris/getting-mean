@@ -10,8 +10,7 @@ router.get('/locations/:locationid', ctrlLocations.locationsReadOne); //done
 router.get('/locations/:locationid/volunteers', ctrlLocations.getVolunteersByLocId); //done
 router.put('/locations/:locationid', ctrlLocations.locationsUpdateOne); //done
 router.delete('/locations/:locationid', ctrlLocations.locationsDeleteOne); //done
-
-// volunteers
+//volunteers
 router.post('/volunteers', ctrlVolunteers.volunteersCreate); //done
 router.get('/volunteers', ctrlVolunteers.volunteersReadAll); //done
 router.get('/volunteers/:volunteerid',
@@ -20,7 +19,6 @@ router.put('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersUpdateOne); //done
 router.delete('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersDeleteOne); //done
-
 //cats
 router.post('/locations/:locationid/cats', ctrlCats.catsCreate); //done
 router.get('/locations/:locationid/cats',
