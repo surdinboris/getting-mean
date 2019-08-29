@@ -14,8 +14,8 @@ router.get('/about', ctrlOthers.about);
 router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditPage);
 router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditCommit);
 
-router.get('/new/volunteer',ctrlvolunteers.volunteerCreatePage);
-router.post('/new/volunteer', ctrlvolunteers.volunteerCreateCommit);
+router.get('/volunteer',ctrlvolunteers.volunteerCreatePage);
+router.post('/volunteer', ctrlvolunteers.volunteerCreateCommit);
 //data manipulation
 
 

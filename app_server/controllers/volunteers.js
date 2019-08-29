@@ -50,7 +50,7 @@ module.exports.volunteerCreatePage = function (req, res) {
 module.exports.volunteerCreateCommit = function (req, res) {
 request(url.resolve(ApiOptions.server,"api/volunteers/"), {method: 'post',
     json: req.body} ,function (err, apiResp, body) {
-    res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:body._id, volunteer:body})
+    res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:'/volunteers/'+body._id, volunteer:body})
 })
 };
 
