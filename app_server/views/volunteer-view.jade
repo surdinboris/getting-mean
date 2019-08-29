@@ -8,7 +8,7 @@ block content
       .row
         .col-xs-12.col-sm-6
         div.volUpdContainer
-            form(action="#{volunteer._id}", method="post",  role="form",  name="update-volunteer")
+            form(action="#{formAction}", method="post",  role="form",  name="update-volunteer")
                 each value,label in volunteer
                         label #{label}:&nbsp &nbsp
                         input(type="text", name="#{label}", value="#{value}")

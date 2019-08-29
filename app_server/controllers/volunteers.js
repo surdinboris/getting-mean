@@ -14,7 +14,7 @@ module.exports.volunteerEditPage = function (req, res) {
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
         json: {}} ,function (err, apiResp, body) {
-        res.render("volunteer-view.jade", {pageHeader:{title: title}, volunteer:body})
+        res.render("volunteer-view.jade", {pageHeader:{title: title},formAction:body._id, volunteer:body})
     })
 };
 
@@ -24,7 +24,7 @@ module.exports.volunteerEditCommit=function (req, res) {
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid),{method: 'put', json: req.body},
         function (err, apiResp, body) {
-            res.render("volunteer-view.jade", {pageHeader:{title: title}, volunteer:body})
+            res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:body._id, volunteer:body})
         } )
 };
 
@@ -36,7 +36,7 @@ module.exports.volunteerCreatePage = function (req, res) {
     //     json: {}} ,function (err, apiResp, body) {
 
     //!implement schema request to dynamically get fields for current schema and generate  creation page
-        res.render("volunteer-view.jade", {pageHeader:{title: title}, volunteer:{
+        res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:'', volunteer:{
                 volunteerName: '',
                 volunteerAddress: '',
                 active: true,
@@ -48,21 +48,21 @@ module.exports.volunteerCreatePage = function (req, res) {
 };
 
 module.exports.volunteerCreateCommit = function (req, res) {
-request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
-    json: {}} ,function (err, apiResp, body) {
-    res.render("volunteer-view.jade", {pageHeader:{title: title}, volunteer:body})
+request(url.resolve(ApiOptions.server,"api/volunteers/"), {method: 'post',
+    json: req.body} ,function (err, apiResp, body) {
+    res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:body._id, volunteer:body})
 })
 };
 
 
 
-module.exports.volunteerCreate=function (req,res) {
-//need to add some advanced validation of arrived data
-    if (req.body && !req.body._id) {
-        request(url.resolve(ApiOptions.server, "api/volunteers/"), {method: 'post', json: req.body},
-            function (err, apiResp, body) {
-                res.render("volunteer-edit.jade", {pageHeader: {title: title}, volunteer: body})
-            })
-    }
-    else res.end('volunteer ID arrived that shouldnt be happen when creating new object')
-};
+// module.exports.volunteerCreate=function (req,res) {
+// //need to add some advanced validation of arrived data
+//     if (req.body && !req.body._id) {
+//         request(url.resolve(ApiOptions.server, "api/volunteers/"), {method: 'post', json: req.body},
+//             function (err, apiResp, body) {
+//                 res.render("volunteer-edit.jade", {pageHeader: {title: title}, volunteer: body})
+//             })
+//     }
+//     else res.end('volunteer ID arrived that shouldnt be happen when creating new object')
+// };
