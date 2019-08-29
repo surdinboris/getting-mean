@@ -54,8 +54,6 @@ request(url.resolve(ApiOptions.server,"api/volunteers/"), {method: 'post',
 })
 };
 
-
-
 // module.exports.volunteerCreate=function (req,res) {
 // //need to add some advanced validation of arrived data
 //     if (req.body && !req.body._id) {

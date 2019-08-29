@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app_server/controllers/volunteers.js" afterPath="$PROJECT_DIR$/app_server/controllers/volunteers.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/routes/routes.js" afterPath="$PROJECT_DIR$/app_server/routes/routes.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/views/location-info.jade" afterPath="$PROJECT_DIR$/app_server/views/location-info.jade" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -108,8 +106,8 @@
       <file leaf-file-name="volunteers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app_server/controllers/volunteers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="53" column="2" lean-forward="true" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+            <state relative-caret-position="969">
+              <caret line="54" column="2" lean-forward="true" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -202,8 +200,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="113" />
-    <option name="y" value="325" />
+    <option name="x" value="167" />
+    <option name="y" value="136" />
     <option name="width" value="1595" />
     <option name="height" value="823" />
   </component>
@@ -451,15 +449,15 @@
       <workItem from="1565672958844" duration="5972000" />
       <workItem from="1566194669436" duration="9499000" />
       <workItem from="1566279552843" duration="13879000" />
-      <workItem from="1566400877197" duration="59448000" />
+      <workItem from="1566400877197" duration="63443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246832000" />
+    <option name="totallyTimeSpent" value="250827000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="113" y="325" width="1595" height="823" extended-state="0" />
+    <frame x="167" y="136" width="1595" height="823" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -824,8 +822,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_server/controllers/volunteers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="53" column="2" lean-forward="true" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+        <state relative-caret-position="969">
+          <caret line="54" column="2" lean-forward="true" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
           <folding />
         </state>
       </provider>
