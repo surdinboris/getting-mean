@@ -47,11 +47,45 @@ module.exports.volunteerCreatePage = function (req, res) {
     //})
 };
 
-module.exports.volunteerCreateCommit = function (req, res) {
-request(url.resolve(ApiOptions.server,"api/volunteers/"), {method: 'post',
-    json: req.body} ,function (err, apiResp, body) {
-    res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:'/volunteers/'+body._id, volunteer:body})
-})
+module.exports.volunteerCreateCommit = function (req, response) {
+    var locationId = req.query.locationId;
+    //first - adding new volunteer and get its id
+    request(url.resolve(ApiOptions.server, "api/volunteers/"), {
+        method: 'post',
+        json: req.body
+    }, function (err, volApiResp, volBody) {
+        //second - get current set of volunteers
+        request(url.resolve(ApiOptions.server, "api/locations/" + locationId), {
+            method: 'get',
+            json: {}
+        }, function (err, locApiResp, locBody) {
+            if (err) {
+                console.log(err)
+            }
+            var locVolsUpdated= locBody.volunteers;
+            locVolsUpdated.push(volBody._id);
+
+            //third - attach this id to location object
+            request(url.resolve(ApiOptions.server, "api/locations/"+ locationId), {
+                method: 'put',
+                json: {volunteers: locVolsUpdated.toString()}},
+                function(err, updatedApiResp, updLocBody) {
+                    if (err) {
+                        console.log('error',err)
+                    }
+                    //console.log('responding....');
+                    // response.render("location-info.jade", {
+                    //     pageHeader: {title: title},
+                    //     formAction: '/volunteers/' + volBody._id,
+                    //     volunteer: volBody
+                    //})
+                    console.log('body',updLocBody);
+                    response.redirect('/locations/'+locationId)
+
+
+            })
+        })
+    })
 };
 
 // module.exports.volunteerCreate=function (req,res) {

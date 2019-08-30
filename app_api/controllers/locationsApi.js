@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Loc = mongoose.model('locations');
-var Vol = mongoose.model('volunteers')
+var Vol = mongoose.model('volunteers');
 var ErrCodesActions={
     400:function (res, err){sendJsonResponse(res, 400,{"message":"error", "error":err})},
     401:function (res,err){sendJsonResponse(res, 401,{"message":"no ID parameter(s) given","err":"missing parameters"})},
@@ -97,14 +97,14 @@ module.exports.locationsUpdateOne=function (req,res) {
                 ErrCodesActions[400](res,err);
                 return;
             }
+            console.log('arrived vols',req.body.volunteers.split(","));
             req.body.name? location.name=req.body.name : null ;
             req.body.address? location.address= req.body.address: null;
                 //location.rating: req.body.rating;
             req.body.facilities? location.facilities= req.body.facilities: null;
             req.body.lng && req.body.lat? location.coords=
                 [parseFloat(req.body.lng), parseFloat(req.body.lat)] : null;
-            console.log('----', req.body.volunteers.split(","));
-            console.log(req.body.volunteers)
+
             req.body.volunteers? location.volunteers =  req.body.volunteers.split(",") : null;
                 //put to child doc
                 // location.days= req.body.days;
@@ -113,7 +113,7 @@ module.exports.locationsUpdateOne=function (req,res) {
                 // location.closed= req.body.closed;
             location.save( function (err, location) {
                 if (err) {
-
+                    console.log(err);
                     ErrCodesActions[400](res,err)
                 } else {
                     sendJsonResponse(res, 200, location)
