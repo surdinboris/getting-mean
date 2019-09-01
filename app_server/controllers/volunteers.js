@@ -64,9 +64,11 @@ module.exports.volunteerCreateCommit = function (req, response) {
                 console.log(err)
             }
             var locVolsUpdated= locBody.volunteers;
-            //the problem is mixing retrieved api object and new id here
+            //creating array of id's
+            locVolsUpdated=locVolsUpdated.map(function (vol) {
+                return vol._id
+            });
             locVolsUpdated.push(volBody._id);
-            console.log('lll',locVolsUpdated);
 
             //third - attach this id to location object
             request(url.resolve(ApiOptions.server, "api/locations/"+ locationId), {
@@ -82,7 +84,6 @@ module.exports.volunteerCreateCommit = function (req, response) {
                     //     formAction: '/volunteers/' + volBody._id,
                     //     volunteer: volBody
                     //})
-                    console.log('body',updLocBody);
                     response.redirect('/locations/'+locationId)
 
 

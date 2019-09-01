@@ -102,7 +102,8 @@ module.exports.locationInfo = function(req, res) {
         //executing action request if presented
         if(req.query.action && actionsHandler[req.query.action]){
            var handlerResult= actionsHandler[req.query.action](req,res,body);
-            handlerResult.then(function (result) {
+           //somehow this not function properly
+           handlerResult.then(function (result) {
                 console.log(result.updData);
                 renderLocation(err,res,result.updData);
                 console.log('actionsHandler done')
