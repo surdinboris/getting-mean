@@ -64,6 +64,7 @@ module.exports.volunteerCreateCommit = function (req, response) {
                 console.log(err)
             }
             var locVolsUpdated= locBody.volunteers;
+            //the problem is mixing retrieved api object and new id here
             locVolsUpdated.push(volBody._id);
             console.log('lll',locVolsUpdated);
 

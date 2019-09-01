@@ -63,14 +63,10 @@ module.exports.locationsReadOne=function (req,res) {
                     // from another db request (volunteers)
                     //location = JSON.parse(JSON.stringify(location));
                     location =location.toObject();
-                    console.log(volsobj);
-                    volsobj=volsobj.map(function (vo) {
 
-                        if (vo!=null){
-                            return vo
-                    }
-                        else
-                            return 'n/a'
+                    //filtering 'dead' volunteers before saving
+                    volsobj=volsobj.filter(function (val) {
+                        return val != null
 
                     });
                     location.volunteers=volsobj;
