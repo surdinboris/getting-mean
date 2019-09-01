@@ -57,6 +57,37 @@ module.exports.homelist = function(req, res) {
 
 
 module.exports.locationInfo = function(req, res) {
+    var actionsHandler={};
+    actionsHandler.unsubscribeVolunteer=function (req,res,body) {
+            return new Promise(function(resolve, reject) {
+                //retrieve current list of volunteers
+                var index=body.volunteers.indexOf(req.query.volunteerId);
+                if(index > -1) {
+                    body.volunteers.splice(index, 1);
+                    //sending request one way
+                request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
+
+                    method: 'put', json: {volunteers: body.volunteers.toString()}
+                }, function (err, apiResp, body) {
+                    console.log('sent to api -vol append',body.volunteers.toString());
+                    if (err) {
+                        console.log(err)
+                    }
+                    else resolve({updData: body})
+                    //resulting data not used
+                });
+                }
+                else reject({errorDesc:'No such volunteer in provided location found', updData: body})
+            }
+            )
+        };
+    //     return {err:0, errorDesc:0, updData: body.volunteers}
+    //     }
+    //     else return
+    // };
+
+
+    //main rendering
     request(url.resolve(ApiOptions.server, 'api/locations/'+req.params.locationid), {
         method: 'get',
             json: {},
@@ -68,12 +99,25 @@ module.exports.locationInfo = function(req, res) {
         if (!body.length) {
             message = "No location with given ID";
         }
-        console.log(body);
-        renderLocation(err,res,body)
+        //executing action request if presented
+        if(req.query.action && actionsHandler[req.query.action]){
+           var handlerResult= actionsHandler[req.query.action](req,res,body);
+            handlerResult.then(function (result) {
+                console.log(result.updData);
+                renderLocation(err,res,result.updData);
+                console.log('actionsHandler done')
+            }).catch(function(err){
+                err=handlerResult.errorDesc;
+                renderLocation(err,res,body)
+            })
+
+        }
+        else{
+            console.log('onhandler render', body)
+            renderLocation(err,res,body)
+        }
 
         })
-
-
 };
 
 

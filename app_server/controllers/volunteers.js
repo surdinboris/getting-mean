@@ -10,6 +10,7 @@ var title= 'Volunteer edit';
 
 //get handler
 module.exports.volunteerEditPage = function (req, res) {
+
     var volid=req.params.volunteerid;
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
@@ -64,6 +65,7 @@ module.exports.volunteerCreateCommit = function (req, response) {
             }
             var locVolsUpdated= locBody.volunteers;
             locVolsUpdated.push(volBody._id);
+            console.log('lll',locVolsUpdated);
 
             //third - attach this id to location object
             request(url.resolve(ApiOptions.server, "api/locations/"+ locationId), {

@@ -63,15 +63,17 @@ module.exports.locationsReadOne=function (req,res) {
                     // from another db request (volunteers)
                     //location = JSON.parse(JSON.stringify(location));
                     location =location.toObject();
+                    console.log(volsobj);
                     volsobj=volsobj.map(function (vo) {
 
-                        if (vo!=null)
-                            return vo;
+                        if (vo!=null){
+                            return vo
+                    }
                         else
-                            return{_id:'n/a',volunteerName:'volunteers n/a',volunteerAddress:"n/a"}
+                            return 'n/a'
 
                     });
-                    location.volunteersList=volsobj;
+                    location.volunteers=volsobj;
                     sendJsonResponse(res, 220,location)
                 });
             }
@@ -97,7 +99,7 @@ module.exports.locationsUpdateOne=function (req,res) {
                 ErrCodesActions[400](res,err);
                 return;
             }
-            console.log('arrived vols',req.body.volunteers.split(","));
+            req.body.rating? location.name=req.body.rating : null ;
             req.body.name? location.name=req.body.name : null ;
             req.body.address? location.address= req.body.address: null;
                 //location.rating: req.body.rating;
@@ -106,12 +108,13 @@ module.exports.locationsUpdateOne=function (req,res) {
                 [parseFloat(req.body.lng), parseFloat(req.body.lat)] : null;
 
             req.body.volunteers? location.volunteers =  req.body.volunteers.split(",") : null;
+            console.log('location saving volunteers', req.body);
                 //put to child doc
                 // location.days= req.body.days;
                 // location.opening= req.body.opening;
                 // location.closing= req.body.closing;
                 // location.closed= req.body.closed;
-            location.save( function (err, location) {
+            location.save(function (err, location) {
                 if (err) {
                     console.log(err);
                     ErrCodesActions[400](res,err)
