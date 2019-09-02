@@ -6,7 +6,7 @@ if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
 
-var title= 'Volunteer edit';
+var volunteerEditTitle= 'Volunteer edit page';
 
 //get handler
 module.exports.volunteerEditPage = function (req, res) {
@@ -15,7 +15,7 @@ module.exports.volunteerEditPage = function (req, res) {
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
         json: {}} ,function (err, apiResp, body) {
-        res.render("volunteer-view.jade", {pageHeader:{title: title},formAction:body._id, volunteer:body})
+        res.render("volunteer-view.jade", {pageHeader:{title: volunteerEditTitle},formAction:body._id, volunteer:body})
     })
 };
 
@@ -25,7 +25,7 @@ module.exports.volunteerEditCommit=function (req, res) {
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid),{method: 'put', json: req.body},
         function (err, apiResp, body) {
-            res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:body._id, volunteer:body})
+            res.render("volunteer-view.jade", {pageHeader:{title: volunteerEditTitle}, formAction:body._id, volunteer:body})
         } )
 };
 
@@ -37,7 +37,7 @@ module.exports.volunteerCreatePage = function (req, res) {
     //     json: {}} ,function (err, apiResp, body) {
 
     //!implement schema request to dynamically get fields for current schema and generate  creation page
-        res.render("volunteer-view.jade", {pageHeader:{title: title}, formAction:'', volunteer:{
+        res.render("volunteer-view.jade", {pageHeader:{title: volunteerEditTitle}, formAction:'', volunteer:{
                 volunteerName: '',
                 volunteerAddress: '',
                 active: true,
@@ -47,13 +47,16 @@ module.exports.volunteerCreatePage = function (req, res) {
             }})
     //})
 };
+module.exports.volunteersList = function (request, response) {
+    response.render("volunteers-list.jade",{pageHeader:{title: 'Volunteers list'}, volunteers:volunteersObj})
+};
 
-module.exports.volunteerCreateCommit = function (req, response) {
-    var locationId = req.query.locationId;
+module.exports.volunteerCreateCommit = function (request, response) {
+    var locationId = request.query.locationId;
     //first - adding new volunteer and get its id
     request(url.resolve(ApiOptions.server, "api/volunteers/"), {
         method: 'post',
-        json: req.body
+        json: request.body
     }, function (err, volApiResp, volBody) {
         //second - get current set of volunteers
         request(url.resolve(ApiOptions.server, "api/locations/" + locationId), {

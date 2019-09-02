@@ -13,6 +13,7 @@ router.get('/locations/:locationid', ctrlLocations.locationInfo);
 router.get('/about', ctrlOthers.about);
 
 router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditPage);
+router.get('/volunteers/', ctrlvolunteers.volunteersList);
 router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditCommit);
 
 router.get('/volunteer',ctrlvolunteers.volunteerCreatePage);

@@ -24,6 +24,9 @@ var attachVolsToLocation = function(location) {
         var volsList = Promise.all(location.volunteers.map(function (volunteer) {
             return Vol.findOne({_id: volunteer}, function (err, volunteer) {
                 //console.log("vols"+volunteer);
+                if(err){
+                    reject('DB request failed for one of locations volunteer ID ',err)
+                }
                 return volunteer
             })
         }));
@@ -38,6 +41,8 @@ var attachVolsToLocation = function(location) {
             });
             location.volunteers = volsobj;
             resolve(location)
+        }).catch(function(err){
+            reject(err)
         });
 
     })

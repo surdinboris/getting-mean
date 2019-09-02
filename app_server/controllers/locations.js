@@ -39,8 +39,7 @@ var renderHomePage=function (err, res, body) {
 module.exports.homelist = function(req, res) {
     //request and in callback renderHomePage
     request(url.resolve(ApiOptions.server, 'api/locations'),
-        {
-            method: 'get',
+        {   method: 'get',
             json: {},
             qs: {
                 lng: 34.767513,
