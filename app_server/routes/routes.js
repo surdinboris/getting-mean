@@ -13,11 +13,13 @@ router.get('/locations/:locationid', ctrlLocations.locationInfo);
 router.get('/about', ctrlOthers.about);
 
 router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditPage);
+router.get('/volunteers/delete/:volunteerid', ctrlvolunteers.deleteVolunteer);
 router.get('/volunteers/', ctrlvolunteers.volunteersList);
 router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditCommit);
 
 router.get('/volunteer',ctrlvolunteers.volunteerCreatePage);
 router.post('/volunteer', ctrlvolunteers.volunteerCreateCommit);
+
 //data manipulation
 
 

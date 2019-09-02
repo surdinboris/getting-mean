@@ -4,7 +4,18 @@ include _includes/sharedHTMLfunctions
 
 block content
   .row.page-header: .col-lg-12
-      h1= pageHeader.title
-  .row
-    .col-xs-12.col-md-9
-      .row
+     h1= pageHeader.title
+
+     .panel-body.volunteer-container
+        .row
+            .col-xs-12.col-md-9
+                .row
+                    each volunteer in volunteers
+                        .row
+                            .volunteer
+                                .well.well-sm.volunteer-header
+                                    span.rating
+                                    p.reviewAuthor Name: #{volunteer.volunteerName}
+                                    p.reviewAuthor Address: #{volunteer.volunteerAddress}
+                                    a.btn.btn-default.pull-right(href="/volunteers/#{volunteer._id}") Edit volunteer
+                                    a.btn.btn-default.pull-right(href="/volunteers/delete/#{volunteer._id}") Delete volunteer

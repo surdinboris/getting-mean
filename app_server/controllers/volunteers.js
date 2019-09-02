@@ -47,19 +47,35 @@ module.exports.volunteerCreatePage = function (req, res) {
             }})
     //})
 };
-module.exports.volunteersList = function (request, response) {
-    response.render("volunteers-list.jade",{pageHeader:{title: 'Volunteers list'}, volunteers:volunteersObj})
+module.exports.volunteersList = function (req, resp) {
+    request(url.resolve(ApiOptions.server, "/api/volunteers/"), {
+        method: 'get',
+        json: {}
+    }, function (err, apiResp, body) {
+        console.log(body)
+        resp.render("volunteers-list.jade", {pageHeader: {title: 'Volunteers list'}, volunteers: body})
+    });
 };
+module.exports.deleteVolunteer= function(req,resp){
+  request(url.resolve(ApiOptions.server, "/api/volunteers/"+req.params.volunteerid),{
+      method:'delete',
+      json:{}
+  }, function (err, volApiResp, volbody) {
 
-module.exports.volunteerCreateCommit = function (request, response) {
-    var locationId = request.query.locationId;
+      if(volApiResp.statusCode == 204){
+          resp.end(req.params.volunteerid + ' - deleted')
+      }
+  })  
+};
+module.exports.volunteerCreateCommit = function (req, resp) {
+    var locationId = req.query.locationId;
     //first - adding new volunteer and get its id
-    request(url.resolve(ApiOptions.server, "api/volunteers/"), {
+    req(url.resolve(ApiOptions.server, "api/volunteers/"), {
         method: 'post',
-        json: request.body
+        json: req.body
     }, function (err, volApiResp, volBody) {
         //second - get current set of volunteers
-        request(url.resolve(ApiOptions.server, "api/locations/" + locationId), {
+        req(url.resolve(ApiOptions.server, "api/locations/" + locationId), {
             method: 'get',
             json: {}
         }, function (err, locApiResp, locBody) {
@@ -74,20 +90,14 @@ module.exports.volunteerCreateCommit = function (request, response) {
             locVolsUpdated.push(volBody._id);
 
             //third - attach this id to location object
-            request(url.resolve(ApiOptions.server, "api/locations/"+ locationId), {
+            req(url.resolve(ApiOptions.server, "api/locations/"+ locationId), {
                 method: 'put',
                 json: {volunteers: locVolsUpdated.toString()}},
                 function(err, updatedApiResp, updLocBody) {
                     if (err) {
                         console.log('error',err)
                     }
-                    //console.log('responding....');
-                    // response.render("location-info.jade", {
-                    //     pageHeader: {title: title},
-                    //     formAction: '/volunteers/' + volBody._id,
-                    //     volunteer: volBody
-                    //})
-                    response.redirect('/locations/'+locationId)
+                    resp.redirect('/locations/'+locationId)
 
 
             })
