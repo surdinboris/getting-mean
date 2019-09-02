@@ -61,23 +61,26 @@ module.exports.locationInfo = function(req, res) {
     actionsHandler.unsubscribeVolunteer=function (req,res,body) {
             return new Promise(function(resolve, reject) {
                 //retrieve current list of volunteers
-                var index=body.volunteers.indexOf(req.query.volunteerId);
+                var volsIdList= body.volunteers.map(function (vol) {
+                    return vol._id
+                });
+                var index=volsIdList.indexOf(req.query.volunteerId);
+                console.log('index',body.volunteers.indexOf(req.query.volunteerId));
                 if(index > -1) {
-                    body.volunteers.splice(index, 1);
+                    volsIdList.splice(index, 1);
                     //sending request one way
                 request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
 
-                    method: 'put', json: {volunteers: body.volunteers.toString()}
+                    method: 'put', json: {volunteers: volsIdList.toString()}
                 }, function (err, apiResp, body) {
-                    console.log('sent to api -vol append',body.volunteers.toString());
                     if (err) {
                         console.log(err)
                     }
-                    else resolve({updData: body})
+                    else resolve(body)
                     //resulting data not used
                 });
                 }
-                else reject({errorDesc:'No such volunteer in provided location found', updData: body})
+                else reject('No such volunteer in provided location found')
             }
             )
         };
@@ -104,17 +107,15 @@ module.exports.locationInfo = function(req, res) {
            var handlerResult= actionsHandler[req.query.action](req,res,body);
            //somehow this not function properly
            handlerResult.then(function (result) {
-                console.log(result.updData);
-                renderLocation(err,res,result.updData);
-                console.log('actionsHandler done')
+               //need to request volunteers by ids
+               renderLocation(err,res,result)
             }).catch(function(err){
-                err=handlerResult.errorDesc;
                 renderLocation(err,res,body)
             })
 
         }
         else{
-            console.log('onhandler render', body)
+            console.log('onhandler render', body);
             renderLocation(err,res,body)
         }
 
