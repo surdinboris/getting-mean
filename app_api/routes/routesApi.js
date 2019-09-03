@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var ctrlLocations = require('../controllers/locationsApi');
-var ctrlVolunteers = require('../controllers/volunteersApi');
-var ctrlCats = require('../controllers/catsApi');
+let express = require('express');
+let router = express.Router();
+let ctrlLocations = require('../controllers/locationsApi');
+let ctrlVolunteers = require('../controllers/volunteersApi');
+let ctrlCats = require('../controllers/catsApi');
 // locations
 router.get('/locations', ctrlLocations.locationsListByDistance); //done
 router.post('/locations', ctrlLocations.locationsCreate); //done

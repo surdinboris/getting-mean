@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Loc = mongoose.model('locations');
+let mongoose = require('mongoose');
+let Loc = mongoose.model('locations');
 
-var sendJsonResponse = function(res, status, content) {
+let sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
@@ -10,13 +10,13 @@ var sendJsonResponse = function(res, status, content) {
 //404 - not found   sendJsonResponse(res,404,{"message":"no document with given ID was found"})
 //220 - ok + response sent
 //204 - deleted + response null
-var ErrCodesActions={
+let ErrCodesActions={
     400:function (res, err){sendJsonResponse(res, 400,{"message":"error", "error":err})},
     401:function (res,err){sendJsonResponse(res, 401,{"message":"no ID parameter(s) given","err":"missing parameters"})},
     404:function (res,err){sendJsonResponse(res,404,{"message":"no document with given ID was found"})},
 };
 
-// var catsListSchema = new mongoose.Schema({
+// let catsListSchema = new mongoose.Schema({
 //     catName: {type:String, required:true},
 //     catAge: {type: Number, "default": 0, min: 0, max: 30},
 //     catChipNumber: String,
@@ -32,7 +32,7 @@ module.exports.catsByLocation=function (req,res) {
     //finding volunteers
 
         if(req.params && req.params.locationid) {
-            var locId = req.params.locationid;
+            let locId = req.params.locationid;
 
             Loc.findOne({_id: locId}).select("cats")
                 .exec(function (err, location) {
@@ -42,7 +42,7 @@ module.exports.catsByLocation=function (req,res) {
                         ErrCodesActions[404](res)
                     } else {
 
-                        var cats = location.cats;
+                        let cats = location.cats;
 
                         sendJsonResponse(res, 220, cats)
                     }
@@ -56,7 +56,7 @@ module.exports.catsByLocation=function (req,res) {
 
 };
 module.exports.catsCreate=function (req,res) {
-    var doAddCat =  function(req, res, location){
+    let doAddCat =  function(req, res, location){
         location.cats.push({
             catName: req.body.catName,
             catAge: req.body.catAge,
@@ -70,8 +70,8 @@ module.exports.catsCreate=function (req,res) {
     };
 
     if(req.params && req.params.locationid ){
-        //var catId=req.params.catid;
-        var locId=req.params.locationid;
+        //let catId=req.params.catid;
+        let locId=req.params.locationid;
 
         Loc.findOne({_id: locId}).select("cats").exec( function (err, location) {
             if(!location){
@@ -84,7 +84,7 @@ module.exports.catsCreate=function (req,res) {
             else {
                 doAddCat(req, res, location);
                 location.save(function(err, location) {
-                    var thisCat;
+                    let thisCat;
                     if (err) {
                         ErrCodesActions[400](res,err);
                     } else {
@@ -109,8 +109,8 @@ module.exports.catsCreate=function (req,res) {
 module.exports.catsReadOne=function (req, res) {
 
     if(req.params && req.params.locationid && req.params.catid){
-        var locId=req.params.locationid;
-        var catId = req.params.catid;
+        let locId=req.params.locationid;
+        let catId = req.params.catid;
 
         Loc.findOne({_id: locId}).select("name cats").exec( function (err, location) {
             if(!location) {
@@ -120,7 +120,7 @@ module.exports.catsReadOne=function (req, res) {
                 ErrCodesActions[400](res,err)
             }
             else {
-                var response, cat;
+                let response, cat;
                 cat = location.cats.id(catId);
                 if(!cat) {
                     ErrCodesActions[404](res)
@@ -143,8 +143,8 @@ module.exports.catsReadOne=function (req, res) {
 module.exports.catsUpdateOne=function (req,res) {
 
     if(req.params && req.params.locationid && req.params.catid){
-        var locId = req.params.locationid;
-        var catId = req.params.catid;
+        let locId = req.params.locationid;
+        let catId = req.params.catid;
 
         Loc.findOne({_id: locId}).select("name cats").exec( function (err, location) {
             if(!location) {
@@ -155,7 +155,7 @@ module.exports.catsUpdateOne=function (req,res) {
             }
 
             else {
-                var thisCat = location.cats.id(catId);
+                let thisCat = location.cats.id(catId);
                 if(!thisCat){
                     ErrCodesActions[404](res);
                     return
@@ -191,8 +191,8 @@ module.exports.catsUpdateOne=function (req,res) {
 module.exports.catsDeleteOne=function (req,res) {
 
     if(req.params && req.params.locationid && req.params.catid){
-        var locId = req.params.locationid;
-        var catId = req.params.catid;
+        let locId = req.params.locationid;
+        let catId = req.params.catid;
 
         Loc.findOne({_id: locId}).select("name cats").exec( function (err, location) {
             if(!location) {
@@ -203,7 +203,7 @@ module.exports.catsDeleteOne=function (req,res) {
             }
 
             else {
-                var thisCat = location.cats.id(catId);
+                let thisCat = location.cats.id(catId);
                 if(!thisCat){
                     ErrCodesActions[404](res);
                 } else {

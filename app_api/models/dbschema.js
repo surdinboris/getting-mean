@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var feedingScheduleSchema = new mongoose.Schema({
+let feedingScheduleSchema = new mongoose.Schema({
     days: {type: String, required: true},
     feedingTime: String,
 });
 
-var volunteerSchema = new mongoose.Schema({
+let volunteerSchema = new mongoose.Schema({
     volunteerName: {type:String},
     volunteerAddress:{type:String},
     feedingSchedule: [feedingScheduleSchema],
@@ -16,12 +16,12 @@ var volunteerSchema = new mongoose.Schema({
 });
 
 
-var catPhotoSchema = new mongoose.Schema({
+let catPhotoSchema = new mongoose.Schema({
     UplDate: {type: Date, default: Date.now},
     imageData: {type:'Buffer'},
     comment: String
 });
-var catsListSchema = new mongoose.Schema({
+let catsListSchema = new mongoose.Schema({
     catName: {type:String, required:true},
     catAge: {type: Number, "default": 0, min: 0, max: 30},
     catChipNumber: String,
@@ -32,7 +32,7 @@ var catsListSchema = new mongoose.Schema({
     catPhoto:[catPhotoSchema]
     });
 
-var locationSchema = new mongoose.Schema({
+let locationSchema = new mongoose.Schema({
     name: {type: String, required: true},
     address: String,
     rating: {type: Number, "default": 0, min: 0, max: 5},

@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var Loc = mongoose.model('locations');
-var Vol = mongoose.model('volunteers');
+let mongoose = require('mongoose');
+let Loc = mongoose.model('locations');
+let Vol = mongoose.model('volunteers');
 
-var sendJsonResponse = function(res, status, content) {
+let sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
@@ -11,7 +11,7 @@ var sendJsonResponse = function(res, status, content) {
 //404 - not found   sendJsonResponse(res,404,{"message":"no document with given ID was found"})
 //220 - ok + response sent
 //204 - deleted + response null
-var ErrCodesActions={
+let ErrCodesActions={
     400:function (res, err){sendJsonResponse(res, 400,{"message":"error", "error":err})},
     401:function (res,err){sendJsonResponse(res, 401,{"message":"no ID parameter(s) given","err":"missing parameters"})},
     404:function (res,err){sendJsonResponse(res,404,{"message":"no document with given ID was found"})},
@@ -48,7 +48,7 @@ module.exports.volunteersReadAll=function (req,res) {
 
 module.exports.volunteersReadOne=function (req,res) {
     if(req.params && req.params.volunteerid){
-        var volId=req.params.volunteerid;
+        let volId=req.params.volunteerid;
 
         Vol.findOne({_id: volId}, function (err, volunteer) {
 
@@ -72,8 +72,8 @@ module.exports.volunteersReadOne=function (req,res) {
 module.exports.volunteersUpdateOne=function (req,res) {
 
         if(req.params &&  req.params.volunteerid){
-            //var locId=req.params.locationid;
-            var volId = req.params.volunteerid;
+            //let locId=req.params.locationid;
+            let volId = req.params.volunteerid;
             Vol.findOne({_id: volId}).exec(function (err,volunteer) {
                 if (!volunteer) {
                     sendJsonResponse(res, 404, {
@@ -113,7 +113,7 @@ module.exports.volunteersUpdateOne=function (req,res) {
 
 module.exports.volunteersDeleteOne=function (req,res) {
     if(req.params && req.params.volunteerid){
-        var volId=req.params.volunteerid;
+        let volId=req.params.volunteerid;
         Vol.findByIdAndRemove(volId).exec(function (err, volunteer) {
 
             if (err) {

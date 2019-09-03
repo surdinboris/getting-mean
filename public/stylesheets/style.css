@@ -28,3 +28,9 @@ label,input {
     border-radius: 10px;
     border-width: 5px;
 }
+.btn-default{
+    margin: 2px;
+    border-width: 0.3px;
+    border: black;
+    border-style: solid;
+}

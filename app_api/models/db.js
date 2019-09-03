@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
 mongoose.connection.on('connected', function () {
-    var srvFromUri=/.*@(.+\/)/.exec(dbURI)? /.*@(.+)\//.exec(dbURI)[1] : 'local';
+    let srvFromUri=/.*@(.+\/)/.exec(dbURI)? /.*@(.+)\//.exec(dbURI)[1] : 'local';
     console.log('Mongoose connected to ' + srvFromUri);
 });
 mongoose.connection.on('error',function (err) {
@@ -12,7 +12,7 @@ mongoose.connection.on('disconnected', function () {
     console.log('Mongoose disconnected');
 });
 
-var gracefulShutdown = function (msg, type, callback) {
+let gracefulShutdown = function (msg, type, callback) {
     mongoose.connection.close(function () {
         console.log(type + ' event occurred. Mongoose disconnected through ' + msg);
         callback();
@@ -35,7 +35,7 @@ process.on('SIGTERM', function() {
     });
 });
 
-var dbURI = 'mongodb://localhost/Loc8r';
+let dbURI = 'mongodb://localhost/Loc8r';
 console.log('Loaded in ' +process.env.NODE_ENV+ ' environment');
 if(process.env.NODE_ENV == 'production'){
     console.log('DB connection changed to cluster');

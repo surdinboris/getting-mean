@@ -1,17 +1,17 @@
-var request = require("request");
-var url =require('url');
-var ApiOptions = {server:"http://localhost:3000"};
+let request = require("request");
+let url =require('url');
+let ApiOptions = {server:"http://localhost:3000"};
 
 if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
 
-var volunteerEditTitle= 'Volunteer edit page';
+let volunteerEditTitle= 'Volunteer edit page';
 
 //get handler
 module.exports.volunteerEditPage = function (req, res) {
 
-    var volid=req.params.volunteerid;
+    let volid=req.params.volunteerid;
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
         json: {}} ,function (err, apiResp, body) {
@@ -21,7 +21,7 @@ module.exports.volunteerEditPage = function (req, res) {
 
 //put (change) handler
 module.exports.volunteerEditCommit=function (req, res) {
-    var volid=req.params.volunteerid;
+    let volid=req.params.volunteerid;
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid),{method: 'put', json: req.body},
         function (err, apiResp, body) {
@@ -52,7 +52,6 @@ module.exports.volunteersList = function (req, resp) {
         method: 'get',
         json: {}
     }, function (err, apiResp, body) {
-        console.log(body)
         resp.render("volunteers-list.jade", {pageHeader: {title: 'Volunteers list'}, volunteers: body})
     });
 };
@@ -63,12 +62,13 @@ module.exports.deleteVolunteer= function(req,resp){
   }, function (err, volApiResp, volbody) {
 
       if(volApiResp.statusCode == 204){
-          resp.end(req.params.volunteerid + ' - deleted')
+          //add pareq.params.volunteerid + ' - deleted'
+          resp.redirect("/volunteers/")
       }
   })  
 };
 module.exports.volunteerCreateCommit = function (req, resp) {
-    var locationId = req.query.locationId;
+    let locationId = req.query.locationId;
     //first - adding new volunteer and get its id
     request(url.resolve(ApiOptions.server, "api/volunteers/"), {
         method: 'post',
@@ -82,7 +82,7 @@ module.exports.volunteerCreateCommit = function (req, resp) {
             if (err) {
                 console.log(err)
             }
-            var locVolsUpdated= locBody.volunteers;
+            let locVolsUpdated= locBody.volunteers;
             //creating array of id's
             locVolsUpdated=locVolsUpdated.map(function (vol) {
                 return vol._id
@@ -98,8 +98,6 @@ module.exports.volunteerCreateCommit = function (req, resp) {
                         console.log('error',err)
                     }
                     resp.redirect('/locations/'+locationId)
-
-
             })
         })
     })

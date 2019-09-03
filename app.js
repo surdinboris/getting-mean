@@ -1,15 +1,15 @@
-var express = require('express');
+let express = require('express');
 require('./app_api/models/db'); //db connection
-var url = require('url');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var routes = require('./app_server/routes/routes');
-var routesApi = require('./app_api/routes/routesApi');
-// var users = require('./app_server/routes/users');
-var app = express();
+let url = require('url');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let routes = require('./app_server/routes/routes');
+let routesApi = require('./app_api/routes/routesApi');
+// let users = require('./app_server/routes/users');
+let app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
@@ -28,7 +28,7 @@ app.use('/api', routesApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

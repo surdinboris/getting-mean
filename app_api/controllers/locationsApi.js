@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Loc = mongoose.model('locations');
-var Vol = mongoose.model('volunteers');
-var ErrCodesActions = {
+let mongoose = require('mongoose');
+let Loc = mongoose.model('locations');
+let Vol = mongoose.model('volunteers');
+let ErrCodesActions = {
     400: function (res, err) {
         sendJsonResponse(res, 400, {"message": "error", "error": err})
     },
@@ -13,15 +13,15 @@ var ErrCodesActions = {
     },
 };
 
-var sendJsonResponse = function (res, status, content) {
+let sendJsonResponse = function (res, status, content) {
     res.status(status);
     res.json(content);
 };
 
 //resolving with full associated  volunteers object
-var attachVolsToLocation = function(location) {
+let attachVolsToLocation = function(location) {
     return new Promise(function (resolve, reject) {
-        var volsList = Promise.all(location.volunteers.map(function (volunteer) {
+        let volsList = Promise.all(location.volunteers.map(function (volunteer) {
             return Vol.findOne({_id: volunteer}, function (err, volunteer) {
                 //console.log("vols"+volunteer);
                 if(err){
@@ -71,7 +71,7 @@ module.exports.locationsCreate = function (req, res) {
 
 module.exports.locationsReadOne = function (req, res) {
     if (req.params && req.params.locationid) {
-        var locId = req.params.locationid;
+        let locId = req.params.locationid;
 
         Loc.findOne({_id: locId}, function (err, location) {
             if (err) {
@@ -98,7 +98,7 @@ module.exports.locationsReadOne = function (req, res) {
 
 module.exports.locationsUpdateOne = function (req, res) {
     if (req.params && req.params.locationid) {
-        var locId = req.params.locationid;
+        let locId = req.params.locationid;
         Loc.findOne({_id: locId}).select("-rating -volunteers").exec(function (err, location) {
             if (!location) {
                 sendJsonResponse(res, 404, {
@@ -140,7 +140,7 @@ module.exports.locationsUpdateOne = function (req, res) {
 
 module.exports.locationsDeleteOne = function (req, res) {
     if (req.params && req.params.locationid) {
-        var locId = req.params.locationid;
+        let locId = req.params.locationid;
 
         Loc.findByIdAndRemove(locId).exec(function (err, location) {
 
@@ -163,10 +163,10 @@ module.exports.locationsDeleteOne = function (req, res) {
 
 /* locations by distance  /api/locations?lng=0.876876&lat=0.812358&dst=40000  (for dist 4000m)*/
 module.exports.locationsListByDistance = function (req, res) {
-    var lng = parseFloat(req.query.lng);
-    var lat = parseFloat(req.query.lat);
-    var maxDist = parseInt(req.query.dst);
-    var point = {
+    let lng = parseFloat(req.query.lng);
+    let lat = parseFloat(req.query.lat);
+    let maxDist = parseInt(req.query.dst);
+    let point = {
         type: "Point",
         coordinates: [lng, lat]
     };
@@ -200,8 +200,8 @@ module.exports.locationsListByDistance = function (req, res) {
             }
             else {
                 locationsbydst.forEach(function (loc) {
-                    //var distInMeters=loc.distance;
-                    var distInkm = loc.distance / 1000;
+                    //let distInMeters=loc.distance;
+                    let distInkm = loc.distance / 1000;
                     if (distInkm < 2) {
                         loc.distance = String(Math.ceil(loc.distance)) + ' m'
                     }
@@ -219,7 +219,7 @@ module.exports.locationsListByDistance = function (req, res) {
 //finding volunteers
 exports.getVolunteersByLocId = (req, res) => {
     if (req.params && req.params.locationid) {
-        var locId = req.params.locationid;
+        let locId = req.params.locationid;
 
         Loc.findOne({_id: locId}).select("volunteers")
             .exec(function (err, location) {
@@ -229,7 +229,7 @@ exports.getVolunteersByLocId = (req, res) => {
                     ErrCodesActions[404](res)
                 } else {
 
-                    var volunteers = location.volunteers;
+                    let volunteers = location.volunteers;
 
                     sendJsonResponse(res, 220, volunteers)
                 }

@@ -1,18 +1,18 @@
-var request = require("request");
-var url =require('url');
-var ApiOptions = {server:"http://localhost:3000"};
+let request = require("request");
+let url =require('url');
+let ApiOptions = {server:"http://localhost:3000"};
 
 if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
 
-var renderLocation = function (err,res,body){
+let renderLocation = function (err,res,body){
        res.render("location-info",
            {pageHeader:{title:'Location info'}, sidebar:{calltoaction:'test', context:"tesr"},location:body})
 };
 
-var renderHomePage=function (err, res, body) {
-        var message;
+let renderHomePage=function (err, res, body) {
+        let message;
         if (err) {
             message = (err);}
         if (!body.length) {
@@ -56,14 +56,14 @@ module.exports.homelist = function(req, res) {
 
 
 module.exports.locationInfo = function(req, res) {
-    var actionsHandler={};
+    let actionsHandler={};
     actionsHandler.unsubscribeVolunteer=function (req,res,body) {
             return new Promise(function(resolve, reject) {
                 //retrieve current list of volunteers
-                var volsIdList= body.volunteers.map(function (vol) {
+                let volsIdList= body.volunteers.map(function (vol) {
                     return vol._id
                 });
-                var index=volsIdList.indexOf(req.query.volunteerId);
+                let index=volsIdList.indexOf(req.query.volunteerId);
                 console.log('index',body.volunteers.indexOf(req.query.volunteerId));
                 if(index > -1) {
                     volsIdList.splice(index, 1);
@@ -95,7 +95,7 @@ module.exports.locationInfo = function(req, res) {
             json: {},
 
         }, function (err,apiResp,body) {
-        var message;
+        let message;
         if (err) {
             message = (err);}
         if (!body.length) {
@@ -103,7 +103,7 @@ module.exports.locationInfo = function(req, res) {
         }
         //executing action request if presented
         if(req.query.action && actionsHandler[req.query.action]){
-           var handlerResult= actionsHandler[req.query.action](req,res,body);
+           let handlerResult= actionsHandler[req.query.action](req,res,body);
            //somehow this not function properly
            handlerResult.then(function (result) {
                //need to request volunteers by ids
@@ -111,7 +111,6 @@ module.exports.locationInfo = function(req, res) {
             }).catch(function(err){
                 renderLocation(err,res,body)
             })
-
         }
         else{
             console.log('onhandler render', body);
