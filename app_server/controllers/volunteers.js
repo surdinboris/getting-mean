@@ -47,6 +47,23 @@ module.exports.volunteerCreatePage = function (req, res) {
             }})
     //})
 };
+module.exports.volunteersLocations = function (req,resp) {
+    let voldata=  new Promise(function(resolve,reject){
+        request(url.resolve(ApiOptions.server, "/api/volunteers/"+req.params.volunteerid),{
+        method:'get',
+        json:{}}, function (err,apiResp,body) {
+            if(err){
+                reject(err)
+            }
+            resolve(body)
+        })});
+
+    voldata.then(function (body) {
+        resp.render("volunteer-with-locations-view.jade", {pageHeader: {title: 'Volunteer\'s locations list'}, volunteer: body})
+
+    }).catch(err=>resp.end(err));
+   };
+
 module.exports.volunteersList = function (req, resp) {
     request(url.resolve(ApiOptions.server, "/api/volunteers/"), {
         method: 'get',
