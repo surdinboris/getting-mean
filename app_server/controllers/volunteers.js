@@ -70,12 +70,12 @@ module.exports.deleteVolunteer= function(req,resp){
 module.exports.volunteerCreateCommit = function (req, resp) {
     var locationId = req.query.locationId;
     //first - adding new volunteer and get its id
-    req(url.resolve(ApiOptions.server, "api/volunteers/"), {
+    request(url.resolve(ApiOptions.server, "api/volunteers/"), {
         method: 'post',
         json: req.body
     }, function (err, volApiResp, volBody) {
         //second - get current set of volunteers
-        req(url.resolve(ApiOptions.server, "api/locations/" + locationId), {
+        request(url.resolve(ApiOptions.server, "api/locations/" + locationId), {
             method: 'get',
             json: {}
         }, function (err, locApiResp, locBody) {
@@ -90,7 +90,7 @@ module.exports.volunteerCreateCommit = function (req, resp) {
             locVolsUpdated.push(volBody._id);
 
             //third - attach this id to location object
-            req(url.resolve(ApiOptions.server, "api/locations/"+ locationId), {
+            request(url.resolve(ApiOptions.server, "api/locations/"+ locationId), {
                 method: 'put',
                 json: {volunteers: locVolsUpdated.toString()}},
                 function(err, updatedApiResp, updLocBody) {
