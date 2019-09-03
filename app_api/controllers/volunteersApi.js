@@ -69,7 +69,25 @@ module.exports.volunteersReadOne=function (req,res) {
 
 };
 
-module.exports.volunteersUpdateOne=function (req,res) {
+
+module.exports.volunteersLocations = function(req,res){
+    let searchvolunt = req.params.volunteerid;
+    //searchlogic will be here
+
+    Loc.find({volunteers:mongoose.Types.ObjectId(searchvolunt)}).exec(function (err,locationslist) {
+        if(err){
+            console.log('error',err)
+        }
+        else {
+            console.log('found locations of', searchvolunt, '--', locationslist)
+        }
+
+    });
+    sendJsonResponse(res, 200, {message: 'api responded volid is '+searchvolunt})
+};
+
+
+module.exports.volunteersUpdateOne = function (req,res) {
 
         if(req.params &&  req.params.volunteerid){
             //let locId=req.params.locationid;

@@ -13,6 +13,7 @@ router.delete('/locations/:locationid', ctrlLocations.locationsDeleteOne); //don
 //volunteers
 router.post('/volunteers', ctrlVolunteers.volunteersCreate); //done
 router.get('/volunteers', ctrlVolunteers.volunteersReadAll); //done
+router.get('/volunteers/view-locations/:volunteerid', ctrlVolunteers.volunteersLocations);
 router.get('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersReadOne); //done
 router.put('/volunteers/:volunteerid',
