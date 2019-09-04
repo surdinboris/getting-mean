@@ -34,3 +34,7 @@ label,input {
     border: black;
     border-style: solid;
 }
+.nolocations{
+    color: #ffffff;
+    font-size: 15pt;
+}

@@ -60,10 +60,12 @@ module.exports.volunteersLocations = function (req,resp) {
 
     voldata.then(function (voluntersLocations) {
         let locationdata= voluntersLocations.locationlist;
-            if (!locationdata.length){
-                locationdata=[{name:'Volunteer has no locations assigned :-( '}]
-            }
-        resp.render("volunteer-with-locations-view.jade", {pageHeader: {title: 'Volunteer\'s locations list'}, locationdata: locationdata})
+        let nolocations;
+        if (!locationdata.length){
+            nolocations = 'Volunteer has no locations assigned :-( '
+            //locationdata=[{name:'Volunteer has no locations assigned :-( '}]
+        }
+        resp.render("volunteer-with-locations-view.jade", {pageHeader: {title: 'Volunteer\'s locations list'}, nolocations:nolocations, locationdata: locationdata})
 
     }).catch(err=>resp.end(err));
    };
