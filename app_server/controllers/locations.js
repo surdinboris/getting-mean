@@ -8,7 +8,7 @@ if (process.env.NODE_ENV == 'production') {
 
 let renderLocation = function (err,res,body){
        res.render("location-info",
-           {pageHeader:{title:'Location info'}, sidebar:{calltoaction:'test', context:"tesr"},location:body})
+           {pageHeader:{title:'Location info'}, sidebar:{calltoaction:'test', context:"tesr"},location:err || body})
 };
 
 let renderHomePage=function (err, res, body) {
@@ -109,6 +109,7 @@ module.exports.locationInfo = function(req, res) {
                //need to request volunteers by ids
                renderLocation(err,res,result)
             }).catch(function(err){
+                console.log('error ocurred while retrieving location data',err);
                 renderLocation(err,res,body)
             })
         }

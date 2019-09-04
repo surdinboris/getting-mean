@@ -51,15 +51,19 @@ module.exports.volunteersLocations = function (req,resp) {
     let voldata=  new Promise(function(resolve,reject){
         request(url.resolve(ApiOptions.server, "/api/volunteers/view-locations/"+req.params.volunteerid),{
         method:'get',
-        json:{}}, function (err,apiResp,body) {
+        json:{}}, function (err,apiResp,voluntersLocations) {
             if(err){
                 reject(err)
             }
-            resolve(body)
+            resolve(voluntersLocations)
         })});
 
-    voldata.then(function (body) {
-        resp.render("volunteer-with-locations-view.jade", {pageHeader: {title: 'Volunteer\'s locations list'}, locationdata: body.message})
+    voldata.then(function (voluntersLocations) {
+        let locationdata= voluntersLocations.locationlist;
+            if (!locationdata.length){
+                locationdata=[{name:'Volunteer has no locations assigned :-( '}]
+            }
+        resp.render("volunteer-with-locations-view.jade", {pageHeader: {title: 'Volunteer\'s locations list'}, locationdata: locationdata})
 
     }).catch(err=>resp.end(err));
    };

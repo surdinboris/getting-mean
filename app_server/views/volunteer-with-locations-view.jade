@@ -1,5 +1,5 @@
 extends layout
-
+include _includes/sharedHTMLfunctions
 block content
   .row.page-header: .col-lg-12
       h1= pageHeader.title
@@ -7,5 +7,17 @@ block content
     .col-xs-12.col-md-9
       .row
         .col-xs-12.col-sm-6
-            p volunteer with locations
-            p #{locationdata}
+            each location in locationdata
+              .col-xs-12.list-group-item
+                h4
+                  a(href="/locations/#{location._id}")= location.name
+                  small &nbsp;
+                    +outputRating(location.rating)
+                  span.badge.pull-right.badge-default= location.distance
+                p.address= location.address
+                p
+                  if location.facilities
+                    each facility in location.facilities
+                      span.label.label-warning= facility
+                      | &nbsp;
+              p

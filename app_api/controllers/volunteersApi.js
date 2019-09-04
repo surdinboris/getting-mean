@@ -76,14 +76,16 @@ module.exports.volunteersLocations = function(req,res){
 
     Loc.find({volunteers:mongoose.Types.ObjectId(searchvolunt)}).exec(function (err,locationslist) {
         if(err){
-            console.log('error',err)
+            console.log('error while retrieving volunteer\'s locations',err);
+            ErrCodesActions[400](res,err);
         }
         else {
-            console.log('found locations of', searchvolunt, '--', locationslist)
+            //console.log('found locations of', searchvolunt, '--', locationslist)
+            sendJsonResponse(res, 200, {locationlist:locationslist})
         }
 
     });
-    sendJsonResponse(res, 200, {message: 'api responded volid is '+searchvolunt})
+
 };
 
 
