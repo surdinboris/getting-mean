@@ -58,24 +58,33 @@ module.exports.homelist = function(req, res) {
 module.exports.locationInfo = function(req, res) {
     let actionsHandler={};
     actionsHandler.unsubscribeVolunteer=function (req,res,body) {
+        //arrived ony one vol???
             return new Promise(function(resolve, reject) {
                 //retrieve current list of volunteers
+
                 let volsIdList= body.volunteers.map(function (vol) {
                     return vol._id
                 });
-                let index=volsIdList.indexOf(req.query.volunteerId);
-                console.log('index',body.volunteers.indexOf(req.query.volunteerId));
-                if(index > -1) {
-                    volsIdList.splice(index, 1);
-                    //sending request one way
-                request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
 
-                    method: 'put', json: {volunteers: volsIdList.toString()}
+                let index=volsIdList.indexOf(req.query.volunteerid);
+                //in case of target vol was found in db, sending request to remove
+                let volunteers;
+                if(index > -1) {
+                    volunteers = volsIdList.splice(index, 1);
+                    //this emty record  not make any sense for api to remove volunteer
+                    //sending request to clear all vols
+                    if(volsIdList.length == 0){
+                        volunteers='no volunteers'
+                    }
+
+                request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
+                    method: 'put', json: {volunteers: volunteers}
                 }, function (err, apiResp, body) {
                     if (err) {
-                        console.log(err)
+                        reject(err)
                     }
                     else resolve(body)
+
                     //resulting data not used
                 });
                 }

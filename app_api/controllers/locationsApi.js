@@ -21,25 +21,29 @@ let sendJsonResponse = function (res, status, content) {
 //resolving with full associated  volunteers object
 let attachVolsToLocation = function(location) {
     return new Promise(function (resolve, reject) {
-        let volsList = Promise.all(location.volunteers.map(function (volunteer) {
-            return Vol.findOne({_id: volunteer}, function (err, volunteer) {
-                //console.log("vols"+volunteer);
-                if(err){
-                    reject('DB request failed for one of locations volunteer ID ',err)
-                }
-                return volunteer
-            })
-        }));
-        volsList.then(function (volsobj) {
+        let volsList = location.volunteers.map(function (volunteer) {
+            return new Promise(function (resolve2, reject2) {
+                Vol.findOne({_id: volunteer}, function (err, volobj) {
+
+                    if (err) {
+                        reject2('DB request failed for one of locations volunteer ID ', err)
+                    }
+                    resolve2(volobj)
+                })
+            });
+        });
+
+        Promise.all(volsList).then(function (volslist) {
+
             //cloning object via JSON to make possible property additions
             // from another db request (volunteers)
             //location = JSON.parse(JSON.stringify(location));
             location = location.toObject();
             //filtering 'dead' volunteers before saving
-            volsobj = volsobj.filter(function (val) {
+            volslist = volslist.filter(function (val) {
                 return val != null
             });
-            location.volunteers = volsobj;
+            location.volunteers = volslist;
             resolve(location)
         }).catch(function(err){
             reject(err)
@@ -47,6 +51,37 @@ let attachVolsToLocation = function(location) {
 
     })
 };
+//     console.log(location.volunteers);
+//     return new Promise(function (resolve, reject) {
+//         let volsList = Promise.all(location.volunteers.map(function (volunteer) {
+//             console.log(volunteer);
+//             return Vol.findOne({_id:volunteer}, function (err, volobj) {
+//                 console.log("searching "+ volobj);
+//                 if(err){
+//                     reject('DB request failed for one of locations volunteer ID ',err)
+//                 }
+//                 return volobj
+//             })
+//         }));
+//         volsList.then(function (volsobj) {
+//             console.log('volsobj====',volsobj);
+//             //cloning object via JSON to make possible property additions
+//             // from another db request (volunteers)
+//             //location = JSON.parse(JSON.stringify(location));
+//             location = location.toObject();
+//             //filtering 'dead' volunteers before saving
+//             volsobj = volsobj.filter(function (val) {
+//                 return val != null
+//
+//             });
+//             location.volunteers = volsobj;
+//             resolve(location)
+//         }).catch(function(err){
+//             reject(err)
+//         });
+//
+//     })
+// };
 
 module.exports.locationsCreate = function (req, res) {
     Loc.create({
@@ -99,12 +134,14 @@ module.exports.locationsReadOne = function (req, res) {
 module.exports.locationsUpdateOne = function (req, res) {
     if (req.params && req.params.locationid) {
         let locId = req.params.locationid;
-        Loc.findOne({_id: locId}).select("-rating -volunteers").exec(function (err, location) {
+        Loc.findOne({_id: locId}).exec(function (err, location) {
+            //console.log('Loc.findOne',locId );
             if (!location) {
                 sendJsonResponse(res, 404, {
                     "message": "locationid not found"
                 });
                 return;
+
             }
             else if (err) {
                 ErrCodesActions[400](res, err);
@@ -118,15 +155,29 @@ module.exports.locationsUpdateOne = function (req, res) {
             req.body.lng && req.body.lat ? location.coords =
                 [parseFloat(req.body.lng), parseFloat(req.body.lat)] : null;
 
-            req.body.volunteers ? location.volunteers = req.body.volunteers.split(",") : null;
+            if(req.body.volunteers && req.body.volunteers != 'no volunteers') {
+                location.volunteers = req.body.volunteers.split(",");
+            }
+            else if (req.body.volunteers == 'no volunteers') {
+                //retrieved request to clear volunteers
+                location.volunteers =[];
+            }
             //put to child doc
             // location.days= req.body.days;
             // location.opening= req.body.opening;
             // location.closing= req.body.closing;
             // location.closed= req.body.closed;
+            //console.log('location arrived',req.body.volunteers);
             location.save().then(function (location) {
-                attachVolsToLocation(location).then
-                (location=> sendJsonResponse(res, 200, location))
+                //checking if it was last volunteer in location to prevent further code failing
+                // if(location.volunteers && location.volunteers.length >0){
+                    attachVolsToLocation(location).then
+                    (location=> sendJsonResponse(res, 200, location)).catch(err=>console.log('error while executing attachVolsToLocation',err))
+                // }
+                // else{
+                //    sendJsonResponse(res, 200, location)
+               // }
+
 
             }).catch(function (err) {
                 console.log('location saving error', err);

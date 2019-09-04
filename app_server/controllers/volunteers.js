@@ -48,8 +48,9 @@ module.exports.volunteerCreatePage = function (req, res) {
     //})
 };
 module.exports.volunteersLocations = function (req,resp) {
+    let volunteerid=req.params.volunteerid;
     let voldata=  new Promise(function(resolve,reject){
-        request(url.resolve(ApiOptions.server, "/api/volunteers/view-locations/"+req.params.volunteerid),{
+        request(url.resolve(ApiOptions.server, "/api/volunteers/view-locations/"+volunteerid),{
         method:'get',
         json:{}}, function (err,apiResp,voluntersLocations) {
             if(err){
@@ -65,7 +66,7 @@ module.exports.volunteersLocations = function (req,resp) {
             nolocations = 'Volunteer has no locations assigned :-( '
             //locationdata=[{name:'Volunteer has no locations assigned :-( '}]
         }
-        resp.render("volunteer-with-locations-view.jade", {pageHeader: {title: 'Volunteer\'s locations list'}, nolocations:nolocations, locationdata: locationdata})
+        resp.render("volunteer-with-locations-view.jade", {pageHeader: {title: 'Volunteer\'s locations list'}, volunteer:{_id:volunteerid},nolocations:nolocations, locationdata: locationdata})
 
     }).catch(err=>resp.end(err));
    };
