@@ -21,8 +21,7 @@ module.exports.volunteerEditPage = function (req, res) {
 
 //put (change) handler
 module.exports.volunteerEditCommit=function (req, res) {
-    console.log('!ok>>>>>',req.body)
-    let volid=req.params.volunteerid;
+      let volid=req.params.volunteerid;
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid),{method: 'put', json: req.body},
         function (err, apiResp, body) {

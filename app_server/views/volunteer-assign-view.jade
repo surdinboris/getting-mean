@@ -13,10 +13,9 @@ block content
                 .col-xs-12.col-sm-6
                     div.volUpdContainer
                         select
-                            each volunteer in volunteers
-                                each value,label in volunteer
-                                                        label #{label}:&nbsp &nbsp
-                                                        input(type="text", name="#{label}", value="#{value}")
+                            each value,label in volunteers
+                                                    label #{label.volunteerName}:&nbsp &nbsp
+                                                    input(type="text", name="#{label}", value="#{value}")
             .row
                 .col-xs-12.col-sm-6
                     div
