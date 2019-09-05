@@ -24,9 +24,18 @@ label,input {
 
 }
 .savebutton{
+    margin-top: 30px;
     width: 70px;
-    border-radius: 10px;
-    border-width: 5px;
+    border-width: 0.3px;
+    border: black;
+    border-style: solid;
+
+}
+form{
+    padding: 40px 10px 5px;
+    background-color: #3aad2f;
+
+;
 }
 .btn-default{
     margin: 2px;
@@ -37,4 +46,7 @@ label,input {
 .nolocations{
     color: #ffffff;
     font-size: 15pt;
+}
+.copyright{
+    margin-top: 40px;
 }
