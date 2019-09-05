@@ -2,20 +2,22 @@ extends layout
 
 block content
   .row.page-header: .col-lg-12
-      h1= pageHeader.title
-    form(method= "post", action='/assignVolunteer', role="form",  name="assign-volunteer")
-        .row
-            .col-xs-12.col-sm-6
-                div.locUpdContainer
-                    select
-                        each location in locations
-                            option(value="#{location._id}") #{location.name}
-            .col-xs-12.col-sm-6
-                div.volUpdContainer
-                    select
-                        each volunteer in volunteers
-                            option(value= "#{volunteer._id}") #{volunteer.volunteerName}
-        .row
-            .col-xs-12.col-sm-6
-                div
-                     button.btn.btn-default.pull-right Add my review
+        h1= pageHeader.title
+        form(action='/assignVolunteer', method= "post",  role="form")
+            .row
+                .col-xs-12.col-sm-6
+                    div.locUpdContainer
+                        select
+                            each location in locations
+                                option(value="#{location._id}") #{location.name}
+                .col-xs-12.col-sm-6
+                    div.volUpdContainer
+                        select
+                            each volunteer in volunteers
+                                each value,label in volunteer
+                                                        label #{label}:&nbsp &nbsp
+                                                        input(type="text", name="#{label}", value="#{value}")
+            .row
+                .col-xs-12.col-sm-6
+                    div
+                        input.savebutton(type="submit", value="Save")
