@@ -12,11 +12,11 @@ block content
                                 option(value="#{location._id}") #{location.name}
                 .col-xs-12.col-sm-6
                     div.volUpdContainer
-                        select
-                            each value,label in volunteers
-                                                    label #{label.volunteerName}:&nbsp &nbsp
-                                                    input(type="text", name="#{label}", value="#{value}")
+                        select(name='dropDown', id='')
+                            each vol, i in volunteers
+                                //label #{value.volunteerName}:&nbsp
+                                option(value=67867867) #{vol.volunteerName}
             .row
                 .col-xs-12.col-sm-6
                     div
-                        input.savebutton(type="submit", value="Save")
+                        button.btn.btn-default(type='submit') Submit
