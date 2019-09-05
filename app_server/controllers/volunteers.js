@@ -47,7 +47,7 @@ module.exports.volunteerAssignPage = function (req, res){
 
 // getting user's choise of volunteer and location - assign volunteer to location
 module.exports.volunteerAssignCommit = function (req,res) {
-
+    console.log('>>>>>',req.body)
 };
 
 

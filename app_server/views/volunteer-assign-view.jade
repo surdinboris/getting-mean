@@ -3,7 +3,7 @@ extends layout
 block content
   .row.page-header: .col-lg-12
       h1= pageHeader.title
-    form(method= "POST", action='/locations/6969', role="form",  name="assign-volunteer")
+    form(method= "post", action='/assignVolunteer', role="form",  name="assign-volunteer")
         .row
             .col-xs-12.col-sm-6
                 div.locUpdContainer
@@ -18,4 +18,4 @@ block content
         .row
             .col-xs-12.col-sm-6
                 div
-                    input.savebutton(type="submit", value="Save")
+                     button.btn.btn-default.pull-right Add my review
