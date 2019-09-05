@@ -5,6 +5,7 @@ let ctrlVolunteers = require('../controllers/volunteersApi');
 let ctrlCats = require('../controllers/catsApi');
 // locations
 router.get('/locations', ctrlLocations.locationsListByDistance); //done
+router.get('/locations/all', ctrlLocations.locationsList); //done
 router.post('/locations', ctrlLocations.locationsCreate); //done
 router.get('/locations/:locationid', ctrlLocations.locationsReadOne); //done
 router.get('/locations/:locationid/volunteers', ctrlLocations.getVolunteersByLocId); //done

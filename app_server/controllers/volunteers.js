@@ -29,6 +29,26 @@ module.exports.volunteerEditCommit=function (req, res) {
         } )
 };
 
+//loading list fo volunteers and render pick up page
+module.exports.volunteerAssignPage = function (req, res){
+    request(url.resolve(ApiOptions.server, "api/locations/all"), {method: 'get',
+    json:{}}, function (err, apiResp, locations) {
+        request(url.resolve(ApiOptions.server, "api/volunteers"), {
+                method: 'get',
+                json: {}
+            },
+            function (err, apiResp, volunteers) {
+                console.log(locations);
+                res.end(JSON.stringify(locations.concat(volunteers)));
+            //res.send(JSON.stringify(volunteers));
+            });
+    })};
+
+// getting user's choise of volunteer and location - assign volunteer to location
+module.exports.volunteerAssignCommit = function (req,res) {
+
+};
+
 
 //get new empty handler
 module.exports.volunteerCreatePage = function (req, res) {

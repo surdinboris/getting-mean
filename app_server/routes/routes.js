@@ -21,6 +21,9 @@ router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditCommit);
 router.get('/volunteer',ctrlvolunteers.volunteerCreatePage);
 router.post('/volunteer', ctrlvolunteers.volunteerCreateCommit);
 
+router.get('/assignVolunteer',ctrlvolunteers.volunteerAssignPage);
+router.post('/assignVolunteer', ctrlvolunteers.volunteerAssignCommit);
+
 
 //data manipulation
 

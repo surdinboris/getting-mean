@@ -265,6 +265,17 @@ module.exports.locationsListByDistance = function (req, res) {
             }
         }
     )
+};/* all locations */
+module.exports.locationsList = function (req, res) {
+    Loc.find({}).exec(function (err, locations) {
+            if (err) {
+                ErrCodesActions[400](res, err)
+            }
+            else {
+                sendJsonResponse(res, 220, locations)
+            }
+        }
+    )
 };
 
 //finding volunteers
