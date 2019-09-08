@@ -49,7 +49,7 @@ block content
                       p.reviewAuthor Name: #{volunteer.volunteerName}
                       p.reviewAuthor Address: #{volunteer.volunteerAddress}
                       a.btn.btn-default.pull-right(href="/volunteers/#{volunteer._id}") Edit volunteer
-                      a.btn.btn-default.pull-right(href="/locations/#{location._id}?action=unsubscribeVolunteer&locationId=#{location._id}&volunteerid=#{volunteer._id}") Unsubscribe
+                      a.btn.btn-default.pull-right(href="/locations/#{location._id}?action=unsubscribeVolunteer&locationid=#{location._id}&volunteerid=#{volunteer._id}") Unsubscribe
                     .col-xs-12
     .col-xs-12.col-md-3
       p.lead #{location.name} #{sidebar.context}

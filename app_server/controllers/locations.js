@@ -70,7 +70,7 @@ module.exports.locationInfo = function(req, res) {
                 //in case of target vol was found in db, sending request to remove
                 let volunteers;
                 if(index > -1) {
-                    volunteers = volsIdList.splice(index, 1);
+                    volsIdList.splice(index, 1);
                     //this emty record  not make any sense for api to remove volunteer
                     //sending request to clear all vols
                     if(volsIdList.length == 0){
@@ -78,7 +78,7 @@ module.exports.locationInfo = function(req, res) {
                     }
 
                 request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
-                    method: 'put', json: {volunteers: volunteers}
+                    method: 'put', json: {volunteers: volsIdList.toString()}
                 }, function (err, apiResp, body) {
                     if (err) {
                         reject(err)
