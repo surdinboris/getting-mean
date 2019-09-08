@@ -38,7 +38,7 @@ block content
           .panel.panel-primary.review-panel
             .panel-heading
               a.btn.btn-default.pull-right(href="/volunteer?action=addVolunteer&locationid=#{location._id}") Add new volunteer
-              a.btn.btn-default.pull-right(href="/assignVolunteer?action=assignVolunteer&locationid=#{location._id}") Assign volunteer
+              a.btn.btn-default.pull-right(href="/assignVolunteer?action=assignVolunteer&locationname=#{location.name}") Assign volunteer
               h2.panel-title Volunteers list
             .panel-body.volunteer-container
               each volunteer in location.volunteers

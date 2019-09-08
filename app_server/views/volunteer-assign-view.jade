@@ -9,7 +9,11 @@ block content
                     div.locUpdContainer
                         select(name='location')
                             each loc in locations
-                                option(value="#{loc._id}") #{loc.name}
+                                - var equal = defloc == loc.name
+                                if equal
+                                    option(value="#{loc._id}" selected) #{loc.name}
+                                else
+                                     option(value="#{loc._id}") #{loc.name}
                 .col-xs-12.col-sm-6
                     div.volUpdContainer
                         select(name='volunteer')

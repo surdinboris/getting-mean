@@ -32,7 +32,8 @@ module.exports.volunteerEditCommit=function (req, res) {
 
 //loading list fo volunteers and render pick up page
 module.exports.volunteerAssignPage = function (req, res){
-    let masterLoc = req.params.locationid;
+    let locationname = req.query.locationname;
+    //console.log('___',locationid);
     request(url.resolve(ApiOptions.server, "api/locations/all"), {method: 'get',
     json:{}}, function (err, apiResp, locsBody) {
         request(url.resolve(ApiOptions.server, "api/volunteers"), {
@@ -41,7 +42,7 @@ module.exports.volunteerAssignPage = function (req, res){
             },
             function (err, apiResp, volsBody) {
                 //res.end(JSON.stringify(locsBody.concat(volsBody)));
-                res.render('volunteer-assign-view.jade',{pageHeader:{title: 'Assign Volunteer'}, defloc:masterLoc, locations:locsBody, volunteers:volsBody})
+                res.render('volunteer-assign-view.jade',{pageHeader:{title: 'Assign Volunteer'}, defloc:locationname, locations:locsBody, volunteers:volsBody})
             });
     })};
 

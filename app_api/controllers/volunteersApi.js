@@ -135,7 +135,6 @@ module.exports.volunteersDeleteOne=function (req,res) {
     if(req.params && req.params.volunteerid){
         let volId=req.params.volunteerid;
         Vol.findByIdAndRemove(volId).exec(function (err, volunteer) {
-
             if (err) {
                 ErrCodesActions[400](res,err)
             }
