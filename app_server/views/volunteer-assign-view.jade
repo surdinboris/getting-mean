@@ -7,15 +7,14 @@ block content
             .row
                 .col-xs-12.col-sm-6
                     div.locUpdContainer
-                        select
-                            each location in locations
-                                option(value="#{location._id}") #{location.name}
+                        select(name='location')
+                            each loc in locations
+                                option(value="#{loc._id}") #{loc.name}
                 .col-xs-12.col-sm-6
                     div.volUpdContainer
-                        select(name='dropDown', id='')
-                            each vol, i in volunteers
-                                //label #{value.volunteerName}:&nbsp
-                                option(value=67867867) #{vol.volunteerName}
+                        select(name='volunteer')
+                            each vol in volunteers
+                                option(value="#{vol._id}") #{vol.volunteerName}
             .row
                 .col-xs-12.col-sm-6
                     div
