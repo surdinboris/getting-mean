@@ -79,20 +79,26 @@ module.exports.volunteerAssignCommit = function (req,resp) {
 
 };
 
+let requestDBSchema= function(dbmodel){
+    return new Promise(function(resolve,reject){request(url.resolve(ApiOptions.server,"api/"+dbmodel+"/schema"), { method: 'get',json:{}}, function (err,apiResp, fieldslist) {
+        if(err){
+            reject(err)
+        }
+        let fieldsObj = {};
+        fieldslist.forEach(function (field) {
+            fieldsObj[field] = ''
+        });
+        resolve(fieldsObj)
+    })
+    })
+};
 //get new empty handler
 module.exports.volunteerCreatePage = function (req, res) {
     //schema request to dynamically get fields for current schema and generate  creation page
-    request(url.resolve(ApiOptions.server,"api/volunteer/schema"), {method: 'get',
-        json: {}} ,function (err, apiResp, fieldslist) {
-        let fieldsObj={};
-        fieldslist.forEach(function (field) {
-           fieldsObj[field]=''
-        });
+    requestDBSchema("volunteer").then(fieldsObj=>{
         res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:'', volunteer:fieldsObj})
-    })
+    }).catch(err=> res.end(err.toString()));
 };
-
-
 
 
 module.exports.volunteersLocations = function (req,resp) {

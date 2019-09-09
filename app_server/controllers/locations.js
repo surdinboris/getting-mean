@@ -68,13 +68,30 @@ module.exports.homelist = function(req, res) {
 };
 
 module.exports.locationCreatePage = function (req,res) {
-    requestDBSchema("location").then(fieldsObj =>  res.render("location-edit.jade", {pageHeader:{title: 'Location edit'}, formAction:"location", location:fieldsObj})).catch(err=> res.end(err.toString()))
+    requestDBSchema("location").then(fieldsObj =>  res.render("location-edit.jade", {pageHeader:{title: 'Location edit'}, formAction:"", location:fieldsObj})).catch(err=> res.end(err.toString()))
      };
 
 //get new empty handler
 
 module.exports.locationCreateCommit = function (req, res) {
-    console.log('location create', req.body)
+
+    //retriving actual model fields from api
+    requestDBSchema("location").then(fieldsObj =>{
+
+        let newLocdata={};
+        Object.keys(fieldsObj).forEach(function (field) {
+            req.body[field]? newLocdata[field]=req.body[field] : newLocdata[field]='n/a'
+        });
+
+        request(ApiOptions.server+"api/locations",{method:"post",
+            json:newLocdata}, function (err,apiResp,body) {
+            if
+                (err) res.end(err.toString());
+            else 
+                res.end(apiResp.statusCode)
+        })
+    });
+
 }
 ;
 module.exports.locationInfo = function(req, res) {
