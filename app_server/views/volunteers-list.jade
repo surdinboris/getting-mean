@@ -17,6 +17,7 @@ block content
                                     span.rating
                                     p.reviewAuthor Name: #{volunteer.volunteerName}
                                     p.reviewAuthor Address: #{volunteer.volunteerAddress}
-                                    a.btn.btn-default.pull-right(href="/volunteers/#{volunteer._id}") Edit volunteer
-                                    a.btn.btn-default.pull-right(href="/volunteers/delete/#{volunteer._id}") Delete volunteer
-                                    a.btn.btn-default.pull-right(href="/volunteers/view-locations/#{volunteer._id}") Assigned locations
+                                    .actions-container
+                                        a.btn.btn-danger.btn-sm(href="/volunteers/#{volunteer._id}") Edit volunteer
+                                        a.btn.btn-primary.btn-sm(href="/volunteers/delete/#{volunteer._id}") Delete volunteer
+                                        a.btn.btn-success.btn-sm(href="/volunteers/view-locations/#{volunteer._id}") Assigned locations

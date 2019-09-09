@@ -21,5 +21,6 @@ block content
                     each facility in location.facilities
                       span.label.label-warning= facility
                       | &nbsp;
-                    a.btn.btn-default.pull-right(href="/locations/#{location._id}?action=unsubscribeVolunteer&locationid=#{location._id}&volunteerid=#{volunteer._id}") Unsubscribe
+                .actions-container
+                    a.btn.btn-primary.btn-sm(href="/locations/#{location._id}?action=unsubscribeVolunteer&locationid=#{location._id}&volunteerid=#{volunteer._id}") Unsubscribe
               p.spacer

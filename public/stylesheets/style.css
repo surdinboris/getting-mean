@@ -37,11 +37,13 @@ form{
 
 ;
 }
-.btn-default{
+.btn{
     margin: 2px;
-    border-width: 0.3px;
-    border: black;
-    border-style: solid;
+}
+.actions-container{
+    font-family: "Calibri" ;
+    text-align: right;
+    color: black;
 }
 .nolocations{
     color: #ffffff;
@@ -49,4 +51,9 @@ form{
 }
 .copyright{
     margin-top: 40px;
+}
+.authorBig{
+    font-size: 20pt;
+    font-weight: bolder;
+    color: #b5d0fa;
 }
