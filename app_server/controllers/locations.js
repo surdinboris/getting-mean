@@ -83,11 +83,11 @@ module.exports.locationCreateCommit = function (req, res) {
             req.body[field]? newLocdata[field]=req.body[field] : newLocdata[field]='n/a'
         });
 
-        request(ApiOptions.server+"api/locations",{method:"post",
+        request(url.resolve(ApiOptions.server,"api/locations"),{method:"post",
             json:newLocdata}, function (err,apiResp,body) {
             if
                 (err) res.end(err.toString());
-            else 
+            else
                 res.end(apiResp.statusCode)
         })
     });
