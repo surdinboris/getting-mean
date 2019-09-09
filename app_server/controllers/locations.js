@@ -83,12 +83,12 @@ module.exports.locationCreateCommit = function (req, res) {
             req.body[field]? newLocdata[field]=req.body[field] : newLocdata[field]='n/a'
         });
 
-        request(url.resolve(ApiOptions.server,"api/locations"),{method:"post",
+        request(url.resolve(ApiOptions.server,"api/locations/"),{method:"post",
             json:newLocdata}, function (err,apiResp,body) {
             if
                 (err) res.end(err.toString());
             else
-                res.end(apiResp.statusCode)
+                res.end(apiResp.statusCode.toString())
         })
     });
 
@@ -104,12 +104,12 @@ module.exports.locationInfo = function(req, res) {
                 let volsIdList= body.volunteers.map(function (vol) {
                     return vol._id
                 });
-
                 let index=volsIdList.indexOf(req.query.volunteerid);
                 //in case of target vol was found in db, sending request to remove
                 let volunteers;
                 if(index > -1) {
                     volsIdList.splice(index, 1);
+
                     //this emty record  not make any sense for api to remove volunteer
                     //sending request to clear all vols
                     if(volsIdList.length == 0){
