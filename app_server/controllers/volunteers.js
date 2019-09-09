@@ -15,7 +15,7 @@ module.exports.volunteerEditPage = function (req, res) {
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
         json: {}} ,function (err, apiResp, body) {
-        res.render("volunteer-view.jade", {pageHeader:{title: volunteerEditTitle},formAction:body._id, volunteer:body})
+        res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle},formAction:body._id, volunteer:body})
     })
 };
 
@@ -25,7 +25,7 @@ module.exports.volunteerEditCommit=function (req, res) {
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid),{method: 'put', json: req.body},
         function (err, apiResp, body) {
-            res.render("volunteer-view.jade", {pageHeader:{title: volunteerEditTitle}, formAction:body._id, volunteer:body})
+            res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:body._id, volunteer:body})
         } )
 };
 
@@ -48,7 +48,6 @@ module.exports.volunteerAssignPage = function (req, res){
 
 // getting user's choise of volunteer and location - assign volunteer to location
 module.exports.volunteerAssignCommit = function (req,resp) {
-    console.log('>>>>>',req.body);
     let attachvol= req.body.volunteer;
     let locationid= req.body.location;
 
@@ -80,24 +79,22 @@ module.exports.volunteerAssignCommit = function (req,resp) {
 
 };
 
-
 //get new empty handler
 module.exports.volunteerCreatePage = function (req, res) {
-    //
-    // request(url.resolve(ApiOptions.server,"api/volunteers/schema"), {method: 'get',
-    //     json: {}} ,function (err, apiResp, body) {
-
-    //!implement schema request to dynamically get fields for current schema and generate  creation page
-        res.render("volunteer-view.jade", {pageHeader:{title: volunteerEditTitle}, formAction:'', volunteer:{
-                volunteerName: '',
-                volunteerAddress: '',
-                active: true,
-                comment: "",
-                feedingSchedule: [],
-                createdOn: '',
-            }})
-    //})
+    //schema request to dynamically get fields for current schema and generate  creation page
+    request(url.resolve(ApiOptions.server,"api/volunteer/schema"), {method: 'get',
+        json: {}} ,function (err, apiResp, fieldslist) {
+        let fieldsObj={};
+        fieldslist.forEach(function (field) {
+           fieldsObj[field]=''
+        });
+        res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:'', volunteer:fieldsObj})
+    })
 };
+
+
+
+
 module.exports.volunteersLocations = function (req,resp) {
     let volunteerid=req.params.volunteerid;
     let voldata=  new Promise(function(resolve,reject){

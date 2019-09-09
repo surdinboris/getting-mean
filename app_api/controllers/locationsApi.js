@@ -83,6 +83,14 @@ let attachVolsToLocation = function(location) {
 //     })
 // };
 
+
+module.exports.locationSchema=function (req,res) {
+    let len= Object.keys(mongoose.model('locations').schema.tree).length;
+    let fields= Object.keys(mongoose.model('locations').schema.tree);
+    fields.splice(-3,len);
+    sendJsonResponse(res, 220, fields)
+};
+
 module.exports.locationsCreate = function (req, res) {
     Loc.create({
         name: req.body.name,
@@ -154,7 +162,6 @@ module.exports.locationsUpdateOne = function (req, res) {
             req.body.facilities ? location.facilities = req.body.facilities : null;
             req.body.lng && req.body.lat ? location.coords =
                 [parseFloat(req.body.lng), parseFloat(req.body.lat)] : null;
-            console.log("|||||", req.body.volunteers);
             if(req.body.volunteers && req.body.volunteers != 'no volunteers') {
                 location.volunteers = req.body.volunteers.split(",");
             }

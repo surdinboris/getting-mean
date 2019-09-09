@@ -43,16 +43,8 @@ module.exports.volunteerSchema=function (req,res) {
     let fields= Object.keys(mongoose.model('volunteers').schema.tree);
     fields.splice(-3,len);
         sendJsonResponse(res, 220, fields)
-
 };
 
-module.exports.locationSchema=function (req,res) {
-    let len= Object.keys(mongoose.model('locations').schema.tree).length;
-    let fields= Object.keys(mongoose.model('locations').schema.tree);
-    fields.splice(-3,len);
-    sendJsonResponse(res, 220, fields)
-
-};
 
 module.exports.volunteersReadAll=function (req,res) {
 

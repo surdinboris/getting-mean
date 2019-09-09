@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .row.page-header: .col-lg-12
+      h1= pageHeader.title
+  .row
+    .col-xs-12.col-md-9
+      .row
+        .col-xs-12.col-sm-6
+        div.UpdContainer
+            form(action="#{formAction}", method="post",  role="form",  name="update-volunteer")
+                each value,label in volunteer
+                        label #{label}:&nbsp &nbsp
+                        input(type="text", name="#{label}", value="#{value}")
+                .row
+                    input.savebutton(type="submit", value="Save")

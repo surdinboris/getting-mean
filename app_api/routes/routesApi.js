@@ -9,7 +9,7 @@ router.get('/locations/all', ctrlLocations.locationsList); //done
 router.post('/locations', ctrlLocations.locationsCreate); //done
 //schema requests
 router.get('/volunteer/schema', ctrlVolunteers.volunteerSchema); //done
-router.get('/location/schema', ctrlVolunteers.locationSchema); //done
+router.get('/location/schema', ctrlLocations.locationSchema); //done
 
 router.get('/locations/:locationid', ctrlLocations.locationsReadOne); //done
 router.get('/locations/:locationid/volunteers', ctrlLocations.getVolunteersByLocId); //done

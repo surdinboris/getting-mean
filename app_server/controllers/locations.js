@@ -6,6 +6,19 @@ if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
 
+let requestDBSchema= function(dbmodel){
+    return new Promise(function(resolve,reject){request(url.resolve(ApiOptions.server,"api/"+dbmodel+"/schema"), { method: 'get',json:{}}, function (err,apiResp, fieldslist) {
+        if(err){
+            reject(err)
+        }
+        let fieldsObj = {};
+        fieldslist.forEach(function (field) {
+            fieldsObj[field] = ''
+            });
+        resolve(fieldsObj)
+    })
+    })
+};
 let renderLocation = function (err,res,body){
        res.render("location-info",
            {pageHeader:{title:'Location info'}, sidebar:{calltoaction:'test', context:"tesr"},location:err || body})
@@ -55,11 +68,15 @@ module.exports.homelist = function(req, res) {
 };
 
 module.exports.locationCreatePage = function (req,res) {
+    requestDBSchema("location").then(fieldsObj =>  res.render("location-edit.jade", {pageHeader:{title: 'Location edit'}, formAction:"location", location:fieldsObj})).catch(err=> res.end(err.toString()))
+     };
 
-};
+//get new empty handler
+
 module.exports.locationCreateCommit = function (req, res) {
-
-};
+    console.log('location create', req.body)
+}
+;
 module.exports.locationInfo = function(req, res) {
     let actionsHandler={};
     actionsHandler.unsubscribeVolunteer=function (req,res,body) {

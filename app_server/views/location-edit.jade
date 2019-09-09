@@ -7,9 +7,10 @@ block content
     .col-xs-12.col-md-9
       .row
         .col-xs-12.col-sm-6
-        div.volUpdContainer
-            form(action="#{formAction}", method="post",  role="form",  name="update-volunteer")
-                each value,label in volunteer
+        div.UpdContainer
+            form(action="#{formAction}", method="post",  role="form",  name="update-location")
+                each value,label in location
                         label #{label}:&nbsp &nbsp
                         input(type="text", name="#{label}", value="#{value}")
-                input.savebutton(type="submit", value="Save")
+                .row
+                    input.savebutton(type="submit", value="Save")
