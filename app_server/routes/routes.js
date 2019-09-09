@@ -5,7 +5,9 @@ let ctrlOthers = require('../controllers/others');
 let ctrlvolunteers = require('../controllers/volunteers');
 /* Locations pages */
 router.get('/', ctrlLocations.homelist);
-//router.get('/location', ctrlLocations.locationInfo);
+router.get('/location', ctrlLocations.locationCreatePage);
+router.post('/location', ctrlLocations.locationCreateCommit);
+
 router.get('/locations/:locationid', ctrlLocations.locationInfo);
 //router.get('/locations/:locationid', ctrlvolunteers.volunteerCreatePage);
 //router.get('/location/new/review', ctrlLocations.addReview);

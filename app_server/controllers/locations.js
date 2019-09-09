@@ -54,7 +54,12 @@ module.exports.homelist = function(req, res) {
         });
 };
 
+module.exports.locationCreatePage = function (req,res) {
 
+};
+module.exports.locationCreateCommit = function (req, res) {
+
+};
 module.exports.locationInfo = function(req, res) {
     let actionsHandler={};
     actionsHandler.unsubscribeVolunteer=function (req,res,body) {

@@ -37,6 +37,22 @@ module.exports.volunteersCreate=function (req,res) {
         })
 
     };
+//empty schema request
+module.exports.volunteerSchema=function (req,res) {
+    let len= Object.keys(mongoose.model('volunteers').schema.tree).length;
+    let fields= Object.keys(mongoose.model('volunteers').schema.tree);
+    fields.splice(-3,len);
+        sendJsonResponse(res, 220, fields)
+
+};
+
+module.exports.locationSchema=function (req,res) {
+    let len= Object.keys(mongoose.model('locations').schema.tree).length;
+    let fields= Object.keys(mongoose.model('locations').schema.tree);
+    fields.splice(-3,len);
+    sendJsonResponse(res, 220, fields)
+
+};
 
 module.exports.volunteersReadAll=function (req,res) {
 
@@ -44,7 +60,7 @@ module.exports.volunteersReadAll=function (req,res) {
         Vol.find({}, function (err, volunteers) {
             sendJsonResponse(res, 220, volunteers)
         })
-}
+};
 
 module.exports.volunteersReadOne=function (req,res) {
     if(req.params && req.params.volunteerid){

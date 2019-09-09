@@ -84,7 +84,7 @@ module.exports.volunteerAssignCommit = function (req,resp) {
 //get new empty handler
 module.exports.volunteerCreatePage = function (req, res) {
     //
-    // request(url.resolve(ApiOptions.server,"api/volunteers/new"), {method: 'get',
+    // request(url.resolve(ApiOptions.server,"api/volunteers/schema"), {method: 'get',
     //     json: {}} ,function (err, apiResp, body) {
 
     //!implement schema request to dynamically get fields for current schema and generate  creation page
