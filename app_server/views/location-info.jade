@@ -52,7 +52,27 @@ block content
                       .actions-container
                           a.btn.btn-danger.btn-sm(href="/volunteers/#{volunteer._id}") Edit volunteer
                           a.btn.btn-primary.btn-sm(href="/locations/#{location._id}?action=unsubscribeVolunteer&locationid=#{location._id}&volunteerid=#{volunteer._id}") Unassign
+      .row
+        .col-xs-12
+          .panel.panel-primary.review-panel
+            .panel-heading
+              h2.panel-title Cats list
+                .actions-container
+                    a.btn.btn-warning.btn-sm(href="/volunteer?action=addCat&locationid=#{location._id}") Add new cat
+                    a.btn.btn-success.btn-sm(href="/assignVolunteer?action=assignCat&locationname=#{location.name}") Assign cat
+            .panel-body.cat-container
+              each cat in location.cats
+                .row
+                  .cat
+                    .well.well-sm.cat-header
+                      span.rating
+                      p.authorBig #{cat.catName}
+                      p. #{cat.catChipNumber}
+                      .actions-container
+                          a.btn.btn-danger.btn-sm(href="/cats/#{cat._id}") Edit cat
+                          a.btn.btn-primary.btn-sm(href="/cats/#{location._id}?action=unsubscribeCat&locationid=#{location._id}&catid=#{cat._id}") Unassign
                     .col-xs-12
     .col-xs-12.col-md-3
       p.lead #{location.name} #{sidebar.context}
       p= sidebar.callToAction
+
