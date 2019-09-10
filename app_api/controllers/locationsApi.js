@@ -92,18 +92,21 @@ module.exports.locationSchema=function (req,res) {
 };
 
 module.exports.locationsCreate = function (req, res) {
+    console.log('location create arrived data',req.body);
     Loc.create({
         name: req.body.name,
         address: req.body.address,
         rating: req.body.rating,
         waterSource: req.body.waterSource,
         facilities: req.body.facilities,
-        coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
+        coords: req.body.coords? req.body.coords.split(",") : [parseFloat(req.body.lng), parseFloat(req.body.lat)],
         // feedingSchedule: [feedingScheduleSchema],
-        volunteers: req.body.volunteers.split(","),
+        volunteers: req.body.volunteers? req.body.volunteers.split(",") : [],
         // catsList:[catsListSchema]
+
     }, function (err, location) {
         if (err) {
+            console.log('location saving error', err);
             ErrCodesActions[400](res, err)
         }
         else {

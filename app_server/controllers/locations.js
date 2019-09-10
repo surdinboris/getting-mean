@@ -80,15 +80,15 @@ module.exports.locationCreateCommit = function (req, res) {
 
         let newLocdata={};
         Object.keys(fieldsObj).forEach(function (field) {
-            req.body[field]? newLocdata[field]=req.body[field] : newLocdata[field]='n/a'
+            req.body[field]? newLocdata[field]=req.body[field] : newLocdata[field]=null
         });
 
         request(url.resolve(ApiOptions.server,"api/locations/"),{method:"post",
-            json:newLocdata}, function (err,apiResp,body) {
+            json:newLocdata}, function (err,apiResp,location) {
             if
-                (err) res.end(err.toString());
+                (err) res.end("error: "+err.toString());
             else
-                res.end(apiResp.statusCode.toString())
+                res.redirect(url.resolve(ApiOptions.server,"locations/"+location._id))
         })
     });
 

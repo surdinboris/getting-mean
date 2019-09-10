@@ -27,6 +27,14 @@ let ErrCodesActions={
 //     catPhoto:[catPhotoSchema]
 // });
 
+//empty schema request
+module.exports.catSchema=function (req,res) {
+    let len= Object.keys(mongoose.model('cats').schema.tree).length;
+    let fields= Object.keys(mongoose.model('cats').schema.tree);
+    fields.splice(-3,len);
+    sendJsonResponse(res, 220, fields)
+};
+
 module.exports.catsByLocation=function (req,res) {
 
     //finding volunteers
@@ -160,6 +168,7 @@ module.exports.catsUpdateOne=function (req,res) {
                     ErrCodesActions[404](res);
                     return
                 } else {
+                    //refactor to dynamic requesting fields accordingly to db schema
                         thisCat.catName= req.body.catName;
                         thisCat.catAge= req.body.catAge;
                         thisCat.catChipNumber= req.body.catChipNumber;
