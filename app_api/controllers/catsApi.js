@@ -28,9 +28,9 @@ let ErrCodesActions={
 // });
 
 //empty schema request
-module.exports.catSchema=function (req,res) {
-    let len= Object.keys(mongoose.model('cats').schema.tree).length;
-    let fields= Object.keys(mongoose.model('cats').schema.tree);
+module.exports.getSchema=function (req,res, model) {
+    let len= Object.keys(mongoose.model(model).schema.tree).length;
+    let fields= Object.keys(mongoose.model(model).schema.tree);
     fields.splice(-3,len);
     sendJsonResponse(res, 220, fields)
 };
@@ -64,6 +64,22 @@ module.exports.catsByLocation=function (req,res) {
 
 };
 module.exports.catsCreate=function (req,res) {
+    let doAddCat = function (req, res, location) {
+        location.cats.push({
+            catName: req.body.catName,
+            catAge: req.body.catAge,
+            catChipNumber: req.body.catChipNumber,
+            catColor: req.body.catColor,
+            catWeight: req.body.catWeight,
+            catDescription: req.body.catDescription,
+            catGender: req.body.catGender,
+            catPhoto: req.body.catPhoto,
+        });
+    };
+
+};
+//not working - need other implementation
+module.exports.catsCreateOld=function (req,res) {
     let doAddCat =  function(req, res, location){
         location.cats.push({
             catName: req.body.catName,

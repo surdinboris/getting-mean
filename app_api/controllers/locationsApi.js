@@ -19,31 +19,32 @@ let sendJsonResponse = function (res, status, content) {
 };
 
 //resolving with full associated  volunteers object
-let attachVolsToLocation = function(location) {
+let attachSubModelsToLocation = function(location, model) {
     return new Promise(function (resolve, reject) {
-        let volsList = location.volunteers.map(function (volunteer) {
+        let subModsList = location[model].map(function (submodel) {
             return new Promise(function (resolve2, reject2) {
-                Vol.findOne({_id: volunteer}, function (err, volobj) {
+                mongoose.model(model).findOne({_id: submodel}, function (err, subobj) {
 
                     if (err) {
-                        reject2('DB request failed for one of locations volunteer ID ', err)
+                        reject2('DB request failed for one of locations submodel ID ', err)
                     }
-                    resolve2(volobj)
+                    resolve2(subobj)
                 })
             });
         });
 
-        Promise.all(volsList).then(function (volslist) {
+        Promise.all(subModsList).then(function (submodslist) {
 
             //cloning object via JSON to make possible property additions
             // from another db request (volunteers)
             //location = JSON.parse(JSON.stringify(location));
             location = location.toObject();
-            //filtering 'dead' volunteers before saving
-            volslist = volslist.filter(function (val) {
-                return val != null
+            //filtering 'dead' submodels that were deleted from db
+            submodslist = submodslist.filter(function (obj) {
+                return obj != null
             });
-            location.volunteers = volslist;
+            location[model] = submodslist;
+            console.log('=>>>>> attached submodel',model, submodslist);
             resolve(location)
         }).catch(function(err){
             reject(err)
@@ -51,6 +52,7 @@ let attachVolsToLocation = function(location) {
 
     })
 };
+
 //     console.log(location.volunteers);
 //     return new Promise(function (resolve, reject) {
 //         let volsList = Promise.all(location.volunteers.map(function (volunteer) {
@@ -127,7 +129,7 @@ module.exports.locationsReadOne = function (req, res) {
                 ErrCodesActions[404](res)
             }
             else {
-                attachVolsToLocation(location).then(function(location){
+                attachSubModelsToLocation(location, 'volunteers').then(function(location){
 
                     sendJsonResponse(res, 220, location)
                 });
@@ -181,8 +183,8 @@ module.exports.locationsUpdateOne = function (req, res) {
             location.save().then(function (location) {
                 //checking if it was last volunteer in location to prevent further code failing
                 // if(location.volunteers && location.volunteers.length >0){
-                    attachVolsToLocation(location).then
-                    (location=> sendJsonResponse(res, 200, location)).catch(err=>console.log('error while executing attachVolsToLocation',err))
+                    attachSubModelsToLocation(location,'locations').then
+                    (location=> attachSubModelsToLocation(location,'cats').then(location => sendJsonResponse(res, 200, location)).catch(err=>console.log('error while executing attachVolsToLocation',err)))
                 // }
                 // else{
                 //    sendJsonResponse(res, 200, location)

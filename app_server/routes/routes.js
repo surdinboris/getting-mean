@@ -5,13 +5,11 @@ let ctrlOthers = require('../controllers/others');
 let ctrlvolunteers = require('../controllers/volunteers');
 /* Locations pages */
 router.get('/', ctrlLocations.homelist);
-
 router.get('/locations/:locationid', ctrlLocations.locationInfo);
 //router.get('/locations/:locationid', ctrlvolunteers.volunteerCreatePage);
 //router.get('/location/new/review', ctrlLocations.addReview);
 /* Other pages */
 router.get('/about', ctrlOthers.about);
-
 router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditPage);
 router.get('/volunteers/delete/:volunteerid', ctrlvolunteers.deleteVolunteer);
 router.get('/volunteers/view-locations/:volunteerid', ctrlvolunteers.volunteersLocations);

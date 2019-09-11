@@ -5,7 +5,7 @@ let ApiOptions = {server:"http://localhost:3000"};
 if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
-
+//shared
 let requestDBSchema= function(dbmodel){
     return new Promise(function(resolve,reject){request(url.resolve(ApiOptions.server,"api/"+dbmodel+"/schema"), { method: 'get',json:{}}, function (err,apiResp, fieldslist) {
         if(err){
@@ -97,10 +97,8 @@ module.exports.locationCreateCommit = function (req, res) {
 module.exports.locationInfo = function(req, res) {
     let actionsHandler={};
     actionsHandler.unsubscribeVolunteer=function (req,res,body) {
-        //arrived ony one vol???
             return new Promise(function(resolve, reject) {
                 //retrieve current list of volunteers
-
                 let volsIdList= body.volunteers.map(function (vol) {
                     return vol._id
                 });
@@ -109,8 +107,7 @@ module.exports.locationInfo = function(req, res) {
                 let volunteers;
                 if(index > -1) {
                     volsIdList.splice(index, 1);
-
-                    //this emty record  not make any sense for api to remove volunteer
+                    //this empty record  not make any sense for api to remove volunteer
                     //sending request to clear all vols
                     if(volsIdList.length == 0){
                         volunteers='no volunteers'
@@ -131,12 +128,6 @@ module.exports.locationInfo = function(req, res) {
             }
             )
         };
-    //     return {err:0, errorDesc:0, updData: body.volunteers}
-    //     }
-    //     else return
-    // };
-
-
     //main rendering
     request(url.resolve(ApiOptions.server, 'api/locations/'+req.params.locationid), {
         method: 'get',

@@ -38,11 +38,9 @@ module.exports.volunteersCreate=function (req,res) {
 
     };
 //empty schema request
+let apil = require('/customlibs');
 module.exports.volunteerSchema=function (req,res) {
-    let len= Object.keys(mongoose.model('volunteers').schema.tree).length;
-    let fields= Object.keys(mongoose.model('volunteers').schema.tree);
-    fields.splice(-3,len);
-        sendJsonResponse(res, 220, fields)
+    return apil.responseDbSchema(req,res,'volunteers')
 };
 
 

@@ -29,7 +29,10 @@ router.delete('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersDeleteOne); //done
 //cats
 router.get('/cat/schema',ctrlCats.catSchema);
+//combined cat creation wit assignment to location
 router.post('/locations/:locationid/cats', ctrlCats.catsCreate); //done
+//free roaming cat creation
+router.post('/locations/cats', ctrlCats.catsCreate); //done
 router.get('/locations/:locationid/cats',
     ctrlCats.catsByLocation); //done
 router.get('/locations/:locationid/cats/:catid',

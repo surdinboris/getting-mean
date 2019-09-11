@@ -10,6 +10,8 @@ let routes = require('./app_server/routes/routes');
 let routesApi = require('./app_api/routes/routesApi');
 // let users = require('./app_server/routes/users');
 let app = express();
+//creationg own namespace for shared functions
+app.sharedFunctions={};
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
@@ -45,6 +47,7 @@ if (app.get('env') === 'development') {
         });
     });
 }
+
 
 // production error handler
 // no stacktraces leaked to user
