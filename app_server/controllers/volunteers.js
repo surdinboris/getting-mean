@@ -84,6 +84,7 @@ let requestDBSchema= function(dbmodel){
         if(err){
             reject(err)
         }
+        console.log('request db schema', "api/"+dbmodel+"/schema", fieldslist)
         let fieldsObj = {};
         fieldslist.forEach(function (field) {
             fieldsObj[field] = ''
@@ -95,7 +96,7 @@ let requestDBSchema= function(dbmodel){
 //get new empty handler
 module.exports.volunteerCreatePage = function (req, res) {
     //schema request to dynamically get fields for current schema and generate  creation page
-    requestDBSchema("volunteer").then(fieldsObj=>{
+    requestDBSchema("volunteers").then(fieldsObj=>{
         res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:'', volunteer:fieldsObj})
     }).catch(err=> res.end(err.toString()));
 };

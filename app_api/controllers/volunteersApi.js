@@ -38,9 +38,10 @@ module.exports.volunteersCreate=function (req,res) {
 
     };
 //empty schema request
-let apil = require('/customlibs');
+let apilib = require('../../apilib');
 module.exports.volunteerSchema=function (req,res) {
-    return apil.responseDbSchema(req,res,'volunteers')
+    let fields = apilib.responseDbSchema(req,res,'volunteers');
+    sendJsonResponse(res, 220, fields)
 };
 
 
