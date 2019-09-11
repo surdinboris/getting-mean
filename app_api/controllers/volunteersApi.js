@@ -1,11 +1,14 @@
+
+//empty schema request
 let mongoose = require('mongoose');
 let Loc = mongoose.model('locations');
 let Vol = mongoose.model('volunteers');
-
 let sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
+let apilib = require('../../apilib');
+
 //400 - error sendJsonResponse(res, 400,{"message":"error", "error":err})
 //401 - no params in request sendJsonResponse(res, 400,{"message":"no ID parameter(s) given","err":"missing parameters"})
 //404 - not found   sendJsonResponse(res,404,{"message":"no document with given ID was found"})
@@ -37,10 +40,21 @@ module.exports.volunteersCreate=function (req,res) {
         })
 
     };
-//empty schema request
-let apilib = require('../../apilib');
+
+
+// let responseDbSchema= function (req,res,shmodel) {
+//     console.log('-----------apilib init------');
+//     let len= Object.keys(mongoose.model(shmodel).schema.tree).length;
+//     let fields= Object.keys(mongoose.model(shmodel).schema.tree);
+//     fields.splice(-3,len);
+//     console.log('from apilib', fields);
+//     return fields
+// };
+
 module.exports.volunteerSchema=function (req,res) {
+    console.log('requesting volunteerSchema');
     let fields = apilib.responseDbSchema(req,res,'volunteers');
+
     sendJsonResponse(res, 220, fields)
 };
 

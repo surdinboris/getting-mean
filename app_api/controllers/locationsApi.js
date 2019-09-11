@@ -1,4 +1,6 @@
 let mongoose = require('mongoose');
+let apilib = require('../../apilib');
+
 let Loc = mongoose.model('locations');
 let Vol = mongoose.model('volunteers');
 let ErrCodesActions = {
@@ -44,7 +46,7 @@ let attachSubModelsToLocation = function(location, model) {
                 return obj != null
             });
             location[model] = submodslist;
-            console.log('=>>>>> attached submodel',model, submodslist);
+            // console.log('=>>>>> attached submodel',model, submodslist);
             resolve(location)
         }).catch(function(err){
             reject(err)
@@ -86,10 +88,15 @@ let attachSubModelsToLocation = function(location, model) {
 // };
 
 
+// module.exports.locationSchema=function (req,res) {
+//     let len= Object.keys(mongoose.model('locations').schema.tree).length;
+//     let fields= Object.keys(mongoose.model('locations').schema.tree);
+//     fields.splice(-3,len);
+//     sendJsonResponse(res, 220, fields)
+// };
 module.exports.locationSchema=function (req,res) {
-    let len= Object.keys(mongoose.model('locations').schema.tree).length;
-    let fields= Object.keys(mongoose.model('locations').schema.tree);
-    fields.splice(-3,len);
+    let fields = apilib.responseDbSchema(req,res,'locations');
+
     sendJsonResponse(res, 220, fields)
 };
 
