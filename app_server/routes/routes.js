@@ -7,6 +7,7 @@ let ctrlCats = require('../controllers/cats');
 /* Locations pages */
 
 router.get('/cat', ctrlCats.catCreatePage);
+router.post('/cat', ctrlCats.catCreateCommit);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);

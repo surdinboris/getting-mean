@@ -13,3 +13,7 @@ module.exports.catCreatePage = function (req, res) {
         res.render("cat-edit.jade", {pageHeader:{title: 'Cat edit page'}, formAction:'', cat:fieldsObj})
     }).catch(err=> res.end(err.toString()));
 };
+
+module.exports.catCreateCommit = function (req,res) {
+
+};
