@@ -2,29 +2,32 @@ let express = require('express');
 let router = express.Router();
 let ctrlLocations = require('../controllers/locations');
 let ctrlOthers = require('../controllers/others');
-let ctrlvolunteers = require('../controllers/volunteers');
+let ctrlVolunteers = require('../controllers/volunteers');
+let ctrlCats = require('../controllers/cats');
 /* Locations pages */
-router.get('/', ctrlLocations.homelist);
-router.get('/locations/:locationid', ctrlLocations.locationInfo);
-//router.get('/locations/:locationid', ctrlvolunteers.volunteerCreatePage);
-//router.get('/location/new/review', ctrlLocations.addReview);
+
+router.get('/cat', ctrlCats.catCreatePage);
+
 /* Other pages */
 router.get('/about', ctrlOthers.about);
-router.get('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditPage);
-router.get('/volunteers/delete/:volunteerid', ctrlvolunteers.deleteVolunteer);
-router.get('/volunteers/view-locations/:volunteerid', ctrlvolunteers.volunteersLocations);
-router.get('/volunteers/', ctrlvolunteers.volunteersList);
-router.post('/volunteers/:volunteerid', ctrlvolunteers.volunteerEditCommit);
+router.get('/', ctrlLocations.homelist);
+router.get('/locations/:locationid', ctrlLocations.locationInfo);
+//router.get('/location/new/review', ctrlLocations.addReview);
+router.get('/volunteers/:volunteerid', ctrlVolunteers.volunteerEditPage);
+router.get('/volunteers/delete/:volunteerid', ctrlVolunteers.deleteVolunteer);
+router.get('/volunteers/view-locations/:volunteerid', ctrlVolunteers.volunteersLocations);
+router.get('/volunteers/', ctrlVolunteers.volunteersList);
+router.post('/volunteers/:volunteerid', ctrlVolunteers.volunteerEditCommit);
 
 //creation
-router.get('/volunteer',ctrlvolunteers.volunteerCreatePage);
-router.post('/volunteer', ctrlvolunteers.volunteerCreateCommit);
+router.get('/volunteer',ctrlVolunteers.volunteerCreatePage);
+router.post('/volunteer', ctrlVolunteers.volunteerCreateCommit);
 
 router.get('/location/', ctrlLocations.locationCreatePage);
 router.post('/location/', ctrlLocations.locationCreateCommit);
 
-router.get('/assignVolunteer',ctrlvolunteers.volunteerAssignPage);
-router.post('/assignVolunteer', ctrlvolunteers.volunteerAssignCommit);
+router.get('/assignVolunteer',ctrlVolunteers.volunteerAssignPage);
+router.post('/assignVolunteer', ctrlVolunteers.volunteerAssignCommit);
 
 
 //data manipulation

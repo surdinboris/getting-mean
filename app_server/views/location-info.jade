@@ -58,8 +58,8 @@ block content
             .panel-heading
               h2.panel-title Cats list
                 .actions-container
-                    a.btn.btn-warning.btn-sm(href="/volunteer?action=addCat&locationid=#{location._id}") Add new cat
-                    a.btn.btn-success.btn-sm(href="/assignVolunteer?action=assignCat&locationname=#{location.name}") Assign cat
+                    a.btn.btn-warning.btn-sm(href="/cat?action=addCat&locationid=#{location._id}") Add new cat
+                    a.btn.btn-success.btn-sm(href="/assignCat?action=assignCat&locationname=#{location.name}") Assign cat
             .panel-body.cat-container
               each cat in location.cats
                 .row
