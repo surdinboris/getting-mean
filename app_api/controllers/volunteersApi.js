@@ -52,7 +52,6 @@ module.exports.volunteersCreate=function (req,res) {
 // };
 
 module.exports.volunteerSchema=function (req,res) {
-    console.log('requesting volunteerSchema');
     let fields = apilib.responseDbSchema(req,res,'volunteers');
 
     sendJsonResponse(res, 220, fields)

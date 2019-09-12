@@ -28,7 +28,7 @@ router.put('/volunteers/:volunteerid',
 router.delete('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersDeleteOne); //done
 //cats
-//router.get('/cat/schema',ctrlCats.catSchema);
+router.get('/cat/schema',ctrlCats.catSchema);
 //combined cat creation wit assignment to location
 router.post('/locations/:locationid/cats', ctrlCats.catsCreate); //done
 //free roaming cat creation

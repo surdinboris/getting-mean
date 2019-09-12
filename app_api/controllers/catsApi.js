@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 let Loc = mongoose.model('locations');
-
+let apilib = require('../../apilib');
 let sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
@@ -28,10 +28,8 @@ let ErrCodesActions={
 // });
 
 //empty schema request
-module.exports.getSchema=function (req,res, model) {
-    let len= Object.keys(mongoose.model(model).schema.tree).length;
-    let fields= Object.keys(mongoose.model(model).schema.tree);
-    fields.splice(-3,len);
+module.exports.catSchema=function (req,res, model) {
+    let fields = apilib.responseDbSchema(req,res,'cats');
     sendJsonResponse(res, 220, fields)
 };
 

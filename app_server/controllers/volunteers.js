@@ -2,7 +2,7 @@
 let request = require("request");
 let url =require('url');
 let ApiOptions = {server:"http://localhost:3000"};
-
+let contrlib = require('../../controllerlib');
 if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
@@ -95,7 +95,7 @@ module.exports.volunteerAssignCommit = function (req,resp) {
 //     })
 //     })
 // };
-let contrlib = require('../../controllerlib');
+
 //get new empty handler
 module.exports.volunteerCreatePage = function (req, res) {
     //schema request to dynamically get fields for current schema and generate  creation page
