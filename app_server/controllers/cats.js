@@ -20,7 +20,7 @@ module.exports.catCreateCommit = function (req,res) {
         if(err){
             console.log(err)
         }
-        else(console.log(body))
+      //  else(console.log("-=+-__===-",body))
     });
-    res.end('cat Create_commit: '+ JSON.stringify(req.body))
+    res.end('cat Create_commit: ')
 };

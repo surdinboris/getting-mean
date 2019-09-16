@@ -62,7 +62,9 @@ module.exports.catsByLocation=function (req,res) {
 
 };
 module.exports.catsCreate=function (req,res) {
-    console.log("api-cats create");
+
+    let fields = apilib.responseDbSchema(req,res,'cats');
+    console.log("api-cats create",fields);
     let doAddCat = function (req, res, location) {
         // location.cats.push({
         //     // catName: req.body.catName,
