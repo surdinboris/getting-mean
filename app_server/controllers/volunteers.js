@@ -10,8 +10,7 @@ if (process.env.NODE_ENV == 'production') {
 let volunteerEditTitle= 'Volunteer edit page';
 
 //get handler
-module.exports.volunteerEditPage = function (req, res) {
-
+module.exports.volunteerEditPage = function (req, res){
     let volid=req.params.volunteerid;
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
@@ -19,9 +18,8 @@ module.exports.volunteerEditPage = function (req, res) {
         res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle},formAction:body._id, volunteer:body})
     })
 };
-
 //put (change) handler
-module.exports.volunteerEditCommit=function (req, res) {
+module.exports.volunteerEditCommit=function (req, res){
       let volid=req.params.volunteerid;
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid),{method: 'put', json: req.body},
@@ -29,7 +27,6 @@ module.exports.volunteerEditCommit=function (req, res) {
             res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:body._id, volunteer:body})
         } )
 };
-
 
 //loading list fo volunteers and render pick up page
 module.exports.volunteerAssignPage = function (req, res){
@@ -103,7 +100,6 @@ module.exports.volunteerCreatePage = function (req, res) {
         res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:'', volunteer:fieldsObj})
     }).catch(err=> res.end(err.toString()));
 };
-
 
 module.exports.volunteersLocations = function (req,resp) {
     let volunteerid=req.params.volunteerid;

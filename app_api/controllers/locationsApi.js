@@ -94,6 +94,7 @@ let attachSubModelsToLocation = function(location, model) {
 //     fields.splice(-3,len);
 //     sendJsonResponse(res, 220, fields)
 // };
+
 module.exports.locationSchema=function (req,res) {
     let fields = apilib.responseDbSchema(req,res,'locations');
 

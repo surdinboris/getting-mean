@@ -62,17 +62,18 @@ module.exports.catsByLocation=function (req,res) {
 
 };
 module.exports.catsCreate=function (req,res) {
+    console.log("api-cats create");
     let doAddCat = function (req, res, location) {
-        location.cats.push({
-            catName: req.body.catName,
-            catAge: req.body.catAge,
-            catChipNumber: req.body.catChipNumber,
-            catColor: req.body.catColor,
-            catWeight: req.body.catWeight,
-            catDescription: req.body.catDescription,
-            catGender: req.body.catGender,
-            catPhoto: req.body.catPhoto,
-        });
+        // location.cats.push({
+        //     // catName: req.body.catName,
+        //     // catAge: req.body.catAge,
+        //     // catChipNumber: req.body.catChipNumber,
+        //     // catColor: req.body.catColor,
+        //     // catWeight: req.body.catWeight,
+        //     // catDescription: req.body.catDescription,
+        //     // catGender: req.body.catGender,
+        //     // catPhoto: req.body.catPhoto,
+        // });
     };
 
 };

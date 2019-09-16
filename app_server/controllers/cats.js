@@ -15,5 +15,12 @@ module.exports.catCreatePage = function (req, res) {
 };
 
 module.exports.catCreateCommit = function (req,res) {
-
+    console.log(req.query.locationid);
+    request(url.resolve(ApiOptions.server, '/api/cats/'), {method:"post"}, function (err,apiResp, body) {
+        if(err){
+            console.log(err)
+        }
+        else(console.log(body))
+    });
+    res.end('cat Create_commit: '+ JSON.stringify(req.body))
 };
