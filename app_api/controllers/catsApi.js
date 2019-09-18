@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 let Loc = mongoose.model('locations');
+let Cat = mongoose.model('cats');
 let apilib = require('../../apilib');
 let sendJsonResponse = function(res, status, content) {
     res.status(status);
@@ -61,22 +62,49 @@ module.exports.catsByLocation=function (req,res) {
 
 
 };
-module.exports.catsCreate=function (req,res) {
 
+function doAddCat (req, res, location) {
     let fields = apilib.responseDbSchema(req,res,'cats');
-    console.log("api-cats create",fields);
-    let doAddCat = function (req, res, location) {
-        // location.cats.push({
-        //     // catName: req.body.catName,
-        //     // catAge: req.body.catAge,
-        //     // catChipNumber: req.body.catChipNumber,
-        //     // catColor: req.body.catColor,
-        //     // catWeight: req.body.catWeight,
-        //     // catDescription: req.body.catDescription,
-        //     // catGender: req.body.catGender,
-        //     // catPhoto: req.body.catPhoto,
-        // });
-    };
+
+    let newCat={};
+
+    fields.forEach(function (field) {
+        newCat.field=req.body[field];
+
+        console.log('>>>',field,req.body.field)
+    });
+
+    Cat.create(
+        newCat
+        , function (err,newCat) {
+            if (err){
+                console.log('cat saving error',err);
+                ErrCodesActions[400](res,err)
+
+            }
+            else{
+                console.log('new cat was created',newCat._id )
+                location.cats.push(newCat._id);
+                sendJsonResponse(res, 200,newCat._id)
+            }
+        })
+
+};
+
+
+module.exports.catsCreate=function (req,res) {
+    console.log('searching for location with id', req.query.locationid);
+    Loc.findOne({_id:req.query.locationid},function (err, location) {
+        if (err){
+            ErrCodesActions[400](res,err)
+
+        }
+        else{
+            doAddCat(req, res, location)
+        }
+    })
+
+
 
 };
 //not working - need other implementation
