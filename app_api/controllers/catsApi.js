@@ -66,6 +66,7 @@ module.exports.catsByLocation=function (req,res) {
 function doAddCat (req, res, location) {
     let fields = apilib.responseDbSchema(req,res,'cats');
 
+
     let newCat={};
 
     fields.forEach(function (field) {
@@ -93,6 +94,8 @@ function doAddCat (req, res, location) {
 
 
 module.exports.catsCreate=function (req,res) {
+    console.log('s>>>>>>>',req.body);
+
     console.log('searching for location with id', req.query.locationid);
     Loc.findOne({_id:req.query.locationid},function (err, location) {
         if (err){
@@ -103,8 +106,6 @@ module.exports.catsCreate=function (req,res) {
             doAddCat(req, res, location)
         }
     })
-
-
 
 };
 //not working - need other implementation

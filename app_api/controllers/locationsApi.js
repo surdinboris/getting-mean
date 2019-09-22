@@ -23,6 +23,7 @@ let sendJsonResponse = function (res, status, content) {
 //resolving with full associated  volunteers object
 let attachSubModelsToLocation = function(location, model) {
     return new Promise(function (resolve, reject) {
+        console.log('hm>>>>>',location,model);
         let subModsList = location[model].map(function (submodel) {
             return new Promise(function (resolve2, reject2) {
                 mongoose.model(model).findOne({_id: submodel}, function (err, subobj) {
@@ -39,8 +40,8 @@ let attachSubModelsToLocation = function(location, model) {
 
             //cloning object via JSON to make possible property additions
             // from another db request (volunteers)
-            //location = JSON.parse(JSON.stringify(location));
-            location = location.toObject();
+            location = JSON.parse(JSON.stringify(location));
+            //location = location.toObject();
             //filtering 'dead' submodels that were deleted from db
             submodslist = submodslist.filter(function (obj) {
                 return obj != null
@@ -191,7 +192,7 @@ module.exports.locationsUpdateOne = function (req, res) {
             location.save().then(function (location) {
                 //checking if it was last volunteer in location to prevent further code failing
                 // if(location.volunteers && location.volunteers.length >0){
-                    attachSubModelsToLocation(location,'locations').then
+                    attachSubModelsToLocation(location,'volunteers').then
                     (location=> attachSubModelsToLocation(location,'cats').then(location => sendJsonResponse(res, 200, location)).catch(err=>console.log('error while executing attachVolsToLocation',err)))
                 // }
                 // else{

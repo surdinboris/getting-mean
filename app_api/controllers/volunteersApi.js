@@ -22,7 +22,7 @@ let ErrCodesActions={
 
 
 module.exports.volunteersCreate=function (req,res) {
-
+    console.log('s>>>>>>',req.body);
         Vol.create({
             volunteerName: req.body.volunteerName,
             volunteerAddress: req.body.volunteerAddress,
