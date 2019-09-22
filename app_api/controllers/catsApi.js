@@ -63,7 +63,7 @@ module.exports.catsByLocation=function (req,res) {
 
 };
 
-function doAddCat (req, res, location) {
+function doAddCat (req, res) {
     let fields = apilib.responseDbSchema(req,res,'cats');
 
 
@@ -84,8 +84,8 @@ function doAddCat (req, res, location) {
 
             }
             else{
-                console.log('new cat was created',newCat._id )
-                location.cats.push(newCat._id);
+                console.log('new cat was created',newCat._id );
+                //location.cats.push(newCat._id);
                 sendJsonResponse(res, 200,newCat._id)
             }
         })
@@ -94,17 +94,17 @@ function doAddCat (req, res, location) {
 
 
 module.exports.catsCreate=function (req,res) {
-
-    console.log('searching for location with id', req.query.locationid);
-    Loc.findOne({_id:req.query.locationid},function (err, location) {
-        if (err){
-            ErrCodesActions[400](res,err)
-
-        }
-        else{
-            doAddCat(req, res, location)
-        }
-    })
+    console.log("req>>>"req)
+    // console.log('searching for location with id', req.query.locationid);
+    // Loc.findOne({_id:req.query.locationid},function (err, location) {
+    //     if (err){
+    //         ErrCodesActions[400](res,err)
+    //
+    //     }
+    //     else{
+    doAddCat(req, res)
+    //    }
+    //})
 
 };
 //not working - need other implementation

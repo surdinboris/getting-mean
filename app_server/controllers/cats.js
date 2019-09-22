@@ -32,11 +32,12 @@ module.exports.childmodelCreateCommit = function (req, resp) {
     let modpath=url.parse(req.url).pathname.replace('/','');
     let childmodel= modpath+'s';
     let locationid = req.query.locationid;
-    //first - adding new volunteer and get its id
+    //first - adding new cat and get its id
     request(url.resolve(ApiOptions.server, `api/${childmodel}/`), {
         method: 'post',
         json: req.body
     }, function (err, childModApiResp, childModBody) {
+        console.log('>>>>>cat loc from client body',req.body);
         //second - get current set of childmodels
         request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
             method: 'get',
