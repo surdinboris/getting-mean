@@ -31,7 +31,6 @@ module.exports.childmodelCreateCommit = function (req, resp) {
     // possible volunteer | cat (will be pluralized)
     let modpath=url.parse(req.url).pathname.replace('/','');
     let childmodel= modpath+'s';
-
     let locationid = req.query.locationid;
     //first - adding new volunteer and get its id
     request(url.resolve(ApiOptions.server, `api/${childmodel}/`), {
@@ -46,6 +45,8 @@ module.exports.childmodelCreateCommit = function (req, resp) {
             if (err) {
                 console.log(err)
             }
+            console.log('>>>>>cat loc api body',childModBody);
+
             let locChldModsUpdated = locBody[childmodel];
             //creating array of id's
             if (locChldModsUpdated.length > 0) {
