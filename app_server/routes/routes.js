@@ -7,7 +7,8 @@ let ctrlCats = require('../controllers/cats');
 /* Locations pages */
 
 router.get('/cats', ctrlCats.catCreatePage);
-router.post('/cats', ctrlCats.catCreateCommit);
+//router.post('/cats', ctrlCats.catCreateCommit);
+router.post('/cats', ctrlCats.childmodelCreateCommit);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);
@@ -22,7 +23,8 @@ router.post('/volunteers/:volunteerid', ctrlVolunteers.volunteerEditCommit);
 
 //creation
 router.get('/volunteer',ctrlVolunteers.volunteerCreatePage);
-router.post('/volunteer', ctrlVolunteers.volunteerCreateCommit);
+//router.post('/volunteer', ctrlVolunteers.volunteerCreateCommit);
+router.post('/volunteer', ctrlVolunteers.childmodelCreateCommit);
 router.get('/location/', ctrlLocations.locationCreatePage);
 router.post('/location/', ctrlLocations.locationCreateCommit);
 router.get('/assignVolunteer',ctrlVolunteers.volunteerAssignPage);

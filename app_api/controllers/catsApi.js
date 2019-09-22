@@ -94,7 +94,6 @@ function doAddCat (req, res, location) {
 
 
 module.exports.catsCreate=function (req,res) {
-    console.log('s>>>>>>>',req.body);
 
     console.log('searching for location with id', req.query.locationid);
     Loc.findOne({_id:req.query.locationid},function (err, location) {

@@ -149,14 +149,55 @@ module.exports.deleteVolunteer= function(req,resp){
       }
   })  
 };
-module.exports.volunteerCreateCommit = function (req, resp) {
+// module.exports.volunteerCreateCommit = function (req, resp) {
+//     let locationid = req.query.locationid;
+//     //first - adding new volunteer and get its id
+//     request(url.resolve(ApiOptions.server, "api/volunteers/"), {
+//         method: 'post',
+//         json: req.body
+//     }, function (err, volApiResp, volBody) {
+//         //second - get current set of volunteers
+//         request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
+//             method: 'get',
+//             json: {}
+//         }, function (err, locApiResp, locBody) {
+//             if (err) {
+//                 console.log(err)
+//             }
+//             let locVolsUpdated = locBody.volunteers;
+//             //creating array of id's
+//             locVolsUpdated=locVolsUpdated.map(function (vol) {
+//                 return vol._id
+//             });
+//             locVolsUpdated.push(volBody._id);
+//
+//             //third - attach this id to location object
+//             request(url.resolve(ApiOptions.server, "api/locations/"+ locationid), {
+//                 method: 'put',
+//                 json: {volunteers: locVolsUpdated.toString()}},
+//                 function(err, updatedApiResp, updLocBody) {
+//                     if (err) {
+//                         console.log('error',err)
+//                     }
+//                     resp.redirect('/locations/'+locationid)
+//             })
+//         })
+//     })
+// };
+
+module.exports.childmodelCreateCommit = function (req, resp) {
+    //determining which model to use
+    // possible volunteer | cat (will be pluralized)
+    let modpath=url.parse(req.url).pathname.replace('/','');
+    let childmodel= modpath+'s';
+
     let locationid = req.query.locationid;
     //first - adding new volunteer and get its id
-    request(url.resolve(ApiOptions.server, "api/volunteers/"), {
+    request(url.resolve(ApiOptions.server, `api/${childmodel}/`), {
         method: 'post',
         json: req.body
-    }, function (err, volApiResp, volBody) {
-        //second - get current set of volunteers
+    }, function (err, childModApiResp, childModBody) {
+        //second - get current set of childmodels
         request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
             method: 'get',
             json: {}
@@ -164,23 +205,25 @@ module.exports.volunteerCreateCommit = function (req, resp) {
             if (err) {
                 console.log(err)
             }
-            let locVolsUpdated = locBody.volunteers;
+            let locChldModsUpdated = locBody[childmodel];
             //creating array of id's
-            locVolsUpdated=locVolsUpdated.map(function (vol) {
-                return vol._id
-            });
-            locVolsUpdated.push(volBody._id);
+            if (locChldModsUpdated.length > 0) {
+                locChldModsUpdated = locChldModsUpdated.map(function (vol) {
+                    return vol._id
+                });
+            }
+            locChldModsUpdated.push(childModBody._id);
 
             //third - attach this id to location object
             request(url.resolve(ApiOptions.server, "api/locations/"+ locationid), {
-                method: 'put',
-                json: {volunteers: locVolsUpdated.toString()}},
+                    method: 'put',
+                    json: {volunteers: locChldModsUpdated.toString()}},
                 function(err, updatedApiResp, updLocBody) {
                     if (err) {
                         console.log('error',err)
                     }
                     resp.redirect('/locations/'+locationid)
-            })
+                })
         })
     })
 };

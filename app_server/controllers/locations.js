@@ -96,6 +96,39 @@ module.exports.locationCreateCommit = function (req, res) {
 ;
 module.exports.locationInfo = function(req, res) {
     let actionsHandler={};
+    actionsHandler.unsubscribeCat=function (req,res,body) {
+        return new Promise(function(resolve, reject) {
+                //retrieve current list of volunteers
+                let catsIdList= body.volunteers.map(function (vol) {
+                    return vol._id
+                });
+                let index=catsIdList.indexOf(req.query.catid);
+                //in case of target vol was found in db, sending request to remove
+                let cats;
+                if(index > -1) {
+                    catsIdList.splice(index, 1);
+                    //this empty record  not make any sense for api to remove volunteer
+                    //sending request to clear all vols
+                    if(catsIdList.length == 0){
+                        cats='no volunteers'
+                    }
+
+                    request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
+                        method: 'put', json: {cats: catsIdList.toString()}
+                    }, function (err, apiResp, body) {
+                        if (err) {
+                            reject(err)
+                        }
+                        else resolve(body)
+
+                        //resulting data not used
+                    });
+                }
+                else reject('No such cat in provided location found')
+            }
+        )
+    };
+
     actionsHandler.unsubscribeVolunteer=function (req,res,body) {
             return new Promise(function(resolve, reject) {
                 //retrieve current list of volunteers
@@ -153,7 +186,7 @@ module.exports.locationInfo = function(req, res) {
             })
         }
         else{
-            console.log('onhandler render', body);
+            //console.log('onhandler render', body);
             renderLocation(err,res,body)
         }
 

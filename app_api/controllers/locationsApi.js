@@ -23,7 +23,6 @@ let sendJsonResponse = function (res, status, content) {
 //resolving with full associated  volunteers object
 let attachSubModelsToLocation = function(location, model) {
     return new Promise(function (resolve, reject) {
-        console.log('hm>>>>>',location,model);
         let subModsList = location[model].map(function (submodel) {
             return new Promise(function (resolve2, reject2) {
                 mongoose.model(model).findOne({_id: submodel}, function (err, subobj) {
