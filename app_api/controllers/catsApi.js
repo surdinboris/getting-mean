@@ -6,6 +6,8 @@ let sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
+let fs = require('fs');
+
 //400 - error sendJsonResponse(res, 400,{"message":"error", "error":err})
 //401 - no params in request sendJsonResponse(res, 400,{"message":"no ID parameter(s) given","err":"missing parameters"})
 //404 - not found   sendJsonResponse(res,404,{"message":"no document with given ID was found"})
@@ -66,14 +68,21 @@ module.exports.catsByLocation=function (req,res) {
 function doAddCat (req, res) {
     let fields = apilib.responseDbSchema(req,res,'cats');
 
-
     let newCat={};
 
     fields.forEach(function (field) {
-        newCat.field=req.body[field];
+        newCat[field]=req.body[field];
 
-        console.log('>>>',field,req.body.field)
+
     });
+    //in case of missing photo data
+    if(req.body.catPhoto == '') {
+        newCat.catPhoto={};
+        //add request image parsing here
+        newCat.catPhoto.imageData = fs.readFileSync('public/images/noimage.jpg');
+        newCat.catPhoto.contentType = 'image/png';
+        newCat.catPhoto.comment='no image';
+    }
 
     Cat.create(
         newCat
@@ -94,7 +103,6 @@ function doAddCat (req, res) {
 
 
 module.exports.catsCreate=function (req,res) {
-    console.log("req>>>"req)
     // console.log('searching for location with id', req.query.locationid);
     // Loc.findOne({_id:req.query.locationid},function (err, location) {
     //     if (err){

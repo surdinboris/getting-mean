@@ -15,12 +15,13 @@ let volunteerSchema = new mongoose.Schema({
     active: {type: Boolean, required: true}
 });
 
-
 let catPhotoSchema = new mongoose.Schema({
     UplDate: {type: Date, default: Date.now},
     imageData: {type:'Buffer'},
+    contentType:String,
     comment: String
 });
+
 let catsListSchema = new mongoose.Schema({
     catName: {type:String, required:true},
     catAge: {type: Number, "default": 0, min: 0, max: 30},

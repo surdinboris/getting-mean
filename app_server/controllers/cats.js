@@ -37,7 +37,6 @@ module.exports.childmodelCreateCommit = function (req, resp) {
         method: 'post',
         json: req.body
     }, function (err, childModApiResp, childModBody) {
-        console.log('>>>>>cat loc from client body',req.body);
         //second - get current set of childmodels
         request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
             method: 'get',
@@ -46,8 +45,6 @@ module.exports.childmodelCreateCommit = function (req, resp) {
             if (err) {
                 console.log(err)
             }
-            console.log('>>>>>cat loc api body',childModBody);
-
             let locChldModsUpdated = locBody[childmodel];
             //creating array of id's
             if (locChldModsUpdated.length > 0) {
