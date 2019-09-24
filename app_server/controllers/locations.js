@@ -99,18 +99,18 @@ module.exports.locationInfo = function(req, res) {
     actionsHandler.unsubscribeCat=function (req,res,body) {
         return new Promise(function(resolve, reject) {
                 //retrieve current list of volunteers
-                let catsIdList= body.volunteers.map(function (vol) {
-                    return vol._id
+                let catsIdList= body.volunteers.map(function (cat) {
+                    return cat._id
                 });
                 let index=catsIdList.indexOf(req.query.catid);
-                //in case of target vol was found in db, sending request to remove
+                //in case of target cat was found in db, sending request to remove
                 let cats;
                 if(index > -1) {
                     catsIdList.splice(index, 1);
                     //this empty record  not make any sense for api to remove volunteer
                     //sending request to clear all vols
                     if(catsIdList.length == 0){
-                        cats='no volunteers'
+                        cats='no cats'
                     }
 
                     request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
@@ -165,8 +165,8 @@ module.exports.locationInfo = function(req, res) {
     request(url.resolve(ApiOptions.server, 'api/locations/'+req.params.locationid), {
         method: 'get',
             json: {},
-
         }, function (err,apiResp,body) {
+        console.log('location body data to be rendered',body);
         let message;
         if (err) {
             message = (err);}

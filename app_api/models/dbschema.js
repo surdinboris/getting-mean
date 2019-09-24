@@ -41,7 +41,7 @@ let locationSchema = new mongoose.Schema({
     facilities: [String],
     coords: {type: [Number], index: '2dsphere'},
     volunteers:{ type: [mongoose.Schema.Types.ObjectId], ref: 'volunteerSchema'},
-    cats:[catsListSchema],
+    cats:{ type: [mongoose.Schema.Types.ObjectId], ref: 'catsListSchema'},
     icon: {type:'Buffer'}
 });
 

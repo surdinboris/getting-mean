@@ -32,6 +32,7 @@ module.exports.childmodelCreateCommit = function (req, resp) {
     let modpath=url.parse(req.url).pathname.replace('/','');
     let childmodel= modpath+'s';
     let locationid = req.query.locationid;
+    console.log('cat to be appended to location', req.query.locationid);
     //first - adding new cat and get its id
     request(url.resolve(ApiOptions.server, `api/${childmodel}/`), {
         method: 'post',
@@ -48,8 +49,10 @@ module.exports.childmodelCreateCommit = function (req, resp) {
             let locChldModsUpdated = locBody[childmodel];
             //creating array of id's
             if (locChldModsUpdated.length > 0) {
-                locChldModsUpdated = locChldModsUpdated.map(function (vol) {
-                    return vol._id
+                locChldModsUpdated = locChldModsUpdated.map(function (cat) {
+
+                    return cat._id
+
                 });
             }
             locChldModsUpdated.push(childModBody._id);
@@ -57,7 +60,7 @@ module.exports.childmodelCreateCommit = function (req, resp) {
             //third - attach this id to location object
             request(url.resolve(ApiOptions.server, "api/locations/"+ locationid), {
                     method: 'put',
-                    json: {volunteers: locChldModsUpdated.toString()}},
+                    json: {cats: locChldModsUpdated.toString()}},
                 function(err, updatedApiResp, updLocBody) {
                     if (err) {
                         console.log('error',err)

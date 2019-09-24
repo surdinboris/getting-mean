@@ -137,11 +137,11 @@ module.exports.locationsReadOne = function (req, res) {
                 ErrCodesActions[404](res)
             }
             else {
-                attachSubModelsToLocation(location, 'volunteers').then(function(location){
-
-                    sendJsonResponse(res, 220, location)
+                attachSubModelsToLocation(location, 'volunteers').then(function(location) {
+                    attachSubModelsToLocation(location, 'cats').then(function (location) {
+                        sendJsonResponse(res, 220, location)
+                    });
                 });
-
 
             }
         });
@@ -169,6 +169,9 @@ module.exports.locationsUpdateOne = function (req, res) {
                 return;
             }
             req.body.rating ? location.name = req.body.rating : null;
+            if(req.body.cats && req.body.cats != 'no cats') {
+                location.cats = req.body.cats.split(",");
+            }
             req.body.name ? location.name = req.body.name : null;
             req.body.address ? location.address = req.body.address : null;
             //location.rating: req.body.rating;

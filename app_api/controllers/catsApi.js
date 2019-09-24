@@ -95,7 +95,7 @@ function doAddCat (req, res) {
             else{
                 console.log('new cat was created',newCat._id );
                 //location.cats.push(newCat._id);
-                sendJsonResponse(res, 200,newCat._id)
+                sendJsonResponse(res, 200,newCat)
             }
         })
 
@@ -115,58 +115,58 @@ module.exports.catsCreate=function (req,res) {
     //})
 
 };
-//not working - need other implementation
-module.exports.catsCreateOld=function (req,res) {
-    let doAddCat =  function(req, res, location){
-        location.cats.push({
-            catName: req.body.catName,
-            catAge: req.body.catAge,
-            catChipNumber: req.body.catChipNumber,
-            catColor: req.body.catColor,
-            catWeight: req.body.catWeight,
-            catDescription: req.body.catDescription,
-            catGender: req.body.catGender,
-            catPhoto: req.body.catPhoto,
-        });
-    };
-
-    if(req.params && req.params.locationid ){
-        //let catId=req.params.catid;
-        let locId=req.params.locationid;
-
-        Loc.findOne({_id: locId}).select("cats").exec( function (err, location) {
-            if(!location){
-                ErrCodesActions[404](res);
-            }
-            else if (err) {
-                ErrCodesActions[400](res,err);
-            }
-
-            else {
-                doAddCat(req, res, location);
-                location.save(function(err, location) {
-                    let thisCat;
-                    if (err) {
-                        ErrCodesActions[400](res,err);
-                    } else {
-                        //updateAverageRating(location._id);
-                        thisCat= location.cats[location.cats.length - 1];
-                        sendJsonResponse(res, 201, thisCat);
-                    }
-                });
-
-            }
-
-        });
-
-
-    }
-    else {
-
-        ErrCodesActions[401](res)
-    }
-
-};
+// //not working - need other implementation
+// module.exports.catsCreateOld=function (req,res) {
+//     let doAddCat =  function(req, res, location){
+//         location.cats.push({
+//             catName: req.body.catName,
+//             catAge: req.body.catAge,
+//             catChipNumber: req.body.catChipNumber,
+//             catColor: req.body.catColor,
+//             catWeight: req.body.catWeight,
+//             catDescription: req.body.catDescription,
+//             catGender: req.body.catGender,
+//             catPhoto: req.body.catPhoto,
+//         });
+//     };
+//
+//     if(req.params && req.params.locationid ){
+//         //let catId=req.params.catid;
+//         let locId=req.params.locationid;
+//
+//         Loc.findOne({_id: locId}).select("cats").exec( function (err, location) {
+//             if(!location){
+//                 ErrCodesActions[404](res);
+//             }
+//             else if (err) {
+//                 ErrCodesActions[400](res,err);
+//             }
+//
+//             else {
+//                 doAddCat(req, res, location);
+//                 location.save(function(err, location) {
+//                     let thisCat;
+//                     if (err) {
+//                         ErrCodesActions[400](res,err);
+//                     } else {
+//                         //updateAverageRating(location._id);
+//                         thisCat= location.cats[location.cats.length - 1];
+//                         sendJsonResponse(res, 201, thisCat);
+//                     }
+//                 });
+//
+//             }
+//
+//         });
+//
+//
+//     }
+//     else {
+//
+//         ErrCodesActions[401](res)
+//     }
+//
+// };
 module.exports.catsReadOne=function (req, res) {
 
     if(req.params && req.params.locationid && req.params.catid){
