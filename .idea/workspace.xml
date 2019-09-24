@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app_api/controllers/catsApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/catsApi.js" />
-      <change beforePath="$PROJECT_DIR$/app_api/controllers/locationsApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/locationsApi.js" />
-      <change beforePath="$PROJECT_DIR$/app_api/models/dbschema.js" afterPath="$PROJECT_DIR$/app_api/models/dbschema.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/controllers/cats.js" afterPath="$PROJECT_DIR$/app_server/controllers/cats.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/controllers/locations.js" afterPath="$PROJECT_DIR$/app_server/controllers/locations.js" />
-    </list>
+    <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -443,12 +437,12 @@
       <workItem from="1567623985145" duration="264000" />
       <workItem from="1567966764548" duration="800000" />
       <workItem from="1568219104099" duration="7483000" />
-      <workItem from="1569127787040" duration="34798000" />
+      <workItem from="1569127787040" duration="35400000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="395579000" />
+    <option name="totallyTimeSpent" value="396181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="269" y="45" width="1558" height="941" extended-state="0" />
