@@ -36,7 +36,6 @@ let renderHomePage=function (err, res, body) {
             body = [];
         }
 
-        console.log(JSON.stringify(body));
         res.render('locations-list',  {        title: 'Cats feeding network',
             pageHeader: {
                 title: ' Lets feed our wonderful cats together!'
@@ -166,7 +165,6 @@ module.exports.locationInfo = function(req, res) {
         method: 'get',
             json: {},
         }, function (err,apiResp,body) {
-        console.log('location body data to be rendered',body);
         let message;
         if (err) {
             message = (err);}

@@ -9,6 +9,9 @@ let ctrlCats = require('../controllers/cats');
 router.get('/cat', ctrlCats.catCreatePage);
 //router.post('/cats', ctrlCats.catCreateCommit);
 router.post('/cat', ctrlCats.childmodelCreateCommit);
+//to be implenented after modelassignment refactory to support both cats and locations
+//router.get('/assignCat',ctrlVolunteers.catAssignPage);
+//router.post('/assignCat', ctrlVolunteers.catAssignCommit);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);

@@ -30,6 +30,7 @@ module.exports.volunteerEditCommit=function (req, res){
 
 //loading list fo volunteers and render pick up page
 module.exports.volunteerAssignPage = function (req, res){
+
     let locationname = req.query.locationname;
     //console.log('___',locationid);
     request(url.resolve(ApiOptions.server, "api/locations/all"), {method: 'get',
@@ -46,6 +47,8 @@ module.exports.volunteerAssignPage = function (req, res){
 
 // getting user's choise of volunteer and location - assign volunteer to location
 module.exports.volunteerAssignCommit = function (req,resp) {
+    console.log('assign volunteer url', req.url);
+    resp.end('assign volunteer url '+ req.url);
     let attachvol= req.body.volunteer;
     let locationid= req.body.location;
 
