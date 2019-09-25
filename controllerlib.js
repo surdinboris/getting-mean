@@ -20,48 +20,53 @@ module.exports.requestDbSchema= function(dbmodel, ApiOptions){
 };
 
 module.exports.modelAssignCommit = function (req,res) {
-    let model= 'unknown model';
 
-    if(req.url.replace('/','') == 'assignVolunteer'){
-        model='volunteer'
-    }
-    else if (req.url.replace('/','') == 'assignCat'){
-        model = 'cat'
-    }
+    return function (req,res) {
 
-    let attachModel= req.body[model];
-    let locationid= req.body.location;
+        let model = 'unknown model';
 
-    request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
-        method: 'get',
-        json: {}
-    }, function (err, locApiResp, locBody) {
-        if (err) {
-            console.log(err)
+        if (req.url.replace('/', '') == 'assignVolunteer') {
+            model = 'volunteer'
         }
-        let locModsUpdated = locBody[model+'s'];
-        //creating array of id's
-        locModsUpdated=locModsUpdated.map(function (mod) {
-            return mod._id
-        });
-        //avoiding duplicate insertion
-        if(locModsUpdated.indexOf(attachModel)<0){
-            locModsUpdated.push(attachModel);
+        else if (req.url.replace('/', '') == 'assignCat') {
+            model = 'cat'
         }
 
-        //third - attach this id to location object
-        request(url.resolve(ApiOptions.server, "api/locations/"+ locationid), {
-                method: 'put',
-                json: model == 'volunteer'? {volunteers: locModsUpdated.toString()} : {cats: locModsUpdated.toString()}},
-            function(err, updatedApiResp, updLocBody) {
-                if (err) {
-                    console.log('error',err)
-                }
-                res.redirect('/locations/'+locationid)
-            })
-    })
+        let attachModel = req.body[model];
+        let locationid = req.body.location;
 
+        request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
+            method: 'get',
+            json: {}
+        }, function (err, locApiResp, locBody) {
+            if (err) {
+                console.log(err)
+            }
+            let locModsUpdated = locBody[model + 's'];
+            //creating array of id's
+            locModsUpdated = locModsUpdated.map(function (mod) {
+                return mod._id
+            });
+            //avoiding duplicate insertion
+            if (locModsUpdated.indexOf(attachModel) < 0) {
+                locModsUpdated.push(attachModel);
+            }
+
+            //third - attach this id to location object
+            request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
+                    method: 'put',
+                    json: model == 'volunteer' ? {volunteers: locModsUpdated.toString()} : {cats: locModsUpdated.toString()}
+                },
+                function (err, updatedApiResp, updLocBody) {
+                    if (err) {
+                        console.log('error', err)
+                    }
+                    res.redirect('/locations/' + locationid)
+                })
+        })
+    }
 };
+
 // module.exports.modelAssignCommit = function (req,resp) {
 //
 //     let attachvol= req.body.volunteer;
