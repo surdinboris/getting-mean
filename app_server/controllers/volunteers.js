@@ -1,8 +1,8 @@
 
 let request = require("request");
 let url =require('url');
-let ApiOptions = {server:"http://localhost:3000"};
 let contrlib = require('../../controllerlib');
+let ApiOptions = {server:"http://localhost:3000"};
 if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
@@ -46,38 +46,8 @@ module.exports.volunteerAssignPage = function (req, res){
     })};
 
 // getting user's choise of volunteer and location - assign volunteer to location
-module.exports.volunteerAssignCommit = function (req,resp) {
-    console.log('assign volunteer url', req.url);
-    resp.end('assign volunteer url '+ req.url);
-    let attachvol= req.body.volunteer;
-    let locationid= req.body.location;
-
-    request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
-        method: 'get',
-        json: {}
-    }, function (err, locApiResp, locBody) {
-        if (err) {
-            console.log(err)
-        }
-        let locVolsUpdated = locBody.volunteers;
-        //creating array of id's
-        locVolsUpdated=locVolsUpdated.map(function (vol) {
-            return vol._id
-        });
-        locVolsUpdated.push(attachvol);
-
-        //third - attach this id to location object
-        request(url.resolve(ApiOptions.server, "api/locations/"+ locationid), {
-                method: 'put',
-                json: {volunteers: locVolsUpdated.toString()}},
-            function(err, updatedApiResp, updLocBody) {
-                if (err) {
-                    console.log('error',err)
-                }
-                resp.redirect('/locations/'+locationid)
-            })
-    })
-
+module.exports.volunteerAssignCommit = function(req,res) {
+    return contrlib.modelAssignCommit(req, res);
 };
 //
 // let requestDBSchema= function(dbmodel){
