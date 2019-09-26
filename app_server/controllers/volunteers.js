@@ -47,7 +47,12 @@ module.exports.volunteerAssignPage = function (req, res){
 
 // getting user's choise of volunteer and location - assign volunteer to location
 module.exports.volunteerAssignCommit = function(req,res) {
-    return contrlib.modelAssignCommit(req, res);
+    //creating preconfiguder object
+    let requestResolver = new contrlib.modelAssignCommit(req, res);
+    console.log('--=-=-=-=-=--',requestResolver);
+    console.log('--=-=-=-=-=--',requestResolver.renderExec.toString());
+    requestResolver.renderExec(req,res)
+    //return new contrlib.modelAssignCommit(req, res);
 };
 //
 // let requestDBSchema= function(dbmodel){
