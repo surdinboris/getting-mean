@@ -70,3 +70,19 @@ module.exports.childmodelCreateCommit = function (req, resp) {
         })
     })
 };
+
+module.exports.catAssignPage = function (req, res){
+
+    let locationname = req.query.locationname;
+    //console.log('___',locationid);
+    request(url.resolve(ApiOptions.server, "api/locations/all"), {method: 'get',
+        json:{}}, function (err, apiResp, locsBody) {
+        request(url.resolve(ApiOptions.server, "api/cats"), {
+                method: 'get',
+                json: {}
+            },
+            function (err, apiResp, volsBody) {
+                //res.end(JSON.stringify(locsBody.concat(volsBody)));
+                res.render('volunteer-assign-view.jade',{pageHeader:{title: 'Assign Cat'}, defloc:locationname, locations:locsBody, volunteers:volsBody})
+            });
+    })};

@@ -8,6 +8,23 @@ let sendJsonResponse = function(res, status, content) {
 };
 let fs = require('fs');
 
+
+module.exports.catsReadAll=function (req,res) {
+
+
+    Cat.find({}, function (err, cats) {
+
+    }).select('-catPhoto').exec(function (err, cats) {
+        if(err){
+            console.lor('Error ocuured', err)
+        }
+        else{
+            //need to filter (select) fields data only
+            sendJsonResponse(res, 220, cats)
+        }
+    })
+};
+
 //400 - error sendJsonResponse(res, 400,{"message":"error", "error":err})
 //401 - no params in request sendJsonResponse(res, 400,{"message":"no ID parameter(s) given","err":"missing parameters"})
 //404 - not found   sendJsonResponse(res,404,{"message":"no document with given ID was found"})

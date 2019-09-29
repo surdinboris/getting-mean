@@ -10,7 +10,7 @@ router.get('/cat', ctrlCats.catCreatePage);
 //router.post('/cats', ctrlCats.catCreateCommit);
 router.post('/cat', ctrlCats.childmodelCreateCommit);
 //to be implenented after modelassignment refactory to support both cats and locations
-//router.get('/assignCat',ctrlVolunteers.catAssignPage);
+router.get('/assignCat',ctrlCats.catAssignPage);
 //router.post('/assignCat', ctrlVolunteers.catAssignCommit);
 
 /* Other pages */

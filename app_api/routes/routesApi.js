@@ -27,11 +27,14 @@ router.put('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersUpdateOne); //done
 router.delete('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersDeleteOne); //done
+
 //cats
 router.get('/cat/schema',ctrlCats.catSchema);
 
 //cat creation
 router.post('/cats', ctrlCats.catsCreate); //done
+router.get('/cats', ctrlCats.catsReadAll); //done
+
 router.get('/locations/:locationid/cats',
     ctrlCats.catsByLocation); //done
 router.get('/locations/:locationid/cats/:catid',

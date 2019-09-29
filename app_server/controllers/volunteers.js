@@ -49,8 +49,6 @@ module.exports.volunteerAssignPage = function (req, res){
 module.exports.volunteerAssignCommit = function(req,res) {
     //creating preconfiguder object
     let requestResolver = new contrlib.modelAssignCommit(req, res);
-    console.log('--=-=-=-=-=--',requestResolver);
-    console.log('--=-=-=-=-=--',requestResolver.renderExec.toString());
     requestResolver.renderExec(req,res)
     //return new contrlib.modelAssignCommit(req, res);
 };
