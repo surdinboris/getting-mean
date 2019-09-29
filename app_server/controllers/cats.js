@@ -81,8 +81,8 @@ module.exports.catAssignPage = function (req, res){
                 method: 'get',
                 json: {}
             },
-            function (err, apiResp, volsBody) {
+            function (err, apiResp, catsBody) {
                 //res.end(JSON.stringify(locsBody.concat(volsBody)));
-                res.render('volunteer-assign-view.jade',{pageHeader:{title: 'Assign Cat'}, defloc:locationname, locations:locsBody, volunteers:volsBody})
+                res.render('cat-assign-view.jade',{pageHeader:{title: 'Assign Cat'}, defloc:locationname, locations:locsBody, cats:catsBody})
             });
     })};

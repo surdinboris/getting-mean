@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .row.page-header: .col-lg-12
+        h1= pageHeader.title
+        form(action='/assignVolunteer', method= "post",  role="form")
+            .row
+                .col-xs-12.col-sm-6
+                    div.locUpdContainer
+                        select(name='location')
+                            each loc in locations
+                                - var equal = defloc == loc.name
+                                if equal
+                                    option(value="#{loc._id}" selected) #{loc.name}
+                                else
+                                     option(value="#{loc._id}") #{loc.name}
+                .col-xs-12.col-sm-6
+                    div.volUpdContainer
+                        select(name='cats')
+                            each cat in cats
+                                option(value="#{cat._id}") #{cat.catName}
+            .row
+                .col-xs-12.col-sm-6
+                    div
+                        button.btn.btn-default(type='submit') Submit
