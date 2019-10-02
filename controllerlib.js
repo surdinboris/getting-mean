@@ -31,10 +31,11 @@ module.exports.modelAssignCommit = function (req,res) {
             model = 'cat'
         }
 
-        this.model=model;
-        this.renderExec = function (req, res) {
+        //this.model=model;
 
-                let attachModel = req.body[model];
+        this.renderExec = function (req, res) {
+                //inconsistent between submods!
+                let attachModel = req.body[model + 's'];
 
                 let locationid = req.body.location;
 
@@ -54,6 +55,7 @@ module.exports.modelAssignCommit = function (req,res) {
                     if (locModsUpdated.indexOf(attachModel) < 0) {
                         locModsUpdated.push(attachModel);
                     }
+                    console.log('++++contrlib mods updated',  req.body[model+'s'], '---', locModsUpdated.toString());
 
                     //third - attach this id to location object
                     request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
