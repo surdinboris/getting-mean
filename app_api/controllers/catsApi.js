@@ -16,7 +16,7 @@ module.exports.catsReadAll=function (req,res) {
 
     }).select('-catPhoto').exec(function (err, cats) {
         if(err){
-            console.lor('Error ocuured', err)
+            console.log('Error ocuured', err)
         }
         else{
             //need to filter (select) fields data only

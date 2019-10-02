@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= title
+  p This page will display a resized image.
+  each thumb in thumbs
+    img(src="data:image/jpeg;base64,#{thumb}")
