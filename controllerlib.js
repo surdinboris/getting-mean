@@ -30,6 +30,7 @@ module.exports.modelAssignCommit = function (req,res) {
         else if (req.url.replace('/', '') == 'assignCat') {
             model = 'cat'
         }
+
         this.model=model;
         this.renderExec = function (req, res) {
 

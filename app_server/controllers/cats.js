@@ -86,3 +86,10 @@ module.exports.catAssignPage = function (req, res){
                 res.render('cat-assign-view.jade',{pageHeader:{title: 'Assign Cat'}, defloc:locationname, locations:locsBody, cats:catsBody})
             });
     })};
+
+module.exports.catAssignCommit = function(req,res) {
+    //creating preconfiguder object
+    let requestResolver = new contrlib.modelAssignCommit(req, res);
+    requestResolver.renderExec(req,res)
+    //return new contrlib.modelAssignCommit(req, res);
+};
