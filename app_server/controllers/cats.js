@@ -6,6 +6,24 @@ if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
 
+
+module.exports.getCatPhotos = function(req, res) {
+
+    let catid = req.params.catid;
+    request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
+        method: 'get',
+        json: {}
+    }, function (err, ApiResp, resBody) {
+        if (err) {
+            console.log(err)
+        }
+        else
+            res.end(resBody)
+    })
+};
+
+
+
 //get new empty handler
 module.exports.catCreatePage = function (req, res) {
     //schema request to dynamically get fields for current schema and generate  creation page
@@ -32,7 +50,6 @@ module.exports.childmodelCreateCommit = function (req, resp) {
     let modpath=url.parse(req.url).pathname.replace('/','');
     let childmodel= modpath+'s';
     let locationid = req.query.locationid;
-    console.log('cat to be appended to location', req.query.locationid);
     //first - adding new cat and get its id
     request(url.resolve(ApiOptions.server, `api/${childmodel}/`), {
         method: 'post',

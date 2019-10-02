@@ -25,7 +25,7 @@ let attachSubModelsToLocation = function(location, model) {
     return new Promise(function (resolve, reject) {
         let subModsList = location[model].map(function (submodel) {
             return new Promise(function (resolve2, reject2) {
-                mongoose.model(model).findOne({_id: submodel}, function (err, subobj) {
+                mongoose.model(model).findOne({_id: submodel}).select('-catPhoto, -volunteerPhoto').exec(function (err, subobj) {
 
                     if (err) {
                         reject2('DB request failed for one of locations submodel ID ', err)
@@ -170,7 +170,6 @@ module.exports.locationsUpdateOne = function (req, res) {
             }
 
             req.body.rating ? location.name = req.body.rating : null;
-            console.log('>>>>>>>>> req cats arrived to update', req.body.cats );
             if(req.body.cats && req.body.cats != 'no cats') {
                 location.cats = req.body.cats.split(",");
             }

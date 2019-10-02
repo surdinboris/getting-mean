@@ -36,6 +36,9 @@ router.post('/assignVolunteer', ctrlVolunteers.volunteerAssignCommit);
 
 //data manipulation
 
-
+//photos
+//router.get('/photos/volunteers/:volunteerid', ctrlVolunteers.getVolunteerPhotos);
+router.get('/photos/cats/:catid', ctrlCats.getCatPhotos);
+//router.get('/photos/cats/:volid', ctrlCats.getVolPhotos);
 
 module.exports = router;

@@ -2,6 +2,8 @@ let express = require('express');
 let router = express.Router();
 let ctrlLocations = require('../controllers/locationsApi');
 let ctrlVolunteers = require('../controllers/volunteersApi');
+let ctrlPhotos = require('../controllers/photosApi');
+
 let ctrlCats = require('../controllers/catsApi');
 // locations
 router.get('/locations', ctrlLocations.locationsListByDistance); //done
@@ -43,5 +45,8 @@ router.put('/locations/:locationid/cats/:catid',
     ctrlCats.catsUpdateOne); //done
 router.delete('/locations/:locationid/cats/:catid',
     ctrlCats.catsDeleteOne); //done
+
+router.get('/cat-photos/:modid', ctrlPhotos.getModPhotos);
+router.get('/volunteer-photos/:modid', ctrlPhotos.getModPhotos);
 
 module.exports = router;

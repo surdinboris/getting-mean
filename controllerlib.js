@@ -55,7 +55,6 @@ module.exports.modelAssignCommit = function (req,res) {
                     if (locModsUpdated.indexOf(attachModel) < 0) {
                         locModsUpdated.push(attachModel);
                     }
-                    console.log('++++contrlib mods updated',  req.body[model+'s'], '---', locModsUpdated.toString());
 
                     //third - attach this id to location object
                     request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
