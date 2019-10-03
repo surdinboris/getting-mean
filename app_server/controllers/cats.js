@@ -7,23 +7,6 @@ if (process.env.NODE_ENV == 'production') {
 }
 
 
-module.exports.getCatPhotos = function(req, res) {
-    let catid = req.params.catid;
-    request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
-        method: 'get',
-        json: {}
-    }, function (err, ApiResp, resBody) {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            let picts = resBody.map(function (tumb) {
-                return Buffer.from(tumb.imageData.data).toString('base64');
-            });
-            res.render('photo-gallery', {thumbs: picts})
-        }
-    })
-};
 
 
 

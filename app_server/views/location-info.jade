@@ -66,8 +66,10 @@ block content
                   .cat
                     .well.well-sm.cat-header
                       span.rating
+                      img(src="/photos/cats/#{cat._id}/avatar")
                       p.authorBig #{cat.catName}
                       p #{cat.catChipNumber}
+                      a(href="/photos/cats/#{cat._id}") View cat's gallery
                       .actions-container
                           a.btn.btn-danger.btn-sm(href="/cats/#{cat._id}") Edit cat
                           a.btn.btn-primary.btn-sm(href="/cats/#{location._id}?action=unsubscribeCat&locationid=#{location._id}&catid=#{cat._id}") Unassign
