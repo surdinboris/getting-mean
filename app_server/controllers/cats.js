@@ -7,14 +7,34 @@ if (process.env.NODE_ENV == 'production') {
 }
 
 
+let catEditTitle= 'Cat edit page';
 
+//get handler
+module.exports.catEditPage = function (req, res){
+    let catid=req.params.catid;
+    //api request by id ...
+    request(url.resolve(ApiOptions.server,"api/cats/"+catid), {method: 'get',
+        json: {}} ,function (err, apiResp, body) {
+        res.render("cat-edit.jade", {pageHeader:{title: catEditTitle},formAction:body._id, volunteer:body})
+    })
+};
+
+//put (change) handler
+module.exports.catEditCommit=function (req, res){
+    let catid=req.params.catid;
+    //api request by id ...
+    request(url.resolve(ApiOptions.server,"api/cats/"+catid),{method: 'put', json: req.body},
+        function (err, apiResp, body) {
+            res.render("cat-edit.jade", {pageHeader:{title: catEditTitle}, formAction:body._id, volunteer:body})
+        } )
+};
 
 
 //get new empty handler
 module.exports.catCreatePage = function (req, res) {
     //schema request to dynamically get fields for current schema and generate  creation page
     contrlib.requestDbSchema("cat",ApiOptions).then(fieldsObj=>{
-        res.render("cat-edit.jade", {pageHeader:{title: 'Cat edit page'}, formAction:'', cat:fieldsObj})
+        res.render("cat-edit.jade", {pageHeader:{title: catEditTitle}, formAction:'', cat:fieldsObj})
     }).catch(err=> res.end(err.toString()));
 };
 

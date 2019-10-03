@@ -186,36 +186,57 @@ module.exports.catsCreate=function (req,res) {
 // };
 module.exports.catsReadOne=function (req, res) {
 
-    if(req.params && req.params.locationid && req.params.catid){
-        let locId=req.params.locationid;
-        let catId = req.params.catid;
+        if(req.params && req.params.catid){
+            let catid=req.params.catid;
 
-        Loc.findOne({_id: locId}).select("name cats").exec( function (err, location) {
-            if(!location) {
-                ErrCodesActions[404](res)
-            }
-            else if (err) {
-                ErrCodesActions[400](res,err)
-            }
-            else {
-                let response, cat;
-                cat = location.cats.id(catId);
-                if(!cat) {
+            Cat.findOne({_id: catid}, function (err, cat) {
+
+                if (err) {
+                    ErrCodesActions[400](res,err)
+                }
+                else if(!cat){
                     ErrCodesActions[404](res)
                 }
-                else{
-
-                    sendJsonResponse(res, 200, cat);
+                else {
+                    sendJsonResponse(res, 220, cat)
                 }
-            }
-        });
+            });
+        }
+        else {
+            ErrCodesActions[400](res, err)
+        }
 
-
-    }
-    else {
-
-        ErrCodesActions[401](res)
-    }
+    //
+    // if(req.params && req.params.locationid && req.params.catid){
+    //     let locId=req.params.locationid;
+    //     let catId = req.params.catid;
+    //
+    //     Loc.findOne({_id: locId}).select("name cats").exec( function (err, location) {
+    //         if(!location) {
+    //             ErrCodesActions[404](res)
+    //         }
+    //         else if (err) {
+    //             ErrCodesActions[400](res,err)
+    //         }
+    //         else {
+    //             let response, cat;
+    //             cat = location.cats.id(catId);
+    //             if(!cat) {
+    //                 ErrCodesActions[404](res)
+    //             }
+    //             else{
+    //
+    //                 sendJsonResponse(res, 200, cat);
+    //             }
+    //         }
+    //     });
+    //
+    //
+    // }
+    // else {
+    //
+    //     ErrCodesActions[401](res)
+    // }
 
 };
 module.exports.catsUpdateOne=function (req,res) {

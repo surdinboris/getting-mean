@@ -66,8 +66,9 @@ block content
                   .cat
                     .well.well-sm.cat-header
                       span.rating
-                      img(src="/photos/cats/#{cat._id}/avatar")
-                      p.authorBig #{cat.catName}
+                      .heading
+                         img.catavatar(src="/photos/cats/#{cat._id}/avatar")
+                         b.authorBig &nbsp #{cat.catName}
                       p #{cat.catChipNumber}
                       a(href="/photos/cats/#{cat._id}") View cat's gallery
                       .actions-container

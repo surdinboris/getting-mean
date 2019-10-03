@@ -39,10 +39,9 @@ router.get('/cats', ctrlCats.catsReadAll); //done
 
 router.get('/locations/:locationid/cats',
     ctrlCats.catsByLocation); //done
-router.get('/locations/:locationid/cats/:catid',
-    ctrlCats.catsReadOne); //done
-router.put('/locations/:locationid/cats/:catid',
-    ctrlCats.catsUpdateOne); //done
+router.get('/cats/:catid', ctrlCats.catsReadOne); //done
+router.put('/cats/:catid', ctrlCats.catsUpdateOne); //done
+
 router.delete('/locations/:locationid/cats/:catid',
     ctrlCats.catsDeleteOne); //done
 
