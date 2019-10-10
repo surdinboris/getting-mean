@@ -35,8 +35,6 @@ router.post('/volunteer', ctrlVolunteers.childmodelCreateCommit);
 router.get('/assignVolunteer',ctrlVolunteers.volunteerAssignPage);
 router.post('/assignVolunteer', ctrlVolunteers.volunteerAssignCommit);
 
-
-
 //data manipulation
 
 //photos

@@ -43,9 +43,7 @@ module.exports.modelAssignCommit = function (req,res) {
         this.renderExec = function (req, res) {
                 //inconsistent between submods!
                 let attachModel = req.body[model + 's'];
-
                 let locationid = req.body.location;
-
                 request(url.resolve(ApiOptions.server, "api/locations/" + locationid), {
                     method: 'get',
                     json: {}
