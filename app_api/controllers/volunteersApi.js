@@ -50,11 +50,11 @@ module.exports.volunteersCreate=function (req,res) {
 //     return fields
 // };
 
-module.exports.volunteerSchema=function (req,res) {
-    let fields = apilib.responseDbSchema(req,res,'volunteers');
-
-    sendJsonResponse(res, 220, fields)
-};
+// module.exports.volunteerSchema=function (req,res) {
+//     let fields = apilib.responseDbSchema(req,res,'volunteers');
+//
+//     sendJsonResponse(res, 220, fields)
+// };
 
 
 module.exports.volunteersReadAll=function (req,res) {
@@ -78,6 +78,7 @@ module.exports.volunteersReadOne=function (req,res) {
                 ErrCodesActions[404](res)
             }
             else {
+                //volunteer=apilib.dbFilter(volunteer,['_id','__v']);
                 sendJsonResponse(res, 220, volunteer)
             }
         });

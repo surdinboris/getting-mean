@@ -11,6 +11,7 @@ module.exports.requestDbSchema= function(dbmodel, ApiOptions){
             reject(err)
         }
         let fieldsObj = {};
+        console.log('got fieldslist', fieldslist);
         fieldslist.forEach(function (field) {
             fieldsObj[field] = ''
         });
@@ -18,6 +19,8 @@ module.exports.requestDbSchema= function(dbmodel, ApiOptions){
     })
     })
 };
+
+
 //returns precofigured constructor with
 module.exports.modelAssignCommit = function (req,res) {
 
@@ -71,6 +74,20 @@ module.exports.modelAssignCommit = function (req,res) {
             }
         };
 
+//filter passed object's fields based on filteredFields array  content
+module.exports.dbFilter= function (obj,  filteredFields){
+    let result = {};
+    //if filteredFields provided - working based on this array, lse requestdbschema for model
+
+    obj= JSON.parse(JSON.stringify(obj));
+    Object.keys(obj).forEach(function (item) {
+        if (filteredFields.indexOf(item) == -1) {
+            result[item] = obj[item]
+        }
+
+    });
+    return result
+};
 // module.exports.modelAssignCommit = function (req,res) {
 //
 //     return function (req,res) {

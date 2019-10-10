@@ -12,6 +12,7 @@ let fs = require('fs');
 // let ApiOptions = {server:"http://localhost:3000"};
 
 
+
 module.exports.catsReadAll=function (req,res) {
 
 
@@ -202,9 +203,10 @@ module.exports.catsReadOne=function (req, res) {
                 }
                 else {
                     //filter here unnessesary fields
-                    cat=JSON.parse(JSON.stringify(cat));
-                    console.log('to be filtered', cat);
-                    cat.
+
+
+
+                    //cat= apilib.dbFilter(cat,catFilteredFields);
                     sendJsonResponse(res, 220, cat)
                 }
             });
@@ -379,13 +381,12 @@ module.exports.catsUpdateOne = function (req,res) {
 
 
                 });
-                console.log(cat);
                 //cat.catDescription = req.body.catDescription;
                 cat.save(function(err, savedcat) {
                     if (err) {
                         ErrCodesActions[400](res,err)
                     } else {
-
+                        //savedcat= apilib.dbFilter(savedcat,catFilteredFields);
                         sendJsonResponse(res, 200, savedcat);
                     }
                 });
