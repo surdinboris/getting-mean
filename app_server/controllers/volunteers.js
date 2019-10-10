@@ -15,7 +15,8 @@ module.exports.volunteerEditPage = function (req, res){
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid), {method: 'get',
         json: {}} ,function (err, apiResp, body) {
-        body= contrlib.dbFilter(body,['_id','__v']);
+        let volFilteredFields =['_id','__v'];
+        body= contrlib.dbFilter(body, 'volunteers');
         res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle},formAction:volid, volunteer:body})
     })
 };
@@ -25,7 +26,8 @@ module.exports.volunteerEditCommit=function (req, res){
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/volunteers/"+volid),{method: 'put', json: req.body},
         function (err, apiResp, body) {
-            body= contrlib.dbFilter(body,['_id','__v']);
+            let volFilteredFields =['_id','__v'];
+            body= contrlib.dbFilter(body,'volunteers');
             res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:volid, volunteer:body})
         } )
 };
@@ -73,7 +75,7 @@ module.exports.volunteerAssignCommit = function(req,res) {
 //get new empty handler
 module.exports.volunteerCreatePage = function (req, res) {
     //schema request to dynamically get fields for current schema and generate  creation page
-    console.log('requesting volunteer schema');
+    //console.log('requesting volunteer schema');
     contrlib.requestDbSchema("volunteers",ApiOptions).then(fieldsObj=>{
         res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:'', volunteer:fieldsObj})
     }).catch(err=> res.end(err.toString()));

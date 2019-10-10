@@ -4,6 +4,10 @@ let ApiOptions = {server:"http://localhost:3000"};
 if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
+
+let genericFilteredFields =['_id','__v'];
+let catFilteredFields=['catPhoto'];
+
 //empty schema request
 module.exports.requestDbSchema= function(dbmodel, ApiOptions){
     return new Promise(function(resolve,reject){request(url.resolve(ApiOptions.server,"api/"+dbmodel+"/schema"), { method: 'get',json:{}}, function (err,apiResp, fieldslist) {
@@ -75,19 +79,21 @@ module.exports.modelAssignCommit = function (req,res) {
         };
 
 //filter passed object's fields based on filteredFields array  content
-module.exports.dbFilter= function (obj,  filteredFields){
+module.exports.dbFilter= function (obj, model, filteredFields=null){
+    if (!filteredFields){
+    model == 'cats'? filteredFields = genericFilteredFields.concat(catFilteredFields):filteredFields = genericFilteredFields;
+    }
     let result = {};
     //if filteredFields provided - working based on this array, lse requestdbschema for model
-
     obj= JSON.parse(JSON.stringify(obj));
     Object.keys(obj).forEach(function (item) {
         if (filteredFields.indexOf(item) == -1) {
             result[item] = obj[item]
         }
-
     });
     return result
 };
+
 // module.exports.modelAssignCommit = function (req,res) {
 //
 //     return function (req,res) {
