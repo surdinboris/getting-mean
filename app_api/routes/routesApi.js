@@ -10,8 +10,10 @@ router.get('/locations', ctrlLocations.locationsListByDistance); //done
 router.get('/locations/all', ctrlLocations.locationsList); //done
 router.post('/locations', ctrlLocations.locationsCreate); //done
 //schema requests
-router.get('/volunteer/schema', ctrlVolunteers.volunteerSchema); //done
-router.get('/location/schema', ctrlLocations.locationSchema); //done
+//router.get('/volunteer/schema', ctrlVolunteers.volunteerSchema); //done
+router.get('/:model/schema', ctrlLocations.getModelSchema); //shared for all models - putted in locations controller
+
+//router.get('/cat/schema',ctrlCats.catSchema);
 
 router.get('/locations/:locationid', ctrlLocations.locationsReadOne); //done
 router.get('/locations/:locationid/volunteers', ctrlLocations.getVolunteersByLocId); //done
@@ -30,8 +32,7 @@ router.put('/volunteers/:volunteerid',
 router.delete('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersDeleteOne); //done
 
-//cats
-router.get('/cat/schema',ctrlCats.catSchema);
+
 
 //cat creation
 router.post('/cats', ctrlCats.catsCreate); //done

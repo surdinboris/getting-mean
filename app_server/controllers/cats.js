@@ -15,7 +15,7 @@ module.exports.catEditPage = function (req, res){
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/cats/"+catid), {method: 'get',
         json: {}} ,function (err, apiResp, body) {
-        res.render("cat-edit.jade", {pageHeader:{title: catEditTitle},formAction:body._id, volunteer:body})
+        res.render("cat-edit.jade", {pageHeader:{title: catEditTitle},formAction:body._id, cat:body})
     })
 };
 
@@ -25,7 +25,7 @@ module.exports.catEditCommit=function (req, res){
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/cats/"+catid),{method: 'put', json: req.body},
         function (err, apiResp, body) {
-            res.render("cat-edit.jade", {pageHeader:{title: catEditTitle}, formAction:body._id, volunteer:body})
+            res.render("cat-edit.jade", {pageHeader:{title: catEditTitle}, formAction:body._id, cat:body})
         } )
 };
 
@@ -116,3 +116,5 @@ module.exports.catAssignCommit = function(req,res) {
     requestResolver.renderExec(req,res)
     //return new contrlib.modelAssignCommit(req, res);
 };
+
+

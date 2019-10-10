@@ -14,6 +14,7 @@ router.post('/cat', ctrlCats.childmodelCreateCommit);
 router.get('/assignCat',ctrlCats.catAssignPage);
 router.post('/assignCat', ctrlCats.catAssignCommit);
 router.get('/cats/:catid', ctrlCats.catEditPage);
+router.post('/cats/:catid',  ctrlCats.catEditCommit);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);

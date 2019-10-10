@@ -95,11 +95,18 @@ let attachSubModelsToLocation = function(location, model) {
 //     sendJsonResponse(res, 220, fields)
 // };
 
-module.exports.locationSchema=function (req,res) {
-    let fields = apilib.responseDbSchema(req,res,'locations');
+// module.exports.locationSchema=function (req,res) {
+//     let fields = apilib.responseDbSchema(req,res,'locations');
+//
+//     sendJsonResponse(res, 220, fields)
+// };
 
+module.exports.getModelSchema=function (req,res) {
+    let model = req.params.model;
+    let fields = apilib.responseDbSchema(req,res,model);
     sendJsonResponse(res, 220, fields)
 };
+
 
 module.exports.locationsCreate = function (req, res) {
     console.log('location create arrived data',req.body);

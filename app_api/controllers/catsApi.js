@@ -7,6 +7,9 @@ let sendJsonResponse = function(res, status, content) {
     res.json(content);
 };
 let fs = require('fs');
+// let request = require('request');
+// let url = require('url');
+// let ApiOptions = {server:"http://localhost:3000"};
 
 
 module.exports.catsReadAll=function (req,res) {
@@ -198,6 +201,10 @@ module.exports.catsReadOne=function (req, res) {
                     ErrCodesActions[404](res)
                 }
                 else {
+                    //filter here unnessesary fields
+                    cat=JSON.parse(JSON.stringify(cat));
+                    console.log('to be filtered', cat);
+                    cat.
                     sendJsonResponse(res, 220, cat)
                 }
             });
@@ -239,54 +246,53 @@ module.exports.catsReadOne=function (req, res) {
     // }
 
 };
-module.exports.catsUpdateOne=function (req,res) {
-
-    if(req.params && req.params.locationid && req.params.catid){
-        let locId = req.params.locationid;
-        let catId = req.params.catid;
-
-        Loc.findOne({_id: locId}).select("name cats").exec( function (err, location) {
-            if(!location) {
-                ErrCodesActions[404](res)
-            }
-            else if (err) {
-                ErrCodesActions[400](res,err);
-            }
-
-            else {
-                let thisCat = location.cats.id(catId);
-                if(!thisCat){
-                    ErrCodesActions[404](res);
-                    return
-                } else {
-                    //refactor to dynamic requesting fields accordingly to db schema
-                        thisCat.catName= req.body.catName;
-                        thisCat.catAge= req.body.catAge;
-                        thisCat.catChipNumber= req.body.catChipNumber;
-                        thisCat.catColor= req.body.catColor;
-                        thisCat.catWeight= req.body.catWeight;
-                        thisCat.catDescription= req.body.catDescription;
-                        thisCat.catGender= req.body.catGender;
-                        thisCat.catPhoto= req.body.catPhoto;
-                    location.save(function(err, savedData) {
-                        if (err) {
-                            ErrCodesActions[400](res,err)
-                        } else {
-                            console.log(location);
-                            //updateAverageRating(savedlocation._id);
-                            sendJsonResponse(res, 200, thisCat);
-                        }
-                    });
-                }
-
-            }
-
-        });
-    }
-    else {
-        ErrCodesActions[401](res)
-    }
-};
+// module.exports.catsUpdateOne=function (req,res) {
+//     if(req.params && req.params.locationid && req.params.catid){
+//         let locId = req.params.locationid;
+//         let catId = req.params.catid;
+//
+//         Loc.findOne({_id: locId}).select("name cats").exec( function (err, location) {
+//             if(!location) {
+//                 ErrCodesActions[404](res)
+//             }
+//             else if (err) {
+//                 ErrCodesActions[400](res,err);
+//             }
+//
+//             else {
+//                 let thisCat = location.cats.id(catId);
+//                 if(!thisCat){
+//                     ErrCodesActions[404](res);
+//                     return
+//                 } else {
+//                     //refactor to dynamic requesting fields accordingly to db schema
+//                         thisCat.catName= req.body.catName;
+//                         thisCat.catAge= req.body.catAge;
+//                         thisCat.catChipNumber= req.body.catChipNumber;
+//                         thisCat.catColor= req.body.catColor;
+//                         thisCat.catWeight= req.body.catWeight;
+//                         thisCat.catDescription= req.body.catDescription;
+//                         thisCat.catGender= req.body.catGender;
+//                         thisCat.catPhoto= req.body.catPhoto;
+//                     location.save(function(err, savedData) {
+//                         if (err) {
+//                             ErrCodesActions[400](res,err)
+//                         } else {
+//                             console.log(location);
+//                             //updateAverageRating(savedlocation._id);
+//                             sendJsonResponse(res, 200, thisCat);
+//                         }
+//                     });
+//                 }
+//
+//             }
+//
+//         });
+//     }
+//     else {
+//         ErrCodesActions[401](res)
+//     }
+// };
 
 module.exports.catsDeleteOne=function (req,res) {
 
@@ -327,4 +333,70 @@ module.exports.catsDeleteOne=function (req,res) {
 
         ErrCodesActions[401](res)
     }
+};
+
+// let requestDBSchema= function(dbmodel){
+//     return new Promise(function(resolve,reject){request(url.resolve(ApiOptions.server,"api/"+dbmodel+"/schema"), { method: 'get',json:{}}, function (err,apiResp, fieldslist) {
+//         if(err){
+//             reject(err)
+//         }
+//         let fieldsObj = {};
+//         fieldslist.forEach(function (field) {
+//             fieldsObj[field] = ''
+//         });
+//         resolve(fieldsObj)
+//     })
+//     })
+// };
+
+module.exports.catsUpdateOne = function (req,res) {
+
+    if(req.params &&  req.params.catid){
+        //let locId=req.params.locationid;
+        let catId = req.params.catid;
+        Cat.findOne({_id: catId}).exec(function (err,cat) {
+            if (!cat) {
+                sendJsonResponse(res, 404, {
+                    "message": "catid not found"
+                });
+
+            }
+            else if(err){
+                ErrCodesActions[400](res,err);
+            }
+
+
+            else { //request schema
+                // volunteer.volunteerName = req.body.volunteerName;
+                // volunteer.volunteerAddress= req.body.volunteerAddress;
+                // volunteer.active= req.body.active;
+                let fields = apilib.responseDbSchema(req,res,'cats');
+
+                //let newCat={};
+
+                fields.forEach(function (field) {
+                    req.body[field]? cat[field]=req.body[field]: null;
+
+
+                });
+                console.log(cat);
+                //cat.catDescription = req.body.catDescription;
+                cat.save(function(err, savedcat) {
+                    if (err) {
+                        ErrCodesActions[400](res,err)
+                    } else {
+
+                        sendJsonResponse(res, 200, savedcat);
+                    }
+                });
+            }
+
+        });
+
+    }
+    else {
+
+        ErrCodesActions[401](res)
+    }
+
 };
