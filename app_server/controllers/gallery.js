@@ -64,7 +64,7 @@ module.exports.getCatAvatar = function(req, res) {
             console.log('___',avatar);
             let ContentType =resBody[0].contentType;
             res.writeHead(200, {'Content-Type': ContentType});
-            res.end({avatar:avatar});
+            res.end(Buffer.from(avatar));
 
         }
     })
