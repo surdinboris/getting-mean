@@ -98,7 +98,7 @@ module.exports.locationInfo = function(req, res) {
     actionsHandler.unsubscribeCat=function (req,res,body) {
         return new Promise(function(resolve, reject) {
                 //retrieve current list of volunteers
-                let catsIdList= body.volunteers.map(function (cat) {
+                let catsIdList= body.cats.map(function (cat) {
                     return cat._id
                 });
                 let index=catsIdList.indexOf(req.query.catid);
