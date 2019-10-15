@@ -1,7 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p This page will display a resized image.
-  each thumb in thumbs
-    img(src="data:image/jpeg;base64,#{thumb}")
+    h1= title
+    .spacer
+        p Cat's gallery:
+    each thumb in thumbs
+        img(src="data:image/jpeg;base64,#{thumb.imageData.data}")
+        .photorow
+            a.btn.btn-primary.btn-sm(href="/editme/#{}") Remove photo
+
+    .spacer
+        p Upload new image:
+        form(method="post", enctype="multipart\/form-data", action="/nodejs-upload/")
+            p.imageupload
+                input(type="file", name="image")
+            p.imageupload
+                input(type="submit", value="Upload")

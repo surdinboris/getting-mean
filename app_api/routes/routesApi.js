@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 let ctrlLocations = require('../controllers/locationsApi');
 let ctrlVolunteers = require('../controllers/volunteersApi');
-let ctrlPhotos = require('../controllers/photosApi');
+let ctrlPhotos = require('../controllers/galleryApi');
 
 let ctrlCats = require('../controllers/catsApi');
 // locations

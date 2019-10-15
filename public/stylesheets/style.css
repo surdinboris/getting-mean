@@ -21,11 +21,11 @@ div.UpdContainer{
 }
 
 
-label,input {
-    width: 150px;
-    display: inline-block;
+/*label,input {*/
+    /*width: 150px;*/
+    /*display: inline-block;*/
 
-}
+/*}*/
 .savebutton{
     margin-top: 30px;
     width: 70px;
@@ -60,3 +60,17 @@ form{
     font-weight: bolder;
     color: #b5d0fa;
 }
+
+.spacer{
+    padding-top: 40px;
+}
+
+.photorow a{
+    margin-left: 0;
+    margin-top: 10px;
+}
+
+/*.imageupload label{*/
+    /*color: #8a1720;*/
+    /*width: 300px;*/
+/*}*/

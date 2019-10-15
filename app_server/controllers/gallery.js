@@ -18,10 +18,11 @@ module.exports.getCatPhotos = function(req, res) {
             console.log(err)
         }
         else {
-            let picts = resBody.map(function (tumb) {
-                return Buffer.from(tumb.imageData.data).toString('base64');
-            });
-            res.render('photo-gallery', {thumbs: picts})
+            // let picts = resBody.map(function (tumb) {
+            //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
+            // });
+            console.log(resBody);
+            res.render('photo-gallery', {thumbs:resBody})
         }
     })
 };
