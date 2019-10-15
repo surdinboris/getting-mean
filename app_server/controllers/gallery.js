@@ -59,10 +59,12 @@ module.exports.getCatAvatar = function(req, res) {
             console.log(err)
         }
         else {
+
             let avatar = resBody[0].imageData.data;
+            console.log('___',avatar);
             let ContentType =resBody[0].contentType;
             res.writeHead(200, {'Content-Type': ContentType});
-            res.end(Buffer.from(avatar));
+            res.end({avatar:avatar});
 
         }
     })

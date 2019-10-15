@@ -19,7 +19,9 @@ let catPhotoSchema = new mongoose.Schema({
     UplDate: {type: Date, default: Date.now},
     imageData: {type:'Buffer'},
     contentType:String,
-    comment: String
+    comment: String,
+    imgtype: String,
+    imgname: String
 });
 
 let catsListSchema = new mongoose.Schema({

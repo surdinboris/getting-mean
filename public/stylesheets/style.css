@@ -21,11 +21,11 @@ div.UpdContainer{
 }
 
 
-/*label,input {*/
-    /*width: 150px;*/
-    /*display: inline-block;*/
+.UpdContainer label,input {
+    width: 150px;
+    display: inline-block;
 
-/*}*/
+}
 .savebutton{
     margin-top: 30px;
     width: 70px;
