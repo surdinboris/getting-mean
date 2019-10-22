@@ -20,7 +20,7 @@ let sendJsonResponse = function (res, status, content) {
     res.json(content);
 };
 
-//resolving with full associated  volunteers object
+//resolving with full associated   object
 let attachSubModelsToLocation = function(location, model) {
     return new Promise(function (resolve, reject) {
         let subModsList = location[model].map(function (submodel) {
@@ -31,10 +31,25 @@ let attachSubModelsToLocation = function(location, model) {
                         reject2('DB request failed for one of locations submodel ID ', err)
                     }
 
-                    //throw theree all photos except first of if avatar field presented, leave only this photo
+                    //throw  all photos except first or, if avatar avatarId field presented, hook t this  specific                      photo - leave only this photo
+                    //regenerating object
+                    subobj=JSON.parse(JSON.stringify(subobj));
 
-                    if (model == 'cats'){
-                        console.log('--------- if avatar field presented, ',subobj);
+                    let found;
+                    if (subobj.avatarId){
+                        for(let ct of subobj.catPhoto){
+                            if (ct._id=subobj.avatarId){
+                                subobj.catPhoto=[ct];
+                                found=true;
+                                //console.log("found avatar for subobj",subobj.catName);
+                                break
+                            }
+                        }
+                    }
+                    //trimming array to return only first one as avatar to avoid memory pollution with full
+                    //gallery
+                    if(!found){
+                        subobj.catPhoto.length = 1;
                     }
 
                     resolve2(subobj)
