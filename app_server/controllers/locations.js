@@ -183,6 +183,7 @@ module.exports.locationInfo = function(req, res) {
                 img.imageData.data=Buffer.from(img.imageData.data).toString('base64')
             })
         });
+
         //executing action request if presented
         if(req.query.action && actionsHandler[req.query.action]){
            let handlerResult= actionsHandler[req.query.action](req,res,body);
