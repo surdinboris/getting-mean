@@ -51,6 +51,51 @@ module.exports.getModPhotos= function (req,res) {
     })
 };
 
+module.exports.setAvatarID= function (req,res) {
+    let modid=req.params.modid;
+
+    //determining-constructing model
+    let reqmodel = 'unknown model';
+
+    if (req.url.split('/')[1] == 'volunteer-photos') {
+        reqmodel = 'volunteers'
+    }
+    else if (req.url.split('/')[1] == 'cat-photos') {
+        reqmodel = 'cats'
+    }
+
+    mongoose.model(reqmodel).findOne({_id:modid}, function (err, cats) {
+
+    }).exec(function (err, cat) {
+        if(err){
+        }
+    }
+
+    )};
+
+
+module.exports.uploadPhotoToDB= function (req,res) {
+    let modid=req.params.modid;
+
+    //determining-constructing model
+    let reqmodel = 'unknown model';
+
+    if (req.url.split('/')[1] == 'volunteer-photos') {
+        reqmodel = 'volunteers'
+    }
+    else if (req.url.split('/')[1] == 'cat-photos') {
+        reqmodel = 'cats'
+    }
+
+    mongoose.model(reqmodel).findOne({_id:modid}, function (err, cats) {
+
+    }).exec(function (err, cat) {
+            if(err){
+            }
+        }
+
+    )};
+
 //
 // module.exports.getModPhotos= function (req,res) {
 //     let modid=req.params.modid;
