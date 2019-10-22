@@ -34,6 +34,7 @@ module.exports.getModPhotos= function (req,res) {
 
             let catPhotos = JSON.parse(JSON.stringify(cat.catPhoto));
             catPhotos.forEach(function(catPhoto){
+                //catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
                 catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
             });
 

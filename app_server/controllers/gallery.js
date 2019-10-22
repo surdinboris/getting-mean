@@ -27,8 +27,6 @@ module.exports.getCatPhotos = function(req, res) {
     })
 };
 
-
-
 module.exports.getVolunteerPhotos = function(req, res) {
     let volid = req.params.volid;
     request(url.resolve(ApiOptions.server, "api/cat-photos/" + volid), {
@@ -50,7 +48,6 @@ module.exports.getVolunteerPhotos = function(req, res) {
 module.exports.getCatAvatar = function(req, res) {
     let catid = req.params.catid;
     //add additional request parameter to get avatar (could be stored as metadata of image file and retrieved via api) now it's just a first picture of gallery array
-
     request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
         method: 'get',
         json: {}
@@ -59,13 +56,11 @@ module.exports.getCatAvatar = function(req, res) {
             console.log(err)
         }
         else {
-
             let avatar = resBody[0].imageData.data;
-            console.log('___',avatar);
+            //console.log('___',resBody[0].contentType);
             let ContentType =resBody[0].contentType;
             res.writeHead(200, {'Content-Type': ContentType});
-            res.end(Buffer.from(avatar));
-
+            res.end(avatar);
         }
     })
 };

@@ -104,6 +104,9 @@ module.exports.locationInfo = function(req, res) {
                 let index=catsIdList.indexOf(req.query.catid);
                 //in case of target cat was found in db, sending request to remove
                 let cats;
+
+
+
                 if(index > -1) {
                     catsIdList.splice(index, 1);
                     //this empty record  not make any sense for api to remove volunteer
@@ -112,8 +115,9 @@ module.exports.locationInfo = function(req, res) {
                         cats='no cats'
                     }
 
+
                     request(url.resolve(ApiOptions.server, 'api/locations/' + req.params.locationid), {
-                        method: 'put', json: {cats: catsIdList.toString()}
+                        method: 'put', json: {cats: catsIdList.toString(),}
                     }, function (err, apiResp, body) {
                         if (err) {
                             reject(err)
@@ -171,6 +175,14 @@ module.exports.locationInfo = function(req, res) {
         if (!body.length) {
             message = "No location with given ID";
         }
+        body=JSON.parse(JSON.stringify(body));
+
+        //decoding cats fetched from api
+        body.cats.forEach(function (cat) {
+           cat.catPhoto.forEach(function(img){
+                img.imageData.data=Buffer.from(img.imageData.data).toString('base64')
+            })
+        });
         //executing action request if presented
         if(req.query.action && actionsHandler[req.query.action]){
            let handlerResult= actionsHandler[req.query.action](req,res,body);
