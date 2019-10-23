@@ -75,8 +75,7 @@ module.exports.setAvatarID= function (req,res) {
 
 
 module.exports.uploadPhotoToDB= function (req,res) {
-    let modid=req.params.modid;
-
+    let modid = req.params.modid;
     //determining-constructing model
     let reqmodel = 'unknown model';
 
@@ -87,16 +86,18 @@ module.exports.uploadPhotoToDB= function (req,res) {
         reqmodel = 'cats'
     }
 
-    mongoose.model(reqmodel).findOne({_id:modid}, function (err, cats) {
+    //console.log('arrived photo for model', reqmodel,'=reqmodel', 'id=', modid);
 
-    }).exec(function (err, cat) {
-            console.log('arrived photo for model', cat, req.body.photo );
+    mongoose.model(reqmodel).findOne({_id: modid}, function (err, cat) {
+ //attach arrived photo to found cat here
+        console.log("~attach cat~",cat, req.body.images);
 
-        if(err){
-            }
+        if (err) {
         }
 
-    )};
+    })
+
+};
 
 //
 // module.exports.getModPhotos= function (req,res) {

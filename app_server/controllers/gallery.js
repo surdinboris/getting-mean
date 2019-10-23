@@ -19,28 +19,33 @@ module.exports.getCatPhotos = function(req, res) {
             // let picts = resBody.map(function (tumb) {
             //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
             // });
-            //console.log(resBody);
-            res.render('photo-gallery', {thumbs:resBody})
+            res.render('photo-gallery', {thumbs:resBody, catid:catid})
         }
     })
 };
 
 module.exports.uploadCatPhotos = function(req, res) {
- console.log('~upload request~',req.files.images);
+    //console.log('~upload request~', req.params.catid);
     let catid = req.params.catid;
-    if (req.files.images){
-        //fix different  typ list \ single object in case of multiple files
-        for(let file of req.files.images){
-            request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
-                method: 'put',
-                json: {'photo':file}
-        })
-
+    let images;
+    //fixing different  typ list \ single object in case of multiple files
+    req.files.images.constructor == Array? images=req.files.images : images=[req.files.images];
+    request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
+        method: 'put',
+        json: {'images': images}
+    }, function (err, ApiResp, resBody) {
+        if (err) {
+            console.log(err)
         }
-    }
-
+        else {
+            // let picts = resBody.map(function (tumb) {
+            //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
+            // });
+            //console.log(resBody);
+            res.render('photo-gallery', {thumbs: resBody})
+        }
+    })
 };
-
 //
 // module.exports.getVolunteerPhotos = function(req, res) {
 //     let volid = req.params.volid;

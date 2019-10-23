@@ -11,7 +11,7 @@ block content
 
     .spacer
         p Upload new image:
-        form(method="post", enctype="multipart/form-data", action="/photos/cats/:catid")
+        form(method="post", enctype="multipart/form-data", action="/photos/cats/#{catid}")
             p.imageupload
                 input(multiple="multiple", type="file", name="images")
             p.imageupload
