@@ -76,7 +76,7 @@ module.exports.setAvatarID= function (req,res) {
 
 
 module.exports.uploadPhotoToDB= function (req,res) {
-console.log('uploadPhotoToDB api/cat-photos/');
+
     let modid = req.params.modid;
     //determining-constructing model
     let reqmodel = 'unknown model';
@@ -92,7 +92,7 @@ console.log('uploadPhotoToDB api/cat-photos/');
 
     mongoose.model(reqmodel).findOne({_id: modid}, function (err, cat) {
  //attach arrived photo to found cat here
-        console.log("~attach cat~",cat, req.body.images);
+        console.log("~attach cat~",modid,cat, req.body.images);
 
         if (err) {
             console.log('error',err)

@@ -47,7 +47,7 @@ router.delete('/locations/:locationid/cats/:catid',
     ctrlCats.catsDeleteOne); //done
 
 router.get('/cat-photos/:modid', ctrlPhotos.getModPhotos);
-router.put('/cat-photos/:modid', ctrlPhotos.uploadPhotoToDB);
+router.post('/cat-photos/:modid', ctrlPhotos.uploadPhotoToDB);
 
 //router.get('/cat-photos/:modid/avatar', ctrlPhotos.getModPhotos);
 router.get('/volunteer-photos/:modid', ctrlPhotos.getModPhotos);

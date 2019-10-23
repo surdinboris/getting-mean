@@ -30,9 +30,9 @@ module.exports.uploadCatPhotos = function(req, res) {
     let images;
     //fixing different  typ list \ single object in case of multiple files
     req.files.images.constructor == Array? images=req.files.images : images=[req.files.images];
-
+    console.log('images',images);
     request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
-        method: 'put',
+        method: 'post',
         json: {'images': images}
     }, function (err, ApiResp, resBody) {
         if (err) {
