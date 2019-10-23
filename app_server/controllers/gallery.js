@@ -30,6 +30,7 @@ module.exports.uploadCatPhotos = function(req, res) {
     let images;
     //fixing different  typ list \ single object in case of multiple files
     req.files.images.constructor == Array? images=req.files.images : images=[req.files.images];
+
     request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
         method: 'put',
         json: {'images': images}
@@ -42,7 +43,8 @@ module.exports.uploadCatPhotos = function(req, res) {
             //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
             // });
             //console.log(resBody);
-            res.render('photo-gallery', {thumbs: resBody})
+            //res.render('photo-gallery', {thumbs: resBody})
+            res.end(resBody.toString())
         }
     })
 };
