@@ -90,7 +90,9 @@ module.exports.uploadPhotoToDB= function (req,res) {
     mongoose.model(reqmodel).findOne({_id:modid}, function (err, cats) {
 
     }).exec(function (err, cat) {
-            if(err){
+            console.log('arrived photo for model', cat, req.body.photo );
+
+        if(err){
             }
         }
 

@@ -33,10 +33,11 @@ let attachSubModelsToLocation = function(location, model) {
 
                     //throw  all photos except first or, if avatar avatarId field presented, hook t this  specific                      photo - leave only this photo
                     //regenerating object
-                    subobj=JSON.parse(JSON.stringify(subobj));
+                    //**implemented for cats only
 
+                    subobj=JSON.parse(JSON.stringify(subobj));
                     let found;
-                    if (subobj.avatarId){
+                    if (subobj.avatarId && subobj.catPhoto){
                         for(let ct of subobj.catPhoto){
                             if (ct._id=subobj.avatarId){
                                 subobj.catPhoto=[ct];
@@ -48,7 +49,7 @@ let attachSubModelsToLocation = function(location, model) {
                     }
                     //trimming array to return only first one as avatar to avoid memory pollution with full
                     //gallery
-                    if(!found){
+                    if(!found && subobj.catPhoto){
                         subobj.catPhoto.length = 1;
                     }
 

@@ -11,8 +11,8 @@ block content
 
     .spacer
         p Upload new image:
-        form(method="post", enctype="multipart\/form-data", action="/nodejs-upload/")
+        form(method="post", enctype="multipart/form-data", action="/photos/cats/:catid")
             p.imageupload
-                input(type="file", name="image")
+                input(multiple="multiple", type="file", name="images")
             p.imageupload
                 input(type="submit", value="Upload")

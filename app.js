@@ -6,6 +6,7 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+let fileUpload = require('express-fileupload');
 let routes = require('./app_server/routes/routes');
 let routesApi = require('./app_api/routes/routesApi');
 // let users = require('./app_server/routes/users');
@@ -22,6 +23,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
