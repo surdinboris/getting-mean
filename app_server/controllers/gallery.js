@@ -30,34 +30,83 @@ module.exports.uploadCatPhotos = function(req, res) {
     let images;
     //fixing different  typ list \ single object in case of multiple files
     req.files.images.constructor == Array? images=req.files.images : images=[req.files.images];
+    //at the moment only one image multi images will be mplemented via promise.all -> response to client request
 
-    let formData = {
-        image_file: {
-            value: images[0],
-            options: {
-                filename: 'image_file'
-            }
-        }
-    };
+    let uploadsResult= images.map(function (image) {
+        return new Promise(function(resolve,reject){
+            let formData = {
+                image_file: {
+                    value: images[0].data,
+                    options: {
+                        filename: images[0].name
+                    }
+                }
+            };
+            //change to promises
+            request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
+                method: 'post',
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                formData:formData,
+                //json: {}
+            }, function (err, ApiResp, resBody) {
+                if (err) {
+                    console.log(err);
+                    reject(err)
+                }
+                else {
+                    resolve({ApiResp:ApiResp,resBody:resBody})
+                    // let picts = resBody.map(function (tumb) {
+                    //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
+                    // });
+                    //console.log(resBody);
+                    //res.render('photo-gallery', {thumbs: resBody})
 
-    request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
-        method: 'post',
-        formData:formData,
-        json: {}
-    }, function (err, ApiResp, resBody) {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            // let picts = resBody.map(function (tumb) {
-            //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
-            // });
-            //console.log(resBody);
-            //res.render('photo-gallery', {thumbs: resBody})
-            res.end(resBody.toString())
-        }
-    })
+                }
+            })
+        })
+
+    });
+    console.log('check the promises', uploadsResult);
+    Promise.all(uploadsResult).then(result=>{
+        console.log(result);
+        res.end('file uploaded')
+    }).catch(err=>res.end(err))
 };
+
+//     let formData = {
+//         image_file: {
+//             value: images[0].data,
+//             options: {
+//                 filename: images[0].name
+//             }
+//         }
+//     };
+//     //change to promises
+//
+//     request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
+//         method: 'post',
+//         headers: {
+//             "Content-Type": "multipart/form-data"
+//         },
+//         formData:formData,
+//         //json: {}
+//     }, function (err, ApiResp, resBody) {
+//         if (err) {
+//             console.log(err)
+//         }
+//         else {
+//
+//             // let picts = resBody.map(function (tumb) {
+//             //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
+//             // });
+//             //console.log(resBody);
+//             //res.render('photo-gallery', {thumbs: resBody})
+//             res.end(resBody.toString())
+//         }
+//     })
+// };
 //
 // module.exports.getVolunteerPhotos = function(req, res) {
 //     let volid = req.params.volid;

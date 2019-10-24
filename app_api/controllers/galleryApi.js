@@ -88,15 +88,19 @@ module.exports.uploadPhotoToDB= function (req,res) {
         reqmodel = 'cats'
     }
 
-    console.log("~attach cat~", req.body.images);
+    //console.log("~attach cat~", req.files);
 
     mongoose.model(reqmodel).findOne({_id: modid}, function (err, cat) {
  //attach arrived photo to found cat here
        // console.log("~attach cat~",modid,cat, req.body.images);
 
         if (err) {
-            res.end('api error',err)
+            console.log('api error', err)
+            //res.end('api error',err)
         }
+        //do stuff
+        console.log("-=arrived file upload request=-");
+        res.end(cat.toString())
 
     })
 

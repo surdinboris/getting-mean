@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" />
       <change beforePath="$PROJECT_DIR$/app_server/controllers/gallery.js" afterPath="$PROJECT_DIR$/app_server/controllers/gallery.js" />
     </list>
@@ -34,21 +35,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="galleryApi.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="galleryApi.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app_api/controllers/galleryApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="94" column="9" lean-forward="false" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
+            <state relative-caret-position="440">
+              <caret line="101" column="55" lean-forward="false" selection-start-line="101" selection-start-column="55" selection-end-line="101" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gallery.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gallery.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_server/controllers/gallery.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="40" column="6" lean-forward="true" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+            <state relative-caret-position="348">
+              <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -188,8 +189,8 @@
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/app_api/routes/routesApi.js" />
         <option value="$PROJECT_DIR$/app_api/routes/routesApi.js" />
-        <option value="$PROJECT_DIR$/app_api/controllers/galleryApi.js" />
         <option value="$PROJECT_DIR$/app_server/controllers/gallery.js" />
+        <option value="$PROJECT_DIR$/app_api/controllers/galleryApi.js" />
       </list>
     </option>
   </component>
@@ -459,12 +460,12 @@
       <workItem from="1567966764548" duration="800000" />
       <workItem from="1568219104099" duration="7483000" />
       <workItem from="1569127787040" duration="141010000" />
-      <workItem from="1571731428885" duration="33631000" />
+      <workItem from="1571731428885" duration="41326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="535422000" />
+    <option name="totallyTimeSpent" value="543117000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="152" y="58" width="1590" height="989" extended-state="0" />
@@ -859,18 +860,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controllers/galleryApi.js">
+    <entry file="file://$PROJECT_DIR$/app_server/controllers/gallery.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="94" column="9" lean-forward="false" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
+        <state relative-caret-position="348">
+          <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_server/controllers/gallery.js">
+    <entry file="file://$PROJECT_DIR$/app_api/controllers/galleryApi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="40" column="6" lean-forward="true" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+        <state relative-caret-position="440">
+          <caret line="101" column="55" lean-forward="false" selection-start-line="101" selection-start-column="55" selection-end-line="101" selection-end-column="55" />
           <folding />
         </state>
       </provider>
