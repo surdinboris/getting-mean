@@ -68,9 +68,11 @@ module.exports.uploadCatPhotos = function(req, res) {
         })
 
     });
-    Promise.all(uploadsResult).then(resBody=>{
-        console.log('promise.all result ',resBody);
-        res.render('photo-gallery', {thumbs:resBody[-1], catid:catid})
+    Promise.all(uploadsResult).then(result=>{
+        //a little boilerplate to retrieve full response with all pictures, but leave it to furter improvement
+        //get   result of last promise
+        console.log('promise.all last result ',result[result.length-1].resBody);
+        res.render('photo-gallery', {thumbs:result[result.length-1].resBody.body, catid:catid})
     }).catch(err=>res.end(err))
 };
 
