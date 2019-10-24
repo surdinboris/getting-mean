@@ -33,7 +33,7 @@ let catsListSchema = new mongoose.Schema({
     catGender: {type:String, validate: /(male|female)$/},
     catDescription: String,
     catPhoto:[catPhotoSchema],
-    avatarID:{ type: [mongoose.Schema.Types.ObjectId]},
+    avatarID:{required:false, type: [mongoose.Schema.Types.ObjectId] },
     });
 
 let locationSchema = new mongoose.Schema({

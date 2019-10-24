@@ -98,11 +98,15 @@ function doAddCat (req, res) {
     });
     //in case of missing photo data
     if(req.body.catPhoto == '') {
+
         newCat.catPhoto={};
         //add request image parsing here
         newCat.catPhoto.imageData = fs.readFileSync('public/images/noimage.jpg');
         newCat.catPhoto.contentType = 'image/png';
         newCat.catPhoto.comment='no image';
+    }
+    if(newCat.avatarID == ''){
+        newCat.avatarID= undefined
     }
 
     Cat.create(
