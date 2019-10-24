@@ -92,7 +92,6 @@ module.exports.uploadPhotoToDB= function (req,res) {
 
     mongoose.model(reqmodel).findOne({_id: modid}, function (err, cat) {
  //attach arrived photo to found cat here
-       // console.log("~attach cat~",modid,cat, req.body.images);
 
         if (err) {
             console.log('api error', err)
@@ -100,7 +99,25 @@ module.exports.uploadPhotoToDB= function (req,res) {
         }
         //do stuff
         console.log("-=arrived file upload request=-");
-        res.end(cat.toString())
+        console.log("~attach cat~",modid,cat, req.files);
+        //db storing here
+
+        //responding
+        let catPhotos = JSON.parse(JSON.stringify(cat.catPhoto));
+        catPhotos.forEach(function(catPhoto){
+            //catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
+            catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
+        });
+
+        //imgdata:Buffer.from(tumb.imageData.data).toString('base64')
+        //need to filter (select) fields data only
+        //sendJsonResponse(res, 220, cats)
+        //  res.writeHead(200,{'Content-type':'image/jpg'});
+        // res.end(content);
+        //console.log(cat);
+        //   res.end(cat.catPhoto[0].imageData);
+
+        sendJsonResponse(res,220,catPhotos)
 
     })
 
