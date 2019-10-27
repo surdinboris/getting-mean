@@ -72,9 +72,6 @@ module.exports.uploadCatPhotos = function(req, res) {
         //a little boilerplate to retrieve full response with all pictures, but leave it to furter improvement
         //get   result of last promise
         result = JSON.parse(result[result.length-1].resBody);
-
-        console.log('promise.all last result ', result);
-
         res.render('photo-gallery', {thumbs:result, catid:catid})
     }).catch(err=>res.end(err))
 };
