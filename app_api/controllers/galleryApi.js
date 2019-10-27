@@ -71,12 +71,10 @@ module.exports.setAvatarID= function (req,res) {
         }
         console.log('error',err)
     }
-
     )};
 
 
 module.exports.uploadPhotoToDB= function (req,res) {
-
     let modid = req.params.modid;
     //determining-constructing model
     let reqmodel = 'unknown model';
@@ -87,28 +85,22 @@ module.exports.uploadPhotoToDB= function (req,res) {
     else if (req.url.split('/')[1] == 'cat-photos') {
         reqmodel = 'cats'
     }
-
     //console.log("~attach cat~", req.files);
-
-    mongoose.model(reqmodel).findOne({_id: modid}, function (err, cat) {
+    console.log("~~~",reqmodel,modid);
+    mongoose.model(reqmodel).findOne({_id: modid},function (err, cat) {}).select('catPhoto').exec(function (err, cat) {
  //attach arrived photo to found cat here
-
         if (err) {
             console.log('api error', err)
             //res.end('api error',err)
         }
         //do stuff
-        console.log("-=arrived file upload request=-");
-        console.log("~attach cat~",modid,cat, req.files);
         //db storing here
-
         //responding
         let catPhotos = JSON.parse(JSON.stringify(cat.catPhoto));
         catPhotos.forEach(function(catPhoto){
             //catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
             catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
         });
-
         //imgdata:Buffer.from(tumb.imageData.data).toString('base64')
         //need to filter (select) fields data only
         //sendJsonResponse(res, 220, cats)
@@ -116,10 +108,11 @@ module.exports.uploadPhotoToDB= function (req,res) {
         // res.end(content);
         //console.log(cat);
         //   res.end(cat.catPhoto[0].imageData);
-
         sendJsonResponse(res,220,catPhotos)
 
     })
+
+
 
 };
 
