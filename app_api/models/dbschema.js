@@ -51,3 +51,4 @@ let locationSchema = new mongoose.Schema({
 mongoose.model('locations',locationSchema);
 mongoose.model('volunteers', volunteerSchema);
 mongoose.model('cats', catsListSchema);
+mongoose.model('catphotos', catPhotoSchema);
