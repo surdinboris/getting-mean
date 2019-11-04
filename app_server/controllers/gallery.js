@@ -25,7 +25,10 @@ module.exports.getCatPhotos = function(req, res) {
     })
 };
 
-module.exports.uploadCatPhotos = function(req, res) {
+module.exports.uploadDeleteCatPhotos = function(req, res) {
+
+    //checking action needed (upload\delete)
+
     //console.log('~upload request~', req.params.catid);
     let catid = req.params.catid;
     let images;
@@ -63,7 +66,6 @@ module.exports.uploadCatPhotos = function(req, res) {
                     // });
                     //console.log(resBody);
                     //res.render('photo-gallery', {thumbs: resBody})
-
                 }
             })
         })
@@ -76,6 +78,7 @@ module.exports.uploadCatPhotos = function(req, res) {
         res.render('photo-gallery', {thumbs:result, catid:catid})
     }).catch(err=>res.end(err))
 };
+
 //     let formData = {
 //         image_file: {
 //             value: images[0].data,
