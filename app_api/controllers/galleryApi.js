@@ -100,6 +100,7 @@ module.exports.uploadPhotoToDB= function (req,res) {
         //console.log("---",cat.catPhoto);
 
         for(let file of Object.keys(req.files)){
+            //return promises as done in controller and afterwards sendresponse out of files loop
             //console.log("checkme", req.files[file]);
             let mimetype = req.files[file].mimetype;
             let buffdata= req.files[file].data;
