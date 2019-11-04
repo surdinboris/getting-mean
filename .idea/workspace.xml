@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/controllers/gallery.js" afterPath="$PROJECT_DIR$/app_server/controllers/gallery.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/routes/routes.js" afterPath="$PROJECT_DIR$/app_server/routes/routes.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,8 +26,8 @@
       <file leaf-file-name="catsApi.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_api/controllers/catsApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-738">
-              <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+            <state relative-caret-position="177">
+              <caret line="176" column="31" lean-forward="false" selection-start-line="176" selection-start-column="29" selection-end-line="176" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -38,8 +36,8 @@
       <file leaf-file-name="galleryApi.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app_api/controllers/galleryApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-89">
-              <caret line="101" column="20" lean-forward="false" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="20" />
+            <state relative-caret-position="153">
+              <caret line="77" column="37" lean-forward="false" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -127,7 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>+++</find>
       <find>cons</find>
       <find>conso</find>
       <find>req cats arrived to update</find>
@@ -157,6 +154,7 @@
       <find>save</find>
       <find>req.</find>
       <find>promise.all</find>
+      <find>up</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -357,6 +355,7 @@
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/gitrep/getting-mean/app_api/controllers/catsApi.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -502,12 +501,12 @@
       <workItem from="1572156887813" duration="24030000" />
       <workItem from="1572342544383" duration="3623000" />
       <workItem from="1572414135111" duration="206000" />
-      <workItem from="1572414707428" duration="17598000" />
+      <workItem from="1572414707428" duration="17996000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="597504000" />
+    <option name="totallyTimeSpent" value="597902000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="202" y="9" width="1609" height="1015" extended-state="0" />
@@ -895,6 +894,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/controllers/catsApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="176" column="31" lean-forward="false" selection-start-line="176" selection-start-column="29" selection-end-line="176" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app_server/controllers/gallery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-420">
@@ -903,18 +910,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controllers/catsApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-738">
-          <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_api/controllers/galleryApi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-89">
-          <caret line="101" column="20" lean-forward="false" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="20" />
+        <state relative-caret-position="153">
+          <caret line="77" column="37" lean-forward="false" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
           <folding />
         </state>
       </provider>

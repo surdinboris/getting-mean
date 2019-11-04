@@ -75,7 +75,7 @@ module.exports.setAvatarID= function (req,res) {
     }
     )};
 
-
+//!!!!!  same ID in database for all bench in case of multiple files upload
 module.exports.uploadPhotoToDB= function (req,res) {
     let modid = req.params.modid;
 
