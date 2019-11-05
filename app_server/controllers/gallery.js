@@ -36,20 +36,16 @@ module.exports.uploadCatPhotos = function(req, res) {
     req.files.images.constructor == Array? images=req.files.images : images=[req.files.images];
 
     //at the moment only one image multi images will be implemented via promise.all -> response to client request
-
-    let uploadsResult= images.map(function (image) {
-        console.log(">> image", image);
-        return new Promise(function(resolve,reject){
-            let formData = {
-                image_file: {
+    let formData = {};
+    images.forEach(function (image) {
+            formData[image.name] = {
                     value: image.data,
                     options: {
                         filename: image.name
                     }
-                }
+
             };
 
-            //change to promises
             request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
                 method: 'post',
                 headers: {
@@ -73,10 +69,7 @@ module.exports.uploadCatPhotos = function(req, res) {
             })
         })
 
-    });
-    console.log(">>> uplres",uploadsResult);
-
-    Promise.all(uploadsResult).then(result=>{
+    }).then(result=>{
 
         //a little boilerplate to retrieve full response with all pictures, but leave it to furter improvement
         //get   result of last promise
