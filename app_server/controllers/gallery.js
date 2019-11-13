@@ -37,8 +37,9 @@ module.exports.uploadCatPhotos = function(req, res) {
 
     //at the moment only one image multi images will be implemented via promise.all -> response to client request
     let formData = {};
-    images.forEach(function (image) {
-            formData[image.name] = {
+    let promisedUpload=images.forEach(function (image) {
+        return   new Promise(resolve,reject => )
+        formData[image.name] = {
                     value: image.data,
                     options: {
                         filename: image.name
@@ -71,7 +72,7 @@ module.exports.uploadCatPhotos = function(req, res) {
 
     }).then(result=>{
 
-        //a little boilerplate to retrieve full response with all pictures, but leave it to furter improvement
+        //a little boilerplate to retrieve full response with all pictures, but leave it to further improvement
         //get   result of last promise
         result = JSON.parse(result[result.length-1].resBody);
         res.render('photo-gallery', {thumbs:result, catid:catid})
