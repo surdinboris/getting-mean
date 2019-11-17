@@ -33,56 +33,59 @@ module.exports.uploadCatPhotos = function(req, res) {
     let catid = req.params.catid;
     let images;
     //fixing different  typ list \ single object in case of multiple files
-    req.files.images.constructor == Array? images=req.files.images : images=[req.files.images];
+    req.files.images.constructor == Array ? images = req.files.images : images = [req.files.images];
 
 
-    let promisedUpload=images.forEach(function (image) {
-
-        return new Promise(function(reslv,rejct){
+    let promisedUpload = images.map(function (image) {
+        return new Promise(function (resolve, reject) {
             //at the moment only one image multi images will be implemented via promise.all -> response to client request
             let formData = {};
 
-        formData[image.name] = {
-                    value: image.data,
-                    options: {
-                        filename: image.name
-                    }
-        };
+            formData[image.name] = {
+                value: image.data,
+                options: {
+                    filename: image.name
+                }
+            };
 
-        request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
-            method: 'post',
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
-            formData:formData,
-            //json: {}
-        }, function (err, ApiResp, resBody) {
-            if (err) {
-                console.log(err);
-                reject(err)
-            }
-            else {
-                resolve({ApiResp:ApiResp,resBody:resBody})
-                // let picts = resBody.map(function (tumb) {
-                //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
-                // });
-                //console.log(resBody);
-                //res.render('photo-gallery', {thumbs: resBody})
+            request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
+                method: 'post',
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                formData: formData,
+                //json: {}
+            }, function (err, ApiResp, resBody) {
+                if (err) {
+                    console.log('Error in promise while uploading via api', err);
+                    reject(err)
+                }
+                else {
+                    //to avoid unwanted photo data exchange while uploading many pictures, only
+                    //response will be returned from api and once all photos will be uploaded, full photo data will be fetched
+                    console.log('gallery upload api resp', ApiResp.statusCode, resBody);
+                    resolve({ApiResp: ApiResp.statusCode, resBody: resBody})
+                    // let picts = resBody.map(function (tumb) {
+                    //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
+                    // });
+                    //console.log(resBody);
+                    //res.render('photo-gallery', {thumbs: resBody})
                 }
             })
         })
-});
-
+    });
 
 Promise.all(promisedUpload).then(result=>{
-
+    //do any sort of validation with api requests
+    console.log(result, );
+    res.redirect(url.resolve(ApiOptions.server,req.url))
         //a little boilerplate to retrieve full response with all pictures, but leave it to further improvement
         //get   result of last promise
-        result = JSON.parse(result[result.length-1].resBody);
-        res.render('photo-gallery', {thumbs:result, catid:catid})
-    }).catch(err=>res.end(err))
+        // result = JSON.parse(result[result.length-1].resBody);
+        // res.render('photo-gallery', {thumbs:result, catid:catid})
+    //res.render('photo-gallery',{})
+    }).catch(err=>res.end('Error in promise.all while uploading via api: '+err))
 };
-
 
 //     let formData = {
 //         image_file: {
