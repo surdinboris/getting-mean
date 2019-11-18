@@ -126,8 +126,8 @@ module.exports.uploadPhotoToDB= function (req,res) {
                     console.log("arrived cat photos", catPhoto);
 
                     //check it and make async
-                    cat.catPhoto.push(catPhoto)
-
+                    cat.catPhoto.push(catPhoto);
+                    console.log("-=pushed cat=-", catPhoto);
 
                     cat.save().then(function (cat, err) {
                         if (err) {
