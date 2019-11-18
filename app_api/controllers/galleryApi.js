@@ -124,17 +124,25 @@ module.exports.uploadPhotoToDB= function (req,res) {
         Promise.all(photoDBroutine).then(catPhotos=>{
                 catPhotos.forEach(function (catPhoto) {
                     console.log("arrived cat photos", catPhoto);
-                    //check it
-                    cat.catPhoto.push(catPhoto);
+
+                    //check it and make async
+                    cat.catPhoto.push(catPhoto)
+
+
                     cat.save().then(function (cat, err) {
                         if (err) {
                             console.log('error while saving cats photo in cat', err)
-
                         }
                     });
-                    // at last iteration send rsponse!
-                        sendJsonResponse(res,220,'photos uploaded')
 
+                    if(catPhotos[catPhotos.length-1] === catPhoto) {
+                        // at last iteration send rsponse!
+                        sendJsonResponse(res, 220, 'photos uploaded')
+
+                    }
+
+        }
+                )
 
                     //console.log('pushed photo', cat);
                         //do stuff
