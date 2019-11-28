@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" />
-    </list>
+    <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -501,12 +499,12 @@
       <workItem from="1572156887813" duration="24030000" />
       <workItem from="1572342544383" duration="3623000" />
       <workItem from="1572414135111" duration="206000" />
-      <workItem from="1572414707428" duration="62102000" />
+      <workItem from="1572414707428" duration="62671000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="642008000" />
+    <option name="totallyTimeSpent" value="642577000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
