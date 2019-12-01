@@ -39,7 +39,7 @@ router.post('/assignVolunteer', ctrlVolunteers.volunteerAssignCommit);
 
 //photos
 //router.get('/photos/volunteers/:volunteerid', ctrlVolunteers.getVolunteerPhotos);
-router.get('/photos/cats/:catid', ctrlGallery.getCatPhotos);
+router.get('/photos/cats/:catid', ctrlGallery.getChangeCatPhotos);
 //router.get('/photos/cats/:catid/avatar', ctrlGallery.getCatAvatar);
 
 //router.get('/photos/cats/:volid', ctrlCats.getVolPhotos);

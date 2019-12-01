@@ -11,6 +11,20 @@ let sendJsonResponse = function(res, status, content) {
 };
 let fs = require('fs');
 
+function detectModelFromRequest(req) {
+
+    //determining-constructing model
+    let reqmodel = 'unknown model';
+
+    if (req.url.split('/')[1] == 'volunteer-photos') {
+        reqmodel = 'volunteers'
+    }
+    else if (req.url.split('/')[1] == 'cat-photos') {
+        reqmodel = 'cats'
+    }
+
+    return reqmodel
+}
 
 module.exports.getModPhotos= function (req,res) {
     let modid=req.params.modid;
@@ -75,27 +89,27 @@ module.exports.setAvatarID= function (req,res) {
     }
     )};
 
-//!!!!!  same ID in database for all bench in case of multiple files upload
-module.exports.uploadPhotoToDB= function (req,res) {
-    //Problem is probably here - its not running in a proper order, process executed in concurent and some of the data is lost
-    console.log('>>>>>>>>>>>>>>>>>Upload to DB initialized<<<<<<<<<<<<<<<<<<');
+module.exports.deleteFromDB = function (req, res) {
+    let photoid=req.params.photoid;
     let modid = req.params.modid;
+    let reqmodel = detectModelFromRequest(req);
+    mongoose.model(reqmodel).findByIdAndUpdate(modid, {$pull: {_id:photoid}},function(err, model) {
+        if(err){
+            console.log('Error deleting photo', err)
+            sendJsonResponse(res, 500, 'error,  photo not deleted'+ err)
+        }
+        console.log('Deleted from DB', model);
+        sendJsonResponse(res, 220, 'photos deleted')
+    })
+};
 
-    //determining-constructing model
-    let reqmodel = 'unknown model';
 
-    if (req.url.split('/')[1] == 'volunteer-photos') {
-        reqmodel = 'volunteers'
-    }
-    else if (req.url.split('/')[1] == 'cat-photos') {
-        reqmodel = 'cats'
-    }
-    //console.log("~attach cat~", req.files);
+// same ID in database for all bench in case of multiple files upload
+module.exports.uploadPhotoToDB = function (req,res) {
 
+    let modid = req.params.modid;
+    let reqmodel = detectModelFromRequest(req);
 
-        //console.log("search for cat executed ~~~~~~~~~~~~~~~~ need to re-search after appending each photo  to refresh in-memory data", cat);
-        //console.log("---",cat.catPhoto);
-        //console.log("req.files", Object.keys(req.files))
         let photoDBroutine = Object.keys(req.files).map(function (file) {
             return new Promise(function (resolve, reject) {
                 let Catphoto = mongoose.model('catphotos');
@@ -104,7 +118,6 @@ module.exports.uploadPhotoToDB= function (req,res) {
                 let mimetype = req.files[file].mimetype;
                 let buffdata = req.files[file].data;
                 let filename = req.files[file].name;
-                //console.log("---",filename);
                 Catphoto.create({
                         imageData: buffdata,
                         comment: filename,
@@ -116,8 +129,6 @@ module.exports.uploadPhotoToDB= function (req,res) {
                 })
             })
         });
-        // console.log("photoDBroutine", photoDBroutine);
-
         Promise.all(photoDBroutine).then(catPhotos=>{
                 catPhotos.forEach(function (catPhoto) {
                     console.log("arrived cat photos", catPhoto);
@@ -131,117 +142,14 @@ module.exports.uploadPhotoToDB= function (req,res) {
                                 console.log('Pushed photo to DB', model)
                                  }
                         );
-                    // mongoose.model(reqmodel).findOne({_id: modid},
-                    //     function (err, cat) {}).select('catPhoto').exec(function (err, cat) {
-                    //         console.log('>>>Cat', cat);
-                    //     //attach arrived photo to found cat here
-                    //     if (err) {
-                    //         console.log('api error', err)
-                    //         //res.end('api error',err)
-                    //     }
-                        //check it and make async
-                        // cat.catPhoto.push(catPhoto);
-                        // console.log("-=pushed cat=-", cat);
-                        //
-                        // cat.save().then(function (cat, err) {
-                        //     if (err) {
-                        //         console.log('error while saving cats photo in cat', err)
-                        //     }
-                        // });
 
                         if (catPhotos[catPhotos.length - 1] === catPhoto) {
-                            // at last iteration send rsponse!
+                            // at last iteration send rsponse
                             sendJsonResponse(res, 220, 'photos uploaded')
-
                         }
-                        else{
-                            console.log('next iteration over arrived files')
-                        }
-                   // })
-
-        }
-                )
-
-                    //console.log('pushed photo', cat);
-                        //do stuff
-                        //db storing here
-                        //responding
-                        //let currentCatPhotos = JSON.parse(JSON.stringify(cat.catPhoto));
-                        // catPhotos.forEach(function(catPhoto){
-                        //     //console.log("checkme", req.files[file]);
-                        //     //catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
-                        //     catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
-                        // });
-                        //imgdata:Buffer.from(tumb.imageData.data).toString('base64')
-                        //need to filter (select) fields data only
-                        //sendJsonResponse(res, 220, cats)
-                        //  res.writeHead(200,{'Content-type':'image/jpg'});
-                        // res.end(content);
-                        //console.log(cat);
-                        //   res.end(cat.catPhoto[0].imageData);
-
-                        //should be out of loop in any case
-
-
-                   // })
                 })
 
-
-
-           // console.log("__result promise all catphotos db load",catPhotos);
-
-            // sendJsonResponse(res,220,'photos uploaded')}
-            // )
-
-
-           // cat.catPhoto.push({imageData:buffdata, comment:filename,contentType:mimetype});
-
-
-
-        //console.log("+++",req.files);
-
-
-   // })
-
-
+                })
 
 };
 
-//
-// module.exports.getModPhotos= function (req,res) {
-//     let modid=req.params.modid;
-//
-//     //determining-constructing model
-//     let reqmodel = 'unknown model';
-//
-//     if (req.url.split('/')[1] == 'volunteer-photos') {
-//         reqmodel = 'volunteers'
-//     }
-//     else if (req.url.split('/')[1] == 'cat-photos') {
-//         reqmodel = 'cats'
-//     }
-//
-//     mongoose.model(reqmodel).findOne({_id:modid}, function (err, cats) {
-//
-//     }).select('catPhoto').exec(function (err, cat) {
-//         if(err){
-//             console.log('Error ocuured', err);
-//             sendJsonResponse(res, 400, err)
-//         }
-//         else{
-//             //need to filter (select) fields data only
-//             //sendJsonResponse(res, 220, cats)
-//             //  res.writeHead(200,{'Content-type':'image/jpg'});
-//             // res.end(content);
-//             //console.log(cat);
-//             //   res.end(cat.catPhoto[0].imageData);
-//
-//             sendJsonResponse(res,220,cat.catPhoto)
-//
-//         }
-//     })
-// };
-//
-// //
-//
-// //};

@@ -7,22 +7,48 @@ if (process.env.NODE_ENV == 'production') {
     ApiOptions.server = "https://borrik.herokuapp.com";
 }
 
-module.exports.getCatPhotos = function(req, res) {
+module.exports.getChangeCatPhotos = function(req, res) {
     let catid = req.params.catid;
-    request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
-        method: 'get',
-        json: {}
-    }, function (err, ApiResp, resBody) {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            // let picts = resBody.map(function (tumb) {
-            //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
-            // });
-            res.render('photo-gallery', {thumbs:resBody, catid:catid})
-        }
-    })
+
+    //in case of deletion request
+    if(req.query.action && req.query.action =='removePhoto'){
+        let photoID = req.query.photoID;
+        request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid + '/' + photoID), {
+            method: 'delete',
+            json: {}
+        }, function (err, ApiResp, resBody) {
+            if (err) {
+                console.log(err);
+                res.send('Error: '+ err)
+            }
+            else{
+                console.log(ApiResp);
+                //if ApiResp code is not 220 , send to client someting
+                res.redirect(url.resolve(ApiOptions.server,req.url))
+            }
+
+        })
+        //API action to delete photo from DB
+
+    }
+
+    //in case of regular request
+    else {
+        request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
+            method: 'get',
+            json: {}
+        }, function (err, ApiResp, resBody) {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                // let picts = resBody.map(function (tumb) {
+                //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
+                // });
+                res.render('photo-gallery', {thumbs: resBody, catid: catid})
+            }
+        })
+    }
 };
 
 module.exports.uploadCatPhotos = function(req, res) {
@@ -77,7 +103,6 @@ module.exports.uploadCatPhotos = function(req, res) {
 
 Promise.all(promisedUpload).then(result=>{
     //do any sort of validation with api requests
-    console.log(result, );
     res.redirect(url.resolve(ApiOptions.server,req.url))
         //a little boilerplate to retrieve full response with all pictures, but leave it to further improvement
         //get   result of last promise

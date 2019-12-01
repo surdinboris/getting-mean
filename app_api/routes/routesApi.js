@@ -48,6 +48,7 @@ router.delete('/locations/:locationid/cats/:catid',
 
 router.get('/cat-photos/:modid', ctrlPhotos.getModPhotos);
 router.post('/cat-photos/:modid', ctrlPhotos.uploadPhotoToDB);
+router.delete('/cat-photos/:modid/:photoid', ctrlPhotos.deleteFromDB);
 
 //router.get('/cat-photos/:modid/avatar', ctrlPhotos.getModPhotos);
 router.get('/volunteer-photos/:modid', ctrlPhotos.getModPhotos);
