@@ -77,6 +77,8 @@ module.exports.setAvatarID= function (req,res) {
 
 //!!!!!  same ID in database for all bench in case of multiple files upload
 module.exports.uploadPhotoToDB= function (req,res) {
+    //Problem is probably here - its not running in a proper order, process executed in concurent and some of the data is lost
+    console.log('>>>>>>>>>>>>>>>>>Upload to DB initialized<<<<<<<<<<<<<<<<<<');
     let modid = req.params.modid;
 
     //determining-constructing model
@@ -90,14 +92,8 @@ module.exports.uploadPhotoToDB= function (req,res) {
     }
     //console.log("~attach cat~", req.files);
 
-    mongoose.model(reqmodel).findOne({_id: modid},
-        function (err, cat) {}).select('catPhoto').exec(function (err, cat) {
-        //attach arrived photo to found cat here
-        if (err) {
-            console.log('api error', err)
-            //res.end('api error',err)
-        }
-       // console.log("~~~",reqmodel,modid, req.files);
+
+        //console.log("search for cat executed ~~~~~~~~~~~~~~~~ need to re-search after appending each photo  to refresh in-memory data", cat);
         //console.log("---",cat.catPhoto);
         //console.log("req.files", Object.keys(req.files))
         let photoDBroutine = Object.keys(req.files).map(function (file) {
@@ -115,6 +111,7 @@ module.exports.uploadPhotoToDB= function (req,res) {
                         contentType: mimetype
                     }
                 ).then(cf => {
+                    console.log('prepared to push cat photo', cf);
                     resolve(cf)
                 })
             })
@@ -124,22 +121,43 @@ module.exports.uploadPhotoToDB= function (req,res) {
         Promise.all(photoDBroutine).then(catPhotos=>{
                 catPhotos.forEach(function (catPhoto) {
                     console.log("arrived cat photos", catPhoto);
+                        mongoose.model(reqmodel).findByIdAndUpdate(
+                             modid,
+                            { $push: {catPhoto: catPhoto } },
+                            function(err, model) {
+                                if(err){
+                                    console.log('Error pushing photo', err)
+                                }
+                                console.log('Pushed photo to DB', model)
+                                 }
+                        );
+                    // mongoose.model(reqmodel).findOne({_id: modid},
+                    //     function (err, cat) {}).select('catPhoto').exec(function (err, cat) {
+                    //         console.log('>>>Cat', cat);
+                    //     //attach arrived photo to found cat here
+                    //     if (err) {
+                    //         console.log('api error', err)
+                    //         //res.end('api error',err)
+                    //     }
+                        //check it and make async
+                        // cat.catPhoto.push(catPhoto);
+                        // console.log("-=pushed cat=-", cat);
+                        //
+                        // cat.save().then(function (cat, err) {
+                        //     if (err) {
+                        //         console.log('error while saving cats photo in cat', err)
+                        //     }
+                        // });
 
-                    //check it and make async
-                    cat.catPhoto.push(catPhoto);
-                    console.log("-=pushed cat=-", cat);
+                        if (catPhotos[catPhotos.length - 1] === catPhoto) {
+                            // at last iteration send rsponse!
+                            sendJsonResponse(res, 220, 'photos uploaded')
 
-                    cat.save().then(function (cat, err) {
-                        if (err) {
-                            console.log('error while saving cats photo in cat', err)
                         }
-                    });
-
-                    if(catPhotos[catPhotos.length-1] === catPhoto) {
-                        // at last iteration send rsponse!
-                        sendJsonResponse(res, 220, 'photos uploaded')
-
-                    }
+                        else{
+                            console.log('next iteration over arrived files')
+                        }
+                   // })
 
         }
                 )
@@ -183,7 +201,7 @@ module.exports.uploadPhotoToDB= function (req,res) {
         //console.log("+++",req.files);
 
 
-    })
+   // })
 
 
 
