@@ -22,9 +22,7 @@ module.exports.getChangeCatPhotos = function(req, res) {
                 res.send('Error: '+ err)
             }
             else{
-                console.log(ApiResp);
-                //if ApiResp code is not 220 , send to client someting
-                res.redirect(url.resolve(ApiOptions.server,req.url))
+                res.redirect(url.resolve(ApiOptions.server,req.url.split('?')[0]))
             }
 
         })
