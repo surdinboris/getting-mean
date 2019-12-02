@@ -8,6 +8,7 @@ block content
         img(src="data:#{thumb.contentType};base64,#{thumb.imageData.data}")
         .photorow
             a.btn.btn-primary.btn-sm(href="/photos/cats/#{catid}?action=removePhoto&photoID=#{thumb._id}") Remove photo
+            a.btn.btn-primary.btn-sm(href="/photos/cats/#{catid}?action=setAvatar&photoID=#{thumb._id}") Set as avatar
 
     .spacer
         p Upload new image:

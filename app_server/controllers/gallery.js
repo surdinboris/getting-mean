@@ -29,7 +29,24 @@ module.exports.getChangeCatPhotos = function(req, res) {
         //API action to delete photo from DB
 
     }
+    else if(req.query.action && req.query.action =='setAvatar'){
 
+        //do stuff via Api
+        request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid),{
+                method: 'post',
+                json: {}
+        },function (err, ApiResp, resBody) {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                //redirect back
+                res.redirect(url.resolve(ApiOptions.server,req.url.split('?')[0]))}
+
+            }
+        )
+
+}
     //in case of regular request
     else {
         request(url.resolve(ApiOptions.server, "api/cat-photos/" + catid), {
