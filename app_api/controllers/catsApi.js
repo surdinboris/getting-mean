@@ -119,7 +119,10 @@ function doAddCat (req, res) {
             }
             else{
                 console.log('new cat was created',newCat._id );
+                let naAvatarId = newCat.catPhoto[0]._id;
                 //location.cats.push(newCat._id);
+                newCat.set('avatarID', naAvatarId);
+                newCat.save();
                 sendJsonResponse(res, 200,newCat)
             }
         })
