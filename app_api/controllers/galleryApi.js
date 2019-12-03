@@ -61,8 +61,10 @@ module.exports.getModPhotos= function (req,res) {
             // res.end(content);
             //console.log(cat);
             //   res.end(cat.catPhoto[0].imageData);
-
-            sendJsonResponse(res,220,catPhotos)
+            let respObj={};
+            respObj.thumbs=catPhotos;
+            respObj.avatarID='wetr3r23';
+            sendJsonResponse(res,220,respObj)
         }
     })
 };

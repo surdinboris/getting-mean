@@ -60,7 +60,7 @@ module.exports.getChangeCatPhotos = function(req, res) {
                 // let picts = resBody.map(function (tumb) {
                 //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
                 // });
-                res.render('photo-gallery', {thumbs: resBody, catid: catid})
+                res.render('photo-gallery', {thumbs: resBody.thumbs, catid: catid, avatarID: resBody.avatarID})
             }
         })
     }
@@ -124,7 +124,7 @@ Promise.all(promisedUpload).then(result=>{
         // result = JSON.parse(result[result.length-1].resBody);
         // res.render('photo-gallery', {thumbs:result, catid:catid})
     //res.render('photo-gallery',{})
-    }).catch(err=>res.end('Error in promise.all while uploading via api: '+err))
+    }).catch(err=>res.end('Error  while uploading via api: '+err))
 };
 
 //     let formData = {

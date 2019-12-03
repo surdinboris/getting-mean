@@ -4,9 +4,11 @@ block content
     h1= title
     .spacer
         p Cat's gallery:
+         p > #{avatarID}
     each thumb in thumbs
         img(src="data:#{thumb.contentType};base64,#{thumb.imageData.data}")
         .photorow
+            //p > #{thumb._id}
             a.btn.btn-primary.btn-sm(href="/photos/cats/#{catid}?action=removePhoto&photoID=#{thumb._id}") Remove photo
             a.btn.btn-primary.btn-sm(href="/photos/cats/#{catid}?action=setAvatar&photoID=#{thumb._id}") Set as avatar
 
