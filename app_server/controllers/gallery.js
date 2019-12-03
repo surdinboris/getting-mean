@@ -60,7 +60,19 @@ module.exports.getChangeCatPhotos = function(req, res) {
                 // let picts = resBody.map(function (tumb) {
                 //     return {imgdata:Buffer.from(tumb.imageData.data).toString('base64')};
                 // });
-                res.render('photo-gallery', {thumbs: resBody.thumbs, catid: catid, avatarID: resBody.avatarID})
+                //attaching avatar property
+                let thumbs= resBody.thumbs.map(function (thumb) {
+                    if(thumb._id == resBody.avatarID){
+                        thumb.isAvatar=true;
+                    }
+                    else{
+                        thumb.isAvatar=false
+                    }
+                    return thumb
+                });
+                console.log(thumbs);
+
+                res.render('photo-gallery', {thumbs: thumbs, catid: catid})
             }
         })
     }

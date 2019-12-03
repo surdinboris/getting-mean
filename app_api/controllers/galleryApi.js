@@ -41,7 +41,7 @@ module.exports.getModPhotos= function (req,res) {
 
     mongoose.model(reqmodel).findOne({_id:modid}, function (err, cats) {
 
-    }).select('catPhoto').exec(function (err, cat) {
+    }).exec(function (err, cat) {
         if(err){
             console.log('Error ocuured', err);
             sendJsonResponse(res, 400, err)
@@ -63,7 +63,7 @@ module.exports.getModPhotos= function (req,res) {
             //   res.end(cat.catPhoto[0].imageData);
             let respObj={};
             respObj.thumbs=catPhotos;
-            respObj.avatarID='wetr3r23';
+            respObj.avatarID=cat.avatarID;
             sendJsonResponse(res,220,respObj)
         }
     })
