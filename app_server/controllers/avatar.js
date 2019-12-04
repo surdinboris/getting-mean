@@ -31,6 +31,8 @@ module.exports.getAvatar = function(req, res) {
 
 
  module.exports.setAvatar = function(req, res) {
+     //detect what model to choose for  avatar photo search
+     console.log(req.url)
      //console.log('get avatar');
      let catid = req.params.catid;
      //do stuff via Api
@@ -43,7 +45,7 @@ module.exports.getAvatar = function(req, res) {
              }
              else {
                  //redirect back
-                 res.send('avatar changed');
+                 res.send('avatar set');
                  console.log(url.resolve(ApiOptions.server, req.url.split('?')[0]))
                  //res.redirect(url.resolve(ApiOptions.server, req.url.split('?')[0]))
              }
