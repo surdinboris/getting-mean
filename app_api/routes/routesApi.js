@@ -3,7 +3,7 @@ let router = express.Router();
 let ctrlLocations = require('../controllers/locationsApi');
 let ctrlVolunteers = require('../controllers/volunteersApi');
 let ctrlPhotos = require('../controllers/galleryApi');
-
+let ctrlAvatar = require('../controllers/avatarApi.js');
 let ctrlCats = require('../controllers/catsApi');
 // locations
 router.get('/locations', ctrlLocations.locationsListByDistance); //done
@@ -50,6 +50,7 @@ router.get('/cat-photos/:modid', ctrlPhotos.getModPhotos);
 router.post('/cat-photos/:modid', ctrlPhotos.uploadPhotoToDB);
 router.delete('/cat-photos/:modid/:photoid', ctrlPhotos.deleteFromDB);
 
+router.post('/avatarCtrl/:modid',ctrlAvatar.avatarAssign);
 //router.get('/cat-photos/:modid/avatar', ctrlPhotos.getModPhotos);
 router.get('/volunteer-photos/:modid', ctrlPhotos.getModPhotos);
 

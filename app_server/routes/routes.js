@@ -5,6 +5,7 @@ let ctrlOthers = require('../controllers/others');
 let ctrlVolunteers = require('../controllers/volunteers');
 let ctrlCats = require('../controllers/cats');
 let ctrlGallery = require('../controllers/gallery');
+let ctrlAvatar = require('../controllers/avatar');
 /* Locations pages */
 
 router.get('/cat', ctrlCats.catCreatePage);
@@ -42,7 +43,8 @@ router.post('/assignVolunteer', ctrlVolunteers.volunteerAssignCommit);
 router.get('/photos/cats/:catid', ctrlGallery.getChangeCatPhotos);
 //router.get('/photos/cats/:catid/avatar', ctrlGallery.getCatAvatar);
 
-
 //router.get('/photos/cats/:volid', ctrlCats.getVolPhotos);
 router.post('/photos/cats/:catid',ctrlGallery.uploadCatPhotos);
+router.get('/avatar/:catid',ctrlAvatar.setAvatar);
+
 module.exports = router;

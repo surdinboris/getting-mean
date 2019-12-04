@@ -20,12 +20,12 @@ div.UpdContainer{
     padding-left: 50px;
 }
 
-
 .UpdContainer label,input {
     width: 150px;
     display: inline-block;
 
 }
+
 .savebutton{
     margin-top: 30px;
     width: 70px;
@@ -34,15 +34,16 @@ div.UpdContainer{
     border-style: solid;
 
 }
+
 form{
     padding: 40px 10px 5px;
     background-color: #3aad2f;
-
-;
 }
+
 .btn{
     margin: 2px;
 }
+
 .actions-container{
     font-family: "Calibri" ;
     text-align: right;

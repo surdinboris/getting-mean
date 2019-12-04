@@ -92,7 +92,7 @@ module.exports.setAvatarID= function (req,res) {
     )};
 
 module.exports.deleteFromDB = function (req, res) {
-    let photoid=req.params.photoid;
+    let photoid = req.params.photoid;
     let modid = req.params.modid;
     let reqmodel = detectModelFromRequest(req);
     mongoose.model(reqmodel).update({_id:modid}, {$pull: {catPhoto: {_id:photoid}}},function(err, model) {
