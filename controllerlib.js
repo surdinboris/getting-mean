@@ -27,7 +27,6 @@ module.exports.requestDbSchema= function(dbmodel, ApiOptions){
 
 //returns precofigured constructor with
 module.exports.modelAssignCommit = function (req,res) {
-
         //determining-constructing model
         let model = 'unknown model';
 

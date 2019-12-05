@@ -10,7 +10,7 @@ block content
             if thumb.isAvatar
                  a.btn.btn-success.btn-sm(disabled) Currently set as avatar
             if !thumb.isAvatar
-                a.btn.btn-primary.btn-sm(href="/setAvatar/cats/#{catid}?action=setAvatar&photoID=#{thumb._id}") Set as avatar
+                a.btn.btn-primary.btn-sm(href="/avatar/cats/#{catid}?action=setAvatar&photoID=#{thumb._id}") Set as avatar
             a.btn.btn-primary.btn-sm(href="/photos/cats/#{catid}?action=removePhoto&photoID=#{thumb._id}") Remove photo
 
     .spacer

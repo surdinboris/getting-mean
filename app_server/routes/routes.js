@@ -46,6 +46,7 @@ router.get('/photos/cats/:catid', ctrlGallery.getChangeCatPhotos);
 //router.get('/photos/cats/:volid', ctrlCats.getVolPhotos);
 router.post('/photos/cats/:catid',ctrlGallery.uploadCatPhotos);
 
-router.get('/setAvatar/cats/:catid',ctrlAvatar.setAvatar);
+router.get('/avatar/cats/:modid',ctrlAvatar.setAvatar);
+//router.get('/avatar/volunteers/:modid',ctrlAvatar.setAvatar);
 
 module.exports = router;

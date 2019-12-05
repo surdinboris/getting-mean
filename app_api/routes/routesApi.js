@@ -51,6 +51,7 @@ router.post('/cat-photos/:modid', ctrlPhotos.uploadPhotoToDB);
 router.delete('/cat-photos/:modid/:photoid', ctrlPhotos.deleteFromDB);
 
 router.post('/avatarCtrl/:modid',ctrlAvatar.avatarAssign);
+router.get('/avatarCtrl/:modid',ctrlAvatar.avatarRetrieve);
 //router.get('/cat-photos/:modid/avatar', ctrlPhotos.getModPhotos);
 router.get('/volunteer-photos/:modid', ctrlPhotos.getModPhotos);
 

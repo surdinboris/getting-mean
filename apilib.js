@@ -1,6 +1,6 @@
 //empty schema request
 let mongoose = require('mongoose');
-
+let url = require('url');
 //returns models fields for db
 module.exports.responseDbSchema= function (req,res,shmodel) {
     let hiddenFields=['avatarID','catPhoto', '_id', '__v', 'id'];
