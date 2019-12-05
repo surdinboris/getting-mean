@@ -14,6 +14,7 @@ module.exports.avatarAssign = function (req, res) {
 
     mongoose.model(reqmodel).findOne({_id:modid}, function (err, cat) {
             if (err) {
+                console.log('error', err);
                 sendJsonResponse(res, 501, 'error during avatar change: '+err)
             }
             else {

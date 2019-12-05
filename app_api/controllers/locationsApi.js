@@ -183,6 +183,7 @@ module.exports.locationsReadOne = function (req, res) {
 };
 
 module.exports.locationsUpdateOne = function (req, res) {
+    console.log('locationsUpdateOne executed',req.body.cats);
     if (req.params && req.params.locationid) {
         let locId = req.params.locationid;
         Loc.findOne({_id: locId}).exec(function (err, location) {

@@ -1,6 +1,8 @@
 let mongoose = require('mongoose');
 let Loc = mongoose.model('locations');
 let Cat = mongoose.model('cats');
+let CatPhoto=mongoose.model('catphotos');
+
 let apilib = require('../../apilib');
 let sendJsonResponse = function(res, status, content) {
     res.status(status);
@@ -96,38 +98,45 @@ function doAddCat (req, res) {
 
 
     });
-    //in case of missing photo data
-    if(req.body.catPhoto == '') {
 
-        newCat.catPhoto={};
-        //add request image parsing here
-        newCat.catPhoto.imageData = fs.readFileSync('public/images/noimage.jpg');
-        newCat.catPhoto.contentType = 'image/png';
-        newCat.catPhoto.comment='no image';
-    }
-    if(newCat.avatarID == ''){
-        newCat.avatarID= undefined
-    }
+    let NAphoto={};
+    //add request image parsing here
+    NAphoto.imageData = fs.readFileSync('public/images/noimage.jpg');
+    NAphotocatPhoto.contentType = 'image/png';
+    NAphotocatPhoto.comment='no image';
 
-    Cat.create(
-        newCat
-        , function (err,newCat) {
-            if (err){
-                console.log('cat saving error',err);
-                ErrCodesActions[400](res,err)
+    //generating photo
+    CatPhoto.create(NAphoto, function (err, newphoto) {
+        if (err) {
+            console.log('cat saving error - while generating default image', err);
+            ErrCodesActions[400](res, err);
+        }
+        else{
+                newCat.catPhoto.push(newphoto);
+                console.log('newCat before', newCat);
+                Cat.create(
+                    newCat
+                    , function (err,newCat) {
+                        if (err){
+                            console.log('cat saving error',err);
+                            ErrCodesActions[400](res,err)
+
+                        }
+                        else{
+                            console.log('new cat was created',newCat);
+                            let naAvatarId = newphoto._id;
+                            //location.cats.push(newCat._id);
+                            newCat.set('avatarID', naAvatarId);
+                            newCat.save();
+                            sendJsonResponse(res, 200,newCat)
+                        }
+                    })
 
             }
-            else{
-                console.log('new cat was created',newCat._id );
-                let naAvatarId = newCat.catPhoto[0]._id;
-                //location.cats.push(newCat._id);
-                newCat.set('avatarID', naAvatarId);
-                newCat.save();
-                sendJsonResponse(res, 200,newCat)
-            }
-        })
 
-};
+});
+
+}
 
 
 module.exports.catsCreate=function (req,res) {

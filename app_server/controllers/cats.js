@@ -24,6 +24,7 @@ module.exports.catEditPage = function (req, res){
 //put (change) handler
 module.exports.catEditCommit=function (req, res){
     let catid=req.params.catid;
+    console.log('catid>>>>>',catid);
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/cats/"+catid),{method: 'put', json: req.body},
         function (err, apiResp, body) {

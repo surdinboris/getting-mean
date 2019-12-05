@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/apilib.js" afterPath="$PROJECT_DIR$/apilib.js" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app_api/controllers/avatarApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/avatarApi.js" />
-      <change beforePath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/galleryApi.js" />
-      <change beforePath="$PROJECT_DIR$/app_api/routes/routesApi.js" afterPath="$PROJECT_DIR$/app_api/routes/routesApi.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/controllers/avatar.js" afterPath="$PROJECT_DIR$/app_server/controllers/avatar.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/routes/routes.js" afterPath="$PROJECT_DIR$/app_server/routes/routes.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/views/photo-gallery.jade" afterPath="$PROJECT_DIR$/app_server/views/photo-gallery.jade" />
-      <change beforePath="$PROJECT_DIR$/controllerlib.js" afterPath="$PROJECT_DIR$/controllerlib.js" />
+      <change beforePath="$PROJECT_DIR$/app_api/controllers/catsApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/catsApi.js" />
+      <change beforePath="$PROJECT_DIR$/app_api/controllers/locationsApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/locationsApi.js" />
+      <change beforePath="$PROJECT_DIR$/app_server/controllers/cats.js" afterPath="$PROJECT_DIR$/app_server/controllers/cats.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,8 +45,18 @@
       <file leaf-file-name="cats.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_server/controllers/cats.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2398">
-              <caret line="109" column="31" lean-forward="false" selection-start-line="109" selection-start-column="31" selection-end-line="109" selection-end-column="31" />
+            <state relative-caret-position="198">
+              <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="controllerlib.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllerlib.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -58,68 +65,18 @@
       <file leaf-file-name="locations.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_server/controllers/locations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="72" column="33" lean-forward="false" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="33" />
+            <state relative-caret-position="589">
+              <caret line="126" column="21" lean-forward="true" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="volunteers.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_server/controllers/volunteers.js">
+      <file leaf-file-name="locationsApi.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_api/controllers/locationsApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="122" column="30" lean-forward="false" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="avatarApi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_api/controllers/avatarApi.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catsApi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_api/controllers/catsApi.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gallery.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_server/controllers/gallery.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="38" column="29" lean-forward="true" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="avatar.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app_server/controllers/avatar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="66" column="87" lean-forward="false" selection-start-line="66" selection-start-column="87" selection-end-line="66" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_server/routes/routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
+            <state relative-caret-position="72">
+              <caret line="185" column="59" lean-forward="false" selection-start-line="185" selection-start-column="59" selection-end-line="185" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -128,8 +85,48 @@
       <file leaf-file-name="routesApi.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_api/routes/routesApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="49" column="53" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+            <state relative-caret-position="202">
+              <caret line="19" column="66" lean-forward="true" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="avatarApi.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_api/controllers/avatarApi.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="catsApi.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_api/controllers/catsApi.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1027">
+              <caret line="152" column="0" lean-forward="true" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbschema.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_api/models/dbschema.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="312">
+              <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="avatar.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_server/controllers/avatar.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="454">
+              <caret line="66" column="87" lean-forward="false" selection-start-line="66" selection-start-column="87" selection-end-line="66" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -147,7 +144,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>edit</find>
       <find>JSON</find>
       <find>JSON.pa</find>
       <find>catFilteredFields</find>
@@ -175,8 +171,9 @@
       <find>req.</find>
       <find>-3</find>
       <find>fired</find>
-      <find>apiResp</find>
       <find>action</find>
+      <find>apiResp</find>
+      <find>locations validation failed:</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -218,7 +215,6 @@
         <option value="$PROJECT_DIR$/app_api/controllers/volunteersApi.js" />
         <option value="$PROJECT_DIR$/app_api/controllers/volunteersApi.js" />
         <option value="$PROJECT_DIR$/app_server/controllers/volunteers.js" />
-        <option value="$PROJECT_DIR$/app_server/controllers/cats.js" />
         <option value="$PROJECT_DIR$/app_server/views/cat-edit.jade" />
         <option value="$PROJECT_DIR$/app_api/controllers/photosApi.js" />
         <option value="$PROJECT_DIR$/app_server/views/location-info.jade" />
@@ -226,21 +222,22 @@
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/app_server/controllers/locations.js" />
         <option value="$PROJECT_DIR$/app_server/controllers/locations.js" />
-        <option value="$PROJECT_DIR$/app_api/controllers/locationsApi.js" />
-        <option value="$PROJECT_DIR$/app_api/controllers/locationsApi.js" />
-        <option value="$PROJECT_DIR$/app_api/models/dbschema.js" />
-        <option value="$PROJECT_DIR$/app_api/controllers/catsApi.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/app_server/controllers/gallery.js" />
-        <option value="$PROJECT_DIR$/controllerlib.js" />
         <option value="$PROJECT_DIR$/app_api/controllers/galleryApi.js" />
         <option value="$PROJECT_DIR$/apilib.js" />
         <option value="$PROJECT_DIR$/app_server/views/photo-gallery.jade" />
         <option value="$PROJECT_DIR$/app_server/routes/routes.js" />
         <option value="$PROJECT_DIR$/app_api/routes/routesApi.js" />
         <option value="$PROJECT_DIR$/app_api/routes/routesApi.js" />
-        <option value="$PROJECT_DIR$/app_api/controllers/avatarApi.js" />
         <option value="$PROJECT_DIR$/app_server/controllers/avatar.js" />
+        <option value="$PROJECT_DIR$/app_api/controllers/catsApi.js" />
+        <option value="$PROJECT_DIR$/app_api/controllers/avatarApi.js" />
+        <option value="$PROJECT_DIR$/app_api/models/dbschema.js" />
+        <option value="$PROJECT_DIR$/controllerlib.js" />
+        <option value="$PROJECT_DIR$/app_server/controllers/cats.js" />
+        <option value="$PROJECT_DIR$/app_api/controllers/locationsApi.js" />
+        <option value="$PROJECT_DIR$/app_api/controllers/locationsApi.js" />
       </list>
     </option>
   </component>
@@ -380,19 +377,19 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/gitrep/getting-mean/app_api/controllers/catsApi.js" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\gitrep\getting-mean\app_server\views" />
-      <recent name="C:\gitrep\getting-mean\node_modules\customlibs" />
-      <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/app_api/controllers" />
-      <recent name="$PROJECT_DIR$/app_api" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\gitrep\getting-mean" />
       <recent name="C:\gitrep\getting-mean\app_server" />
       <recent name="C:\gitrep\getting-mean\node_modules\customlibs\lib" />
       <recent name="C:\gitrep\getting-mean\node_modules" />
       <recent name="C:\gitrep\getting-mean\customlibs" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\gitrep\getting-mean\app_server\views" />
+      <recent name="C:\gitrep\getting-mean\node_modules\customlibs" />
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/app_api/controllers" />
+      <recent name="$PROJECT_DIR$/app_api" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -523,16 +520,15 @@
       <workItem from="1572156887813" duration="24030000" />
       <workItem from="1572342544383" duration="3623000" />
       <workItem from="1572414135111" duration="206000" />
-      <workItem from="1572414707428" duration="123175000" />
+      <workItem from="1572414707428" duration="127102000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="703081000" />
+    <option name="totallyTimeSpent" value="707008000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="15" width="1843" height="1014" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -543,7 +539,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884097" sideWeight="0.49771988" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31074765" sideWeight="0.85046726" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.50233644" sideWeight="0.85046726" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17779024" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -817,34 +813,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/models/dbschema.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="35" column="12" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-594">
           <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controllers/locationsApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="224" column="25" lean-forward="false" selection-start-line="224" selection-start-column="21" selection-end-line="224" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllerlib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -873,58 +845,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controllers/avatarApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="11" lean-forward="true" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_server/controllers/cats.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2398">
-          <caret line="109" column="31" lean-forward="false" selection-start-line="109" selection-start-column="31" selection-end-line="109" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_server/controllers/locations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="72" column="33" lean-forward="false" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/routes/routesApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="49" column="53" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controllers/galleryApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_server/controllers/volunteers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
           <caret line="122" column="30" lean-forward="false" selection-start-line="122" selection-start-column="20" selection-end-line="122" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controllers/catsApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -941,6 +865,78 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="454">
           <caret line="66" column="87" lean-forward="false" selection-start-line="66" selection-start-column="87" selection-end-line="66" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/controllers/galleryApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/controllers/avatarApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/controllers/catsApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1027">
+          <caret line="152" column="0" lean-forward="true" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/models/dbschema.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_server/controllers/locations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="126" column="21" lean-forward="true" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllerlib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_server/controllers/cats.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/routes/routesApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="19" column="66" lean-forward="true" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/controllers/locationsApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="185" column="59" lean-forward="false" selection-start-line="185" selection-start-column="59" selection-end-line="185" selection-end-column="59" />
           <folding />
         </state>
       </provider>
