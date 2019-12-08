@@ -89,34 +89,42 @@ module.exports.catsByLocation=function (req,res) {
 };
 
 function doAddCat (req, res) {
-    let fields = apilib.responseDbSchema(req,res,'cats');
+    fs.readFile('public/images/noimage.jpg',function (err,resFile) {
 
-    let newCat={};
+        let fields = apilib.responseDbSchema(req,res,'cats');
 
-    fields.forEach(function (field) {
-        newCat[field]=req.body[field];
+        let newCat={};
+        newCat.catPhoto =[];
+
+        fields.forEach(function (field) {
+            newCat[field]=req.body[field];
+        });
 
 
-    });
+        let NAphoto={};
+        //add request image parsing here
 
-    let NAphoto={};
-    //add request image parsing here
-    NAphoto.imageData = fs.readFileSync('public/images/noimage.jpg');
-    NAphotocatPhoto.contentType = 'image/png';
-    NAphotocatPhoto.comment='no image';
-
-    //generating photo
-    CatPhoto.create(NAphoto, function (err, newphoto) {
-        if (err) {
-            console.log('cat saving error - while generating default image', err);
-            ErrCodesActions[400](res, err);
+        if(err){
+            console.log('error during reading default avatar image \'public/images/noimage.jpg\'', err);
+            NAphoto.imageData='';
         }
-        else{
+
+        NAphoto.imageData=resFile;
+        NAphoto.contentType = 'image/png';
+        NAphoto.comment='no image';
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>",resFile);
+        //generating photo
+        CatPhoto.create(NAphoto, function (err, newphoto) {
+            if (err) {
+                ErrCodesActions[400](res, err);
+            }
+            else{
+
                 newCat.catPhoto.push(newphoto);
-                console.log('newCat before', newCat);
                 Cat.create(
                     newCat
                     , function (err,newCat) {
+
                         if (err){
                             console.log('cat saving error',err);
                             ErrCodesActions[400](res,err)
@@ -134,7 +142,9 @@ function doAddCat (req, res) {
 
             }
 
-});
+        });
+
+    })
 
 }
 
