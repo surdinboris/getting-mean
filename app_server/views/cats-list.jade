@@ -1,0 +1,23 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  .row.page-header: .col-lg-12
+     h1= pageHeader.title
+
+     .panel-body.volunteer-container
+        .row
+            .col-xs-12.col-md-9
+                .row
+                    each cat in cats
+                        .row
+                            .cat
+                                .well.well-sm.volunteer-header
+                                    span.rating
+                                    p.reviewAuthor Name: #{cat.catName}
+                                    p.reviewAuthor Color: #{cat.catColor}
+                                    .actions-container
+                                        a.btn.btn-danger.btn-sm(href="/cats/#{cat._id}") Edit cat
+                                        a.btn.btn-primary.btn-sm(href="/cats/delete/#{cat._id}") Delete cat
+                                        a.btn.btn-success.btn-sm(href="/cats/view-locations/#{cat._id}") Assigned locations

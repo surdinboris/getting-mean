@@ -24,7 +24,6 @@ module.exports.catEditPage = function (req, res){
 //put (change) handler
 module.exports.catEditCommit=function (req, res){
     let catid=req.params.catid;
-    console.log('catid>>>>>',catid);
     //api request by id ...
     request(url.resolve(ApiOptions.server,"api/cats/"+catid),{method: 'put', json: req.body},
         function (err, apiResp, body) {
@@ -40,6 +39,39 @@ module.exports.catCreatePage = function (req, res) {
     contrlib.requestDbSchema("cats",ApiOptions).then(fieldsObj=>{
         res.render("cat-edit.jade", {pageHeader:{title: catEditTitle}, formAction:'', cat:fieldsObj})
     }).catch(err=> res.end(err.toString()));
+};
+
+module.exports.catsList = function (req, resp) {
+    request(url.resolve(ApiOptions.server, "/api/cats/"), {
+        method: 'get',
+        json: {}
+    }, function (err, apiResp, body) {
+        resp.render("cats-list.jade", {pageHeader: {title: 'Cats list'}, cats: body})
+    });
+};
+
+module.exports.catsLocations = function (req,resp) {
+    let catid=req.params.catid;
+    let voldata=  new Promise(function(resolve,reject){
+        request(url.resolve(ApiOptions.server, "/api/cats/view-locations/"+catid),{
+            method:'get',
+            json:{}}, function (err,apiResp,catsLocations) {
+            if(err){
+                reject(err)
+            }
+            resolve(catsLocations)
+        })});
+
+    voldata.then(function (locations) {
+        let locationdata= locations.locationlist;
+        let nolocations;
+        if (!locationdata.length){
+            nolocations = 'Cat has no locations assigned :-( '
+            //locationdata=[{name:'Volunteer has no locations assigned :-( '}]
+        }
+        resp.render("cat-with-locations-view.jade", {pageHeader: {title: 'Cat\'s locations list'}, cat:{_id:catid},nolocations:nolocations, locationdata: locationdata})
+
+    }).catch(err=>resp.end(err));
 };
 
 // module.exports.catCreateCommit = function (req,res) {

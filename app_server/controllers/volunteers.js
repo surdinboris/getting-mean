@@ -28,7 +28,8 @@ module.exports.volunteerEditCommit=function (req, res){
         function (err, apiResp, body) {
             let volFilteredFields =['_id','__v'];
             body= contrlib.dbFilter(body,'volunteers');
-            res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:volid, volunteer:body})
+           /// res.render("volunteer-edit.jade", {pageHeader:{title: volunteerEditTitle}, formAction:volid, volunteer:body})
+            res.redirect("/volunteers/")
         } )
 };
 //loading list fo volunteers and render pick up page

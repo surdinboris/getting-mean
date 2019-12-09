@@ -135,7 +135,6 @@ module.exports.volunteersUpdateOne = function (req,res) {
                             if (err) {
                                 ErrCodesActions[400](res,err)
                             } else {
-
                                 sendJsonResponse(res, 200, volunteer);
                             }
                         });

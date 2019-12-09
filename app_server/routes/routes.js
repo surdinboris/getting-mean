@@ -16,6 +16,8 @@ router.get('/assignCat',ctrlCats.catAssignPage);
 router.post('/assignCat', ctrlCats.catAssignCommit);
 router.get('/cats/:catid', ctrlCats.catEditPage);
 router.post('/cats/:catid',  ctrlCats.catEditCommit);
+router.get('/cats/', ctrlCats.catsList);
+router.get('/cats/view-locations/:catid', ctrlCats.catsLocations);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);

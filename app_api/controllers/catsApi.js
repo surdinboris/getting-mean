@@ -14,7 +14,23 @@ let fs = require('fs');
 // let ApiOptions = {server:"http://localhost:3000"};
 
 
+module.exports.catsLocations = function(req,res){
+    let searchcat = req.params.catid;
+    //searchlogic will be here
 
+    Loc.find({cats:mongoose.Types.ObjectId(searchcat)}).exec(function (err,locationslist) {
+        if(err){
+            console.log('error while retrieving cats\'s locations',err);
+            ErrCodesActions[400](res,err);
+        }
+        else {
+            //console.log('found locations of', searchcat, '--', locationslist)
+            sendJsonResponse(res, 200, {locationlist:locationslist})
+        }
+
+    });
+
+};
 module.exports.catsReadAll=function (req,res) {
 
 
@@ -112,7 +128,6 @@ function doAddCat (req, res) {
         NAphoto.imageData=resFile;
         NAphoto.contentType = 'image/png';
         NAphoto.comment='no image';
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>",resFile);
         //generating photo
         CatPhoto.create(NAphoto, function (err, newphoto) {
             if (err) {
