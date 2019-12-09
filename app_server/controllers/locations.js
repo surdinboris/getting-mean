@@ -7,6 +7,7 @@ if (process.env.NODE_ENV == 'production') {
 }
 //shared
 let requestDBSchema= function(dbmodel){
+
     return new Promise(function(resolve,reject){
         request(url.resolve(ApiOptions.server,"api/"+dbmodel+"/schema"), {
             method: 'get',
@@ -18,9 +19,8 @@ let requestDBSchema= function(dbmodel){
         }
         let fieldsObj = {};
 
-        if(fieldslist) {
-
-
+        if(fieldslist){
+            console.log('>>>>>>',dbmodel,fieldslist);
             fieldslist.forEach(function (field) {
                 fieldsObj[field] = ''
             });
@@ -78,7 +78,7 @@ module.exports.homelist = function(req, res) {
 };
 
 module.exports.locationCreatePage = function (req,res) {
-    requestDBSchema("location").then(fieldsObj =>  res.render("location-edit.jade", {pageHeader:{title: 'Location edit'}, formAction:"", location:fieldsObj})).catch(err=> res.end(err.toString()))
+    requestDBSchema("locations").then(fieldsObj =>  res.render("location-edit.jade", {pageHeader:{title: 'Location edit'}, formAction:"", location:fieldsObj})).catch(err=> res.end(err.toString()))
      };
 
 //get new empty handler
@@ -86,7 +86,7 @@ module.exports.locationCreatePage = function (req,res) {
 module.exports.locationCreateCommit = function (req, res) {
 
     //retriving actual model fields from api
-    requestDBSchema("location").then(fieldsObj =>{
+    requestDBSchema("locations").then(fieldsObj =>{
 
         let newLocdata={};
         Object.keys(fieldsObj).forEach(function (field) {
