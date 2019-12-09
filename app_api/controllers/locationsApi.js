@@ -167,6 +167,7 @@ module.exports.locationsReadOne = function (req, res) {
             }
             else {
                 attachSubModelsToLocation(location, 'volunteers').then(function(location) {
+                    //add filtering for unnecessary photos - only avatar one should be sent for each cat
                     attachSubModelsToLocation(location, 'cats').then(function (location) {
 
                         sendJsonResponse(res, 220, location)
