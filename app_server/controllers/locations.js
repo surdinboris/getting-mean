@@ -32,7 +32,7 @@ let requestDBSchema= function(dbmodel){
 };
 let renderLocation = function (err,res,body){
        res.render("location-info",
-           {pageHeader:{title:'Location info'}, sidebar:{calltoaction:'test', context:"tesr"},location:err || body})
+           {pageHeader:{title:'Location info'}, sidebar:{calltoaction:'action', context:"context"},location:err || body})
 };
 
 let renderHomePage=function (err, res, body) {
@@ -189,6 +189,7 @@ module.exports.locationInfo = function(req, res) {
         body=JSON.parse(JSON.stringify(body));
 
         //decoding cats fetched from api
+        //make only avatar pic to be fetched from API to avoid unnecessary data exchange betweer all parts of application
         body.cats.forEach(function (cat) {
            cat.catPhoto.forEach(function(img){
                 img.imageData.data=Buffer.from(img.imageData.data).toString('base64')
