@@ -30,28 +30,26 @@ let attachSubModelsToLocation = function(location, model) {
 
                         reject2('DB request failed for one of locations submodel ID ', err)
                     }
-                    //throw  all photos except first or, if avatar avatarId field presented, hook t this  specific                      photo - leave only this photo
+                    //throw  all photos except first or, if avatar avatarId field presented, hook this  specific                      photo - leave only this photo
                     //regenerating object
                     //**implemented for cats only
-
                     subobj=JSON.parse(JSON.stringify(subobj));
                     let found;
-                    if (subobj && subobj.avatarId && subobj.catPhoto){
+                    if (subobj && subobj.avatarID && subobj.catPhoto){
                         for(let ct of subobj.catPhoto){
-                            if (ct._id=subobj.avatarId){
+                            if (ct._id == subobj.avatarID){
                                 subobj.catPhoto=[ct];
                                 found=true;
-                                //console.log("found avatar for subobj",subobj.catName);
                                 break
                             }
                         }
                     }
                     //trimming array to return only first one as avatar to avoid memory pollution with full
                     //gallery
-                    if(!found && subobj&& subobj.catPhoto){
+                    else if(!found && subobj && subobj.catPhoto){
                         subobj.catPhoto.length = 1;
                     }
-
+                    console.log(subobj.catPhoto,subobj.avatarID,subobj.catName);
                     resolve2(subobj)
                 })
             });
