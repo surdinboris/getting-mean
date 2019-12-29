@@ -15,8 +15,10 @@ block content
                             .cat
                                 .well.well-sm.volunteer-header
                                     span.rating
+                                    img.catavatar(src="data:image/png;base64,#{cat.catPhoto[0].imageData.data}")
                                     p.reviewAuthor Name: #{cat.catName}
                                     p.reviewAuthor Color: #{cat.catColor}
+                                    a(href="/photos/cats/#{cat._id}") View cat's gallery
                                     .actions-container
                                         a.btn.btn-danger.btn-sm(href="/cats/#{cat._id}") Edit cat
                                         a.btn.btn-primary.btn-sm(href="/cats/delete/#{cat._id}") Delete cat

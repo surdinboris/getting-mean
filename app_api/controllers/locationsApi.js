@@ -49,7 +49,6 @@ let attachSubModelsToLocation = function(location, model) {
                     else if(!found && subobj && subobj.catPhoto){
                         subobj.catPhoto.length = 1;
                     }
-                    console.log(subobj.catPhoto,subobj.avatarID,subobj.catName);
                     resolve2(subobj)
                 })
             });

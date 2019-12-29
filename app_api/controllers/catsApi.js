@@ -36,7 +36,8 @@ module.exports.catsReadAll=function (req,res) {
 
     Cat.find({}, function (err, cats) {
 
-    }).select('-catPhoto').exec(function (err, cats) {
+    }).exec(function (err, cats) {
+   // }).select('-catPhoto').exec(function (err, cats) {
         if(err){
             console.log('Error ocuured', err)
         }
