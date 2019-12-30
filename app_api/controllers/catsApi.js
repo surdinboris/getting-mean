@@ -42,6 +42,15 @@ module.exports.catsReadAll=function (req,res) {
             console.log('Error ocuured', err)
         }
         else{
+            cats=JSON.parse(JSON.stringify(cats));
+            cats.forEach(function (cat) {
+                //let catPhotos = JSON.parse(JSON.stringify(cat.catPhoto));
+                cat.catPhoto.forEach(function(catPhoto){
+                    //catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
+                    catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
+                });
+            });
+
             //need to filter (select) fields data only
             sendJsonResponse(res, 220, cats)
         }
