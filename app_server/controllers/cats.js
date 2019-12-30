@@ -46,6 +46,7 @@ module.exports.catsList = function (req, resp) {
         method: 'get',
         json: {}
     }, function (err, apiResp, body) {
+        console.log(body);
         resp.render("cats-list.jade", {pageHeader: {title: 'Cats list'}, cats: body})
     });
 };

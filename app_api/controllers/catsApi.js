@@ -32,10 +32,7 @@ module.exports.catsLocations = function(req,res){
 
 };
 module.exports.catsReadAll=function (req,res) {
-
-
     Cat.find({}, function (err, cats) {
-
     }).exec(function (err, cats) {
    // }).select('-catPhoto').exec(function (err, cats) {
         if(err){
@@ -44,12 +41,29 @@ module.exports.catsReadAll=function (req,res) {
         else{
             cats=JSON.parse(JSON.stringify(cats));
             cats.forEach(function (cat) {
+                let found;
+                if (cat && cat.avatarID && cat.catPhoto){
+                    for(let ct of cat.catPhoto){
+                        if (ct._id == cat.avatarID){
+                            cat.catPhoto=[ct];
+                            found=true;
+                            break
+                        }
+                    }
+                }
+                //trimming array to return only first one as avatar to avoid memory pollution with full
+                //gallery
+                else if(!found && cat && cat.catPhoto){
+                    cat.catPhoto.length = 1;
+                }
+
                 //let catPhotos = JSON.parse(JSON.stringify(cat.catPhoto));
                 cat.catPhoto.forEach(function(catPhoto){
                     //catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
                     catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
                 });
             });
+
 
             //need to filter (select) fields data only
             sendJsonResponse(res, 220, cats)
