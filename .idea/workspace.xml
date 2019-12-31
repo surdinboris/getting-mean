@@ -4,12 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/app_server/views/photo-gallery.jade" line="11" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app_api/controllers/catsApi.js" afterPath="$PROJECT_DIR$/app_api/controllers/catsApi.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/controllers/cats.js" afterPath="$PROJECT_DIR$/app_server/controllers/cats.js" />
-      <change beforePath="$PROJECT_DIR$/app_server/controllers/locations.js" afterPath="$PROJECT_DIR$/app_server/controllers/locations.js" />
-    </list>
+    <list default="true" id="c5ccd1bb-4c39-4952-8f1f-04f368efb91c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -631,12 +626,12 @@
       <workItem from="1572342544383" duration="3623000" />
       <workItem from="1572414135111" duration="206000" />
       <workItem from="1572414707428" duration="170886000" />
-      <workItem from="1577709596468" duration="75000" />
+      <workItem from="1577709596468" duration="672000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="750867000" />
+    <option name="totallyTimeSpent" value="751464000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="29" y="15" width="1843" height="1021" extended-state="0" />
