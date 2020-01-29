@@ -196,6 +196,10 @@ module.exports.locationsUpdateOne = function (req, res) {
                 ErrCodesActions[400](res, err);
                 return;
             }
+<<<<<<< HEAD
+            console.log('cats---->>>',req.body.cats);
+=======
+>>>>>>> 96fe2e16eecaf7c69686064416b7b52c04462d9f
             req.body.rating ? location.name = req.body.rating : null;
             if(req.body.cats && req.body.cats != 'no cats') {
                 location.cats = req.body.cats.split(",");
