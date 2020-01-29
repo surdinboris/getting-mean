@@ -14,17 +14,57 @@ let fs = require('fs');
 // let ApiOptions = {server:"http://localhost:3000"};
 
 
+module.exports.catsLocations = function(req,res){
+    let searchcat = req.params.catid;
+    //searchlogic will be here
 
+    Loc.find({cats:mongoose.Types.ObjectId(searchcat)}).exec(function (err,locationslist) {
+        if(err){
+            console.log('error while retrieving cats\'s locations',err);
+            ErrCodesActions[400](res,err);
+        }
+        else {
+            //console.log('found locations of', searchcat, '--', locationslist)
+            sendJsonResponse(res, 200, {locationlist:locationslist})
+        }
+
+    });
+
+};
 module.exports.catsReadAll=function (req,res) {
-
-
     Cat.find({}, function (err, cats) {
-
-    }).select('-catPhoto').exec(function (err, cats) {
+    }).exec(function (err, cats) {
+   // }).select('-catPhoto').exec(function (err, cats) {
         if(err){
             console.log('Error ocuured', err)
         }
         else{
+            cats=JSON.parse(JSON.stringify(cats));
+            cats.forEach(function (cat) {
+                let found;
+                if (cat && cat.avatarID && cat.catPhoto){
+                    for(let ct of cat.catPhoto){
+                        if (ct._id == cat.avatarID){
+                            cat.catPhoto=[ct];
+                            found=true;
+                            break
+                        }
+                    }
+                }
+                //trimming array to return only first one as avatar to avoid memory pollution with full
+                //gallery
+                else if(!found && cat && cat.catPhoto){
+                    cat.catPhoto.length = 1;
+                }
+
+                //let catPhotos = JSON.parse(JSON.stringify(cat.catPhoto));
+                cat.catPhoto.forEach(function(catPhoto){
+                    //catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
+                    catPhoto.imageData.data=Buffer.from(catPhoto.imageData.data).toString('base64');
+                });
+            });
+
+
             //need to filter (select) fields data only
             sendJsonResponse(res, 220, cats)
         }
@@ -89,34 +129,41 @@ module.exports.catsByLocation=function (req,res) {
 };
 
 function doAddCat (req, res) {
-    let fields = apilib.responseDbSchema(req,res,'cats');
+    fs.readFile('public/images/noimage.jpg',function (err,resFile) {
 
-    let newCat={};
+        let fields = apilib.responseDbSchema(req,res,'cats');
 
-    fields.forEach(function (field) {
-        newCat[field]=req.body[field];
+        let newCat={};
+        newCat.catPhoto =[];
+
+        fields.forEach(function (field) {
+            newCat[field]=req.body[field];
+        });
 
 
-    });
+        let NAphoto={};
+        //add request image parsing here
 
-    let NAphoto={};
-    //add request image parsing here
-    NAphoto.imageData = fs.readFileSync('public/images/noimage.jpg');
-    NAphotocatPhoto.contentType = 'image/png';
-    NAphotocatPhoto.comment='no image';
-
-    //generating photo
-    CatPhoto.create(NAphoto, function (err, newphoto) {
-        if (err) {
-            console.log('cat saving error - while generating default image', err);
-            ErrCodesActions[400](res, err);
+        if(err){
+            console.log('error during reading default avatar image \'public/images/noimage.jpg\'', err);
+            NAphoto.imageData='';
         }
-        else{
+
+        NAphoto.imageData=resFile;
+        NAphoto.contentType = 'image/png';
+        NAphoto.comment='no image';
+        //generating photo
+        CatPhoto.create(NAphoto, function (err, newphoto) {
+            if (err) {
+                ErrCodesActions[400](res, err);
+            }
+            else{
+
                 newCat.catPhoto.push(newphoto);
-                console.log('newCat before', newCat);
                 Cat.create(
                     newCat
                     , function (err,newCat) {
+
                         if (err){
                             console.log('cat saving error',err);
                             ErrCodesActions[400](res,err)
@@ -134,7 +181,9 @@ function doAddCat (req, res) {
 
             }
 
-});
+        });
+
+    })
 
 }
 

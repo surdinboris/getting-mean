@@ -25,6 +25,7 @@ router.get('/volunteers', ctrlVolunteers.volunteersReadAll); //done
 
 
 router.get('/volunteers/view-locations/:volunteerid', ctrlVolunteers.volunteersLocations);
+router.get('/cats/view-locations/:catid', ctrlCats.catsLocations);
 router.get('/volunteers/:volunteerid',
     ctrlVolunteers.volunteersReadOne); //done
 router.put('/volunteers/:volunteerid',

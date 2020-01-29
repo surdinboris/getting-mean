@@ -30,28 +30,25 @@ let attachSubModelsToLocation = function(location, model) {
 
                         reject2('DB request failed for one of locations submodel ID ', err)
                     }
-                    //throw  all photos except first or, if avatar avatarId field presented, hook t this  specific                      photo - leave only this photo
+                    //throw  all photos except first or, if avatar avatarId field presented, hook this  specific                      photo - leave only this photo
                     //regenerating object
                     //**implemented for cats only
-
                     subobj=JSON.parse(JSON.stringify(subobj));
                     let found;
-                    if (subobj && subobj.avatarId && subobj.catPhoto){
+                    if (subobj && subobj.avatarID && subobj.catPhoto){
                         for(let ct of subobj.catPhoto){
-                            if (ct._id=subobj.avatarId){
+                            if (ct._id == subobj.avatarID){
                                 subobj.catPhoto=[ct];
                                 found=true;
-                                //console.log("found avatar for subobj",subobj.catName);
                                 break
                             }
                         }
                     }
                     //trimming array to return only first one as avatar to avoid memory pollution with full
                     //gallery
-                    if(!found && subobj&& subobj.catPhoto){
+                    else if(!found && subobj && subobj.catPhoto){
                         subobj.catPhoto.length = 1;
                     }
-
                     resolve2(subobj)
                 })
             });
@@ -167,6 +164,7 @@ module.exports.locationsReadOne = function (req, res) {
             }
             else {
                 attachSubModelsToLocation(location, 'volunteers').then(function(location) {
+                    //add filtering for unnecessary photos - only avatar one should be sent for each cat
                     attachSubModelsToLocation(location, 'cats').then(function (location) {
 
                         sendJsonResponse(res, 220, location)
@@ -193,13 +191,15 @@ module.exports.locationsUpdateOne = function (req, res) {
                     "message": "locationid not found"
                 });
                 return;
-
             }
             else if (err) {
                 ErrCodesActions[400](res, err);
                 return;
             }
+<<<<<<< HEAD
             console.log('cats---->>>',req.body.cats);
+=======
+>>>>>>> 96fe2e16eecaf7c69686064416b7b52c04462d9f
             req.body.rating ? location.name = req.body.rating : null;
             if(req.body.cats && req.body.cats != 'no cats') {
                 location.cats = req.body.cats.split(",");
